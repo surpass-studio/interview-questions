@@ -5,7 +5,7 @@ interface ArticleProps {
 const Article = ({ html }: ArticleProps) => {
 	return (
 		<article
-			className="prose max-w-full"
+			className="prose max-w-none"
 			dangerouslySetInnerHTML={{ __html: html }}
 		/>
 	)

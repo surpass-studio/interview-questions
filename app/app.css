@@ -5,3 +5,7 @@
 @plugin '@tailwindcss/typography';
 
 @import '@mantine/core/styles.layer.css';
+
+@utility stroke-1.5 {
+	stroke-width: 1.5;
+}

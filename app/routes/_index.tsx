@@ -1,12 +1,14 @@
-import { Container } from '@mantine/core'
+import { Container, Stack } from '@mantine/core'
 import rehypeShiki from '@shikijs/rehype'
 import pMap from 'p-map'
+import parseLinkHeader from 'parse-link-header'
 import rehypeStringify from 'rehype-stringify'
 import remarkParse from 'remark-parse'
 import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { type Route } from './+types/_index'
 import IssueList from '@/components/issue/IssueList'
+import IssueListPagination from '@/components/issue/IssueListPagination'
 import octokit from '@/configs/octokit'
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
@@ -20,6 +22,19 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 		page,
 		per_page: 20,
 	})
+
+	let total = 1
+
+	const links = parseLinkHeader(response.headers.link)
+
+	if (links && links.last) {
+		total = Number(links.last.page) || 1
+	}
+
+	const pagination = {
+		value: page,
+		total,
+	}
 
 	const issues = await pMap(response.data, async (issue) => ({
 		...issue,
@@ -39,13 +54,17 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 	return {
 		issues,
+		pagination,
 	}
 }
 
 const HomePage = () => {
 	return (
 		<Container className="flex-1" size="lg">
-			<IssueList />
+			<Stack align="center">
+				<IssueList />
+				<IssueListPagination />
+			</Stack>
 		</Container>
 	)
 }

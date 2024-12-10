@@ -38,7 +38,7 @@ const IssueList = () => {
 	}
 
 	return (
-		<Card padding={0}>
+		<Card className="w-full" padding={0}>
 			<List size="lg">
 				{issues.map((issue) => (
 					<UnstyledButton

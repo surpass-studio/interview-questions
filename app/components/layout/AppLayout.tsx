@@ -4,10 +4,10 @@ import styles from './AppLayout.module.css'
 
 const AppLayout = () => {
 	return (
-		<AppShell padding="md" header={{ height: 64 }}>
+		<AppShell padding="md" header={{ height: 56 }}>
 			<AppShell.Header>
 				<Group className="h-full" align="center" px="xl">
-					<Title>Interview Questions</Title>
+					<Title order={2}>Interview Questions</Title>
 				</Group>
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>

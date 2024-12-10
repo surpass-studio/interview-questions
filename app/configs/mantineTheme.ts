@@ -2,6 +2,7 @@ import {
 	type DefaultMantineColor,
 	type MantineColorsTuple,
 	createTheme,
+	TextInput,
 } from '@mantine/core'
 
 type ExtendedCustomColors = 'primary' | DefaultMantineColor
@@ -16,6 +17,9 @@ const mantineTheme = createTheme({
 	primaryColor: 'orange',
 	defaultRadius: 'md',
 	activeClassName: 'active:brightness-90',
+	components: {
+		TextInput: TextInput.withProps({ variant: 'filled' }),
+	},
 })
 
 export default mantineTheme

@@ -18,7 +18,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 		owner: 'pro-collection',
 		repo: 'interview-question',
 		page,
-		per_page: 10,
+		per_page: 20,
 	})
 
 	const issues = await pMap(response.data, async (issue) => ({

@@ -27,8 +27,12 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 	const links = parseLinkHeader(response.headers.link)
 
-	if (links && links.last) {
-		total = Number(links.last.page) || 1
+	if (links) {
+		if (links.last) {
+			total = Number(links.last.page) || 1
+		} else if (links.prev && Number(links.prev.page) === page - 1) {
+			total = page
+		}
 	}
 
 	const pagination = {

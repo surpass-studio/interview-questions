@@ -2,4 +2,6 @@
 
 @import 'tailwindcss';
 
+@plugin '@tailwindcss/typography';
+
 @import '@mantine/core/styles.layer.css';

@@ -7,7 +7,7 @@ const AppLayout = () => {
 		<AppShell padding="md" header={{ height: 64 }}>
 			<AppShell.Header>
 				<Group className="h-full" align="center" px="xl">
-					<Title>ACME</Title>
+					<Title>Interview Questions</Title>
 				</Group>
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>

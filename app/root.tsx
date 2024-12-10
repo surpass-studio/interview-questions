@@ -7,12 +7,12 @@ import './app.css'
 
 export const Layout = () => {
 	return (
-		<html lang="en">
+		<html lang="zh">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
-				<title>React Router Starter</title>
-				<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+				<title>Interview Questions</title>
+				<link rel="icon" type="image/png" href="/favicon.png" />
 				<Meta />
 				<Links />
 				<ColorSchemeScript />

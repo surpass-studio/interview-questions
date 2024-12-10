@@ -54,7 +54,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 const HomePage = () => {
 	return (
 		<Container className="flex-1" size="lg">
-			<Stack align="center">
+			<Stack align="center" gap="xl" py="xl">
 				<IssueList />
 				<IssueListPagination />
 			</Stack>

@@ -1,5 +1,6 @@
-import { Container, List, UnstyledButton } from '@mantine/core'
+import { Container } from '@mantine/core'
 import { type Route } from './+types/_index'
+import IssueList from '@/components/issue/IssueList'
 import octokit from '@/configs/octokit'
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
@@ -19,16 +20,10 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 	}
 }
 
-const HomePage = ({ loaderData }: Route.ComponentProps) => {
+const HomePage = () => {
 	return (
 		<Container className="flex-1" size="lg">
-			<List size="lg" className="space-y-4">
-				{loaderData.issues.map((issue) => (
-					<UnstyledButton component={List.Item} key={issue.id}>
-						{issue.title}
-					</UnstyledButton>
-				))}
-			</List>
+			<IssueList />
 		</Container>
 	)
 }

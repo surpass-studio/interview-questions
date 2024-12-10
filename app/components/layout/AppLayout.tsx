@@ -1,5 +1,6 @@
 import { AppShell, Group, Title } from '@mantine/core'
 import { Outlet } from 'react-router'
+import styles from './AppLayout.module.css'
 
 const AppLayout = () => {
 	return (
@@ -9,7 +10,7 @@ const AppLayout = () => {
 					<Title>ACME</Title>
 				</Group>
 			</AppShell.Header>
-			<AppShell.Main className="flex">
+			<AppShell.Main className={styles.main}>
 				<Outlet />
 			</AppShell.Main>
 		</AppShell>

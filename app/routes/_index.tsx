@@ -15,15 +15,27 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 	const search = url.searchParams.get('search')
 
 	if (search) {
-		const { data } = await octokit.search.issuesAndPullRequests({
+		const { data, headers } = await octokit.search.issuesAndPullRequests({
 			q: `repo:pro-collection/interview-question is:issue is:open ${search}`,
 		})
+
+		let total = 1
+
+		const links = parseLinkHeader(headers.link)
+
+		if (links) {
+			if (links.last) {
+				total = Number(links.last.page) || 1
+			} else if (links.prev && Number(links.prev.page) === page - 1) {
+				total = page
+			}
+		}
 
 		return {
 			issues: data.items,
 			pagination: {
 				value: page,
-				total: data.total_count,
+				total,
 			},
 		}
 	}

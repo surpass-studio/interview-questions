@@ -1,13 +1,11 @@
 import {
 	Card,
 	List,
-	Text,
 	Container,
 	ScrollArea,
 	UnstyledButton,
 } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { micromark } from 'micromark'
 import { useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import styles from './issueList.module.css'
@@ -20,16 +18,13 @@ const IssueList = () => {
 			title: issue.title,
 			fullScreen: true,
 			scrollAreaComponent: ScrollArea.Autosize,
+			classNames: { header: styles.modalHeader },
 			children: (
-				<Container>
-					{issue.body ? (
-						<article
-							className="prose max-w-full"
-							dangerouslySetInnerHTML={{ __html: micromark(issue.body) }}
-						/>
-					) : (
-						<Text>No description</Text>
-					)}
+				<Container py="xl">
+					<article
+						className="prose max-w-full"
+						dangerouslySetInnerHTML={{ __html: issue.formattedBody }}
+					/>
 				</Container>
 			),
 		})

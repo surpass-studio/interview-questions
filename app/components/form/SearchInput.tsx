@@ -1,8 +1,10 @@
 import { TextInput } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
-import { Form } from 'react-router'
+import { Form, useSearchParams } from 'react-router'
 
 const SearchInput = () => {
+	const [searchParams] = useSearchParams()
+
 	return (
 		<Form action="/" method="get">
 			<TextInput
@@ -10,6 +12,7 @@ const SearchInput = () => {
 				name="search"
 				label="Search"
 				placeholder="Search"
+				defaultValue={searchParams.get('search') ?? ''}
 				leftSection={<IconSearch className="stroke-1.5 size-4" />}
 			/>
 			<button type="submit" hidden />

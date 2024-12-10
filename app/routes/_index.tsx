@@ -31,6 +31,12 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 			}
 		}
 
+		for (const issue of data.items) {
+			issue.body = issue.body
+				? await marked.parse(issue.body, { async: true, gfm: true })
+				: 'No description'
+		}
+
 		return {
 			issues: data.items,
 			pagination: {

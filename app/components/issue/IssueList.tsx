@@ -11,6 +11,7 @@ import {
 import { modals } from '@mantine/modals'
 import { useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
+import Article from './Article'
 import styles from './issueList.module.css'
 
 const IssueLabel = Badge.withProps({
@@ -28,10 +29,7 @@ const IssueList = () => {
 			classNames: { header: styles.modalHeader },
 			children: (
 				<Container py="xl">
-					<article
-						className="prose max-w-full"
-						dangerouslySetInnerHTML={{ __html: issue.formattedBody }}
-					/>
+					<Article html={issue.body as string} />
 				</Container>
 			),
 		})

@@ -1,6 +1,5 @@
 import { Container, Stack } from '@mantine/core'
-import { micromark } from 'micromark'
-import { gfmHtml, gfm } from 'micromark-extension-gfm'
+import { marked } from 'marked'
 import parseLinkHeader from 'parse-link-header'
 import { type Route } from './+types/_index'
 import IssueList from '@/components/issue/IssueList'
@@ -21,10 +20,7 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 	for (const issue of issues) {
 		issue.body = issue.body
-			? micromark(issue.body, {
-					extensions: [gfm()],
-					htmlExtensions: [gfmHtml()],
-				})
+			? await marked.parse(issue.body, { async: true, gfm: true })
 			: 'No description'
 	}
 

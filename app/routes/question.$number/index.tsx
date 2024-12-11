@@ -1,7 +1,7 @@
 import { Container, Stack, Title, Text, Anchor, Paper } from '@mantine/core'
-import { marked } from 'marked'
 import { type Route } from './+types/index'
 import Article from '@/components/question/Article'
+import marked from '@/configs/marked'
 import octokit from '@/configs/octokit'
 
 export const loader = async ({ params }: Route.LoaderArgs) => {

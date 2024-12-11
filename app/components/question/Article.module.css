@@ -1,3 +1,19 @@
 .Article :where(ol, ul, menu) {
 	list-style: initial;
 }
+
+.Article :where(pre) {
+	background-color: #1e1e2e;
+	border-radius: var(--mantine-radius-md);
+	padding: var(--mantine-spacing-sm);
+}
+
+.Article :where(pre > code) {
+	background-color: transparent;
+	display: block;
+}
+
+.Article :where(code) {
+	font-size: var(--mantine-font-size-sm);
+	line-height: var(--mantine-line-height);
+}

@@ -1,4 +1,12 @@
-import { Card, List, Text, Badge, Group, UnstyledButton } from '@mantine/core'
+import {
+	Box,
+	Card,
+	List,
+	Text,
+	Badge,
+	Group,
+	UnstyledButton,
+} from '@mantine/core'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import styles from './QuestionList.module.css'
@@ -16,13 +24,18 @@ const QuestionList = () => {
 				{issues.map((issue) => (
 					<UnstyledButton
 						key={issue.number}
-						component={List.Item}
+						component="li"
 						title={issue.title}
 						className={styles.listItem}
-						py="sm"
-						px="xs"
 					>
-						<Link to={`/question/${issue.number}`}>
+						<Box
+							component={Link}
+							to={`/question/${issue.number}`}
+							viewTransition
+							display="block"
+							py="sm"
+							px="xs"
+						>
 							<Text span className="align-middle">
 								{issue.title}
 							</Text>
@@ -41,7 +54,7 @@ const QuestionList = () => {
 									),
 								)}
 							</Group>
-						</Link>
+						</Box>
 					</UnstyledButton>
 				))}
 			</List>

@@ -10,8 +10,7 @@ const SearchInput = () => {
 			<TextInput
 				type="search"
 				name="search"
-				label="Search"
-				placeholder="Search"
+				placeholder="Type Something..."
 				defaultValue={searchParams.get('search') ?? ''}
 				leftSection={<IconSearch className="stroke-1.5 size-4" />}
 			/>

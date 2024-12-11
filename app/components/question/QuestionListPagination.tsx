@@ -3,9 +3,13 @@ import { Link, useLoaderData, useSearchParams } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 
 const QuestionListPagination = () => {
-	const { pagination } = useLoaderData<Info['loaderData']>()
+	const { issues, pagination } = useLoaderData<Info['loaderData']>()
 
 	const [searchParams] = useSearchParams()
+
+	if (issues.length === 0) {
+		return null
+	}
 
 	return (
 		<Pagination

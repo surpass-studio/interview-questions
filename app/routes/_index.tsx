@@ -1,7 +1,6 @@
-import { Container, Group, Stack } from '@mantine/core'
+import { Container, Stack } from '@mantine/core'
 import LinkHeader from 'http-link-header'
 import { type Route } from './+types/_index'
-import SearchInput from '@/components/form/SearchInput'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import octokit from '@/configs/octokit'
@@ -87,9 +86,6 @@ const HomePage = () => {
 	return (
 		<Container className="flex-1" size="lg">
 			<Stack align="center" gap="xl" py="xl">
-				<Group className="ml-auto">
-					<SearchInput />
-				</Group>
 				<QuestionList />
 				<QuestionListPagination />
 			</Stack>

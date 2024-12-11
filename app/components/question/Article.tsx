@@ -1,4 +1,5 @@
-import { Container } from '@mantine/core'
+import { TypographyStylesProvider } from '@mantine/core'
+import styles from './Article.module.css'
 
 interface ArticleProps {
 	html: string
@@ -6,12 +7,9 @@ interface ArticleProps {
 
 const Article = ({ html }: ArticleProps) => {
 	return (
-		<Container size="md" py="xl">
-			<article
-				className="prose max-w-none"
-				dangerouslySetInnerHTML={{ __html: html }}
-			/>
-		</Container>
+		<TypographyStylesProvider className={styles.Article}>
+			<article dangerouslySetInnerHTML={{ __html: html }} />
+		</TypographyStylesProvider>
 	)
 }
 

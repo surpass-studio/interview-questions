@@ -2,8 +2,6 @@
 
 @import 'tailwindcss';
 
-@plugin '@tailwindcss/typography';
-
 @import '@mantine/core/styles.layer.css';
 
 @utility stroke-1.5 {

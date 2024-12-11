@@ -32,7 +32,6 @@
     "@epic-web/config": "^1.16.4",
     "@react-router/cloudflare": "^7.0.2",
     "@react-router/dev": "7.0.2",
-    "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "4.0.0-beta.6",
     "@total-typescript/tsconfig": "^1.0.4",
     "@types/http-link-header": "^1.0.7",

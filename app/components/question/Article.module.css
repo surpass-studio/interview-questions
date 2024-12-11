@@ -9,8 +9,9 @@
 }
 
 .Article :where(pre > code) {
-	background-color: transparent;
+	color: #cdd6f4;
 	display: block;
+	background-color: transparent;
 }
 
 .Article :where(code) {

@@ -1,10 +1,13 @@
 import { Marked } from 'marked'
 import { markedHighlight } from 'marked-highlight'
-import highlighter from './highlighter'
+import getHighlighter from './getHighlighter'
 
 const marked = new Marked(
 	markedHighlight({
-		highlight: (code, lang) => {
+		async: true,
+		highlight: async (code, lang) => {
+			const highlighter = await getHighlighter()
+
 			if (highlighter.getLoadedLanguages().includes(lang)) {
 				return highlighter.codeToHtml(code, {
 					lang,

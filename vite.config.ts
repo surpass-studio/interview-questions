@@ -12,9 +12,6 @@ export default defineConfig({
 		reactRouter(),
 		tailwindcss(),
 	],
-	build: {
-		target: 'esnext',
-	},
 	resolve: {
 		alias: {
 			'@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',

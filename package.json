@@ -16,7 +16,7 @@
     "@mantine/hooks": "7.14.3",
     "@mantine/modals": "7.14.3",
     "@octokit/rest": "^21.0.2",
-    "@react-router/fs-routes": "7.0.1",
+    "@react-router/fs-routes": "7.0.2",
     "@react-router/serve": "7.0.2",
     "@tabler/icons-react": "^3.24.0",
     "clsx": "^2.1.1",

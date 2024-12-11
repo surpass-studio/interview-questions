@@ -1,10 +1,9 @@
 import { Container, Group, Stack } from '@mantine/core'
-import { marked } from 'marked'
 import parseLinkHeader from 'parse-link-header'
 import { type Route } from './+types/_index'
 import SearchInput from '@/components/form/SearchInput'
-import IssueList from '@/components/issue/IssueList'
-import IssueListPagination from '@/components/issue/IssueListPagination'
+import QuestionList from '@/components/question/QuestionList'
+import QuestionListPagination from '@/components/question/QuestionListPagination'
 import octokit from '@/configs/octokit'
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
@@ -31,12 +30,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 			}
 		}
 
-		for (const issue of data.items) {
-			issue.body = issue.body
-				? await marked.parse(issue.body, { async: true, gfm: true })
-				: 'No description'
-		}
-
 		return {
 			issues: data.items,
 			pagination: {
@@ -52,12 +45,6 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 		page,
 		per_page: 20,
 	})
-
-	for (const issue of issues) {
-		issue.body = issue.body
-			? await marked.parse(issue.body, { async: true, gfm: true })
-			: 'No description'
-	}
 
 	let total = 1
 
@@ -89,8 +76,8 @@ const HomePage = () => {
 				<Group className="ml-auto">
 					<SearchInput />
 				</Group>
-				<IssueList />
-				<IssueListPagination />
+				<QuestionList />
+				<QuestionListPagination />
 			</Stack>
 		</Container>
 	)

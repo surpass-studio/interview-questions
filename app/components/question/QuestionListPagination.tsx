@@ -2,7 +2,7 @@ import { Pagination } from '@mantine/core'
 import { Link, useLoaderData, useSearchParams } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 
-const IssueListPagination = () => {
+const QuestionListPagination = () => {
 	const { pagination } = useLoaderData<Info['loaderData']>()
 
 	const [searchParams] = useSearchParams()
@@ -50,4 +50,4 @@ const IssueListPagination = () => {
 	)
 }
 
-export default IssueListPagination
+export default QuestionListPagination

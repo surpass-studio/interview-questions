@@ -1,5 +1,5 @@
 import { Container, Group, Stack } from '@mantine/core'
-import parseLinkHeader from 'parse-link-header'
+import LinkHeader from 'http-link-header'
 import { type Route } from './+types/_index'
 import SearchInput from '@/components/form/SearchInput'
 import QuestionList from '@/components/question/QuestionList'
@@ -20,12 +20,19 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 		let total = 1
 
-		const links = parseLinkHeader(headers.link)
+		if (headers.link) {
+			const link = LinkHeader.parse(headers.link),
+				prev = link.rel('prev')[0],
+				last = link.rel('last')[0]
 
-		if (links) {
-			if (links.last) {
-				total = Number(links.last.page) || 1
-			} else if (links.prev && Number(links.prev.page) === page - 1) {
+			if (last) {
+				const page = new URL(last.uri).searchParams.get('page')
+
+				total = Number(page) || 1
+			} else if (
+				prev &&
+				Number(new URL(prev.uri).searchParams.get('page')) === page - 1
+			) {
 				total = page
 			}
 		}
@@ -48,12 +55,19 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 	let total = 1
 
-	const links = parseLinkHeader(headers.link)
+	if (headers.link) {
+		const link = LinkHeader.parse(headers.link),
+			prev = link.rel('prev')[0],
+			last = link.rel('last')[0]
 
-	if (links) {
-		if (links.last) {
-			total = Number(links.last.page) || 1
-		} else if (links.prev && Number(links.prev.page) === page - 1) {
+		if (last) {
+			const page = new URL(last.uri).searchParams.get('page')
+
+			total = Number(page) || 1
+		} else if (
+			prev &&
+			Number(new URL(prev.uri).searchParams.get('page')) === page - 1
+		) {
 			total = page
 		}
 	}

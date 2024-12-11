@@ -15,7 +15,7 @@ export const Layout = () => {
 				<link rel="icon" type="image/png" href="/favicon.png" />
 				<Meta />
 				<Links />
-				<ColorSchemeScript />
+				<ColorSchemeScript defaultColorScheme="auto" />
 			</head>
 			<body>
 				<Providers>

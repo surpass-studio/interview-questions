@@ -5,7 +5,10 @@ import {
 	Text,
 	Badge,
 	Group,
+	Stack,
+	Button,
 	UnstyledButton,
+	Title,
 } from '@mantine/core'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
@@ -17,6 +20,17 @@ const QuestionLabel = Badge.withProps({
 
 const QuestionList = () => {
 	const { issues } = useLoaderData<Info['loaderData']>()
+
+	if (issues.length === 0) {
+		return (
+			<Stack className="h-80" justify="center" align="center" gap="xl">
+				<Title order={2}>No question found.</Title>
+				<Button component={Link} to="/" variant="subtle">
+					Back to home
+				</Button>
+			</Stack>
+		)
+	}
 
 	return (
 		<Card className="w-full" padding={0}>

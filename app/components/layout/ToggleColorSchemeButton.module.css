@@ -1,0 +1,7 @@
+.light {
+	display: light-dark(none, block);
+}
+
+.dark {
+	display: light-dark(block, none);
+}

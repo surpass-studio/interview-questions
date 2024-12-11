@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@epic-web/config": "^1.16.4",
+    "@react-router/cloudflare": "^7.0.2",
     "@react-router/dev": "7.0.1",
     "@tailwindcss/typography": "^0.5.15",
     "@tailwindcss/vite": "4.0.0-beta.2",

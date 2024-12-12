@@ -16,8 +16,6 @@ const getHighlighter = async () => {
 			],
 			engine: javascriptRegexEngine,
 		})
-
-		console.log(highlighter.getLoadedLanguages())
 	}
 
 	return highlighter

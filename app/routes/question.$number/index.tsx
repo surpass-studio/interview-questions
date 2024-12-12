@@ -1,4 +1,4 @@
-import { Stack, Title, Text, Anchor, Card } from '@mantine/core'
+import { Stack, Title, Text, Anchor, Paper } from '@mantine/core'
 import { type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import Article from '@/components/question/Article'
@@ -29,7 +29,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 	const { title, formatedIssueBody } = loaderData
 
 	return (
-		<Card padding="lg">
+		<Paper p="lg">
 			<Stack className="w-full" gap="xl">
 				<Stack>
 					<Title order={2}>{title}</Title>
@@ -44,7 +44,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 				</Stack>
 				<Article html={formatedIssueBody} />
 			</Stack>
-		</Card>
+		</Paper>
 	)
 }
 

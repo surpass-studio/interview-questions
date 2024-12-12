@@ -1,9 +1,20 @@
-import { Container, Stack } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import LinkHeader from 'http-link-header'
+import { type MetaFunction } from 'react-router'
 import { type Route } from './+types/_index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import octokit from '@/configs/octokit'
+
+export const meta: MetaFunction = () => {
+	return [
+		{ title: 'Interview Questions' },
+		{
+			name: 'description',
+			content: '面试题集锦 - 一个帮助开发者准备技术面试的知识库 📚',
+		},
+	]
+}
 
 export const loader = async ({ request }: Route.LoaderArgs) => {
 	const url = new URL(request.url)
@@ -84,12 +95,10 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 const HomePage = () => {
 	return (
-		<Container className="flex-1" size="lg">
-			<Stack align="center" gap="xl" py="lg">
-				<QuestionList />
-				<QuestionListPagination />
-			</Stack>
-		</Container>
+		<Stack align="center" gap="xl">
+			<QuestionList />
+			<QuestionListPagination />
+		</Stack>
 	)
 }
 

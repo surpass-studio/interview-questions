@@ -1,14 +1,14 @@
 import {
 	Box,
-	Card,
 	List,
 	Text,
 	Badge,
 	Group,
 	Stack,
+	Title,
+	Paper,
 	Button,
 	UnstyledButton,
-	Title,
 } from '@mantine/core'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
@@ -33,7 +33,7 @@ const QuestionList = () => {
 	}
 
 	return (
-		<Card className="w-full" padding={0}>
+		<Paper className="w-full">
 			<List size="lg">
 				{issues.map((issue) => (
 					<UnstyledButton
@@ -72,7 +72,7 @@ const QuestionList = () => {
 					</UnstyledButton>
 				))}
 			</List>
-		</Card>
+		</Paper>
 	)
 }
 

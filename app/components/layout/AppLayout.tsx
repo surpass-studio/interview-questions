@@ -7,7 +7,7 @@ import ToggleColorSchemeButton from './ToggleColorSchemeButton'
 
 const AppLayout = () => {
 	return (
-		<AppShell padding="md" header={{ height: 56 }}>
+		<AppShell header={{ height: 56 }}>
 			<AppShell.Header>
 				<Container className="h-full" size="lg">
 					<Group className="h-full" justify="space-between" align="center">
@@ -26,7 +26,9 @@ const AppLayout = () => {
 				</Container>
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>
-				<Outlet />
+				<Container className="w-full" size="md" py="lg">
+					<Outlet />
+				</Container>
 			</AppShell.Main>
 		</AppShell>
 	)

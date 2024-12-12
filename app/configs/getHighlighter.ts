@@ -1,20 +1,23 @@
 import { createHighlighterCore, type HighlighterCore } from 'shiki/core'
-import { createOnigurumaEngine } from 'shiki/engine/oniguruma'
+import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
 
 let highlighter: HighlighterCore | null = null
+
+const javascriptRegexEngine = createJavaScriptRegexEngine({ forgiving: true })
 
 const getHighlighter = async () => {
 	if (highlighter === null) {
 		highlighter = await createHighlighterCore({
 			themes: [import('shiki/themes/catppuccin-mocha.mjs')],
 			langs: [
-				() => import('shiki/langs/html.mjs'),
+				() => import('shiki/langs/vue.mjs'),
 				() => import('shiki/langs/scss.mjs'),
 				() => import('shiki/langs/typescript.mjs'),
-				() => import('shiki/langs/vue.mjs'),
 			],
-			engine: createOnigurumaEngine(import('shiki/wasm')),
+			engine: javascriptRegexEngine,
 		})
+
+		console.log(highlighter.getLoadedLanguages())
 	}
 
 	return highlighter

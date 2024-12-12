@@ -5,7 +5,7 @@ import mantineTheme from './configs/mantineTheme'
 
 const Providers = ({ children }: PropsWithChildren) => {
 	return (
-		<MantineProvider theme={mantineTheme}>
+		<MantineProvider defaultColorScheme="auto" theme={mantineTheme}>
 			<ModalsProvider>{children}</ModalsProvider>
 		</MantineProvider>
 	)

@@ -39,8 +39,8 @@ importers:
         specifier: ^5
         version: 5.1.17
       marked:
-        specifier: ^15.0.3
-        version: 15.0.3
+        specifier: ^15.0.4
+        version: 15.0.4
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -92,7 +92,7 @@ importers:
         version: 15.2.11
       marked-highlight:
         specifier: ^2.2.1
-        version: 2.2.1(marked@15.0.3)
+        version: 2.2.1(marked@15.0.4)
       postcss:
         specifier: ^8.4.49
         version: 8.4.49
@@ -2505,8 +2505,8 @@ packages:
     peerDependencies:
       marked: '>=4 <16'
 
-  marked@15.0.3:
-    resolution: {integrity: sha512-Ai0cepvl2NHnTcO9jYDtcOEtVBNVYR31XnEA3BndO7f5As1wzpcOceSUM8FDkNLJNIODcLpDTWay/qQhqbuMvg==}
+  marked@15.0.4:
+    resolution: {integrity: sha512-TCHvDqmb3ZJ4PWG7VEGVgtefA5/euFmsIhxtD0XsBxI39gUSKL81mIRFdt0AiNQozUahd4ke98ZdirExd/vSEw==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -6246,11 +6246,11 @@ snapshots:
     dependencies:
       sourcemap-codec: 1.4.8
 
-  marked-highlight@2.2.1(marked@15.0.3):
+  marked-highlight@2.2.1(marked@15.0.4):
     dependencies:
-      marked: 15.0.3
+      marked: 15.0.4
 
-  marked@15.0.3: {}
+  marked@15.0.4: {}
 
   mdast-util-to-hast@13.2.0:
     dependencies:

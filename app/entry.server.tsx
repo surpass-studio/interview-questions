@@ -6,8 +6,6 @@ import {
 	ServerRouter,
 } from 'react-router'
 
-const ABORT_DELAY = 5_000
-
 const handleRequest = async (
 	request: Request,
 	responseStatusCode: number,
@@ -20,12 +18,9 @@ const handleRequest = async (
 	const userAgent = request.headers.get('user-agent')
 
 	const body = await renderToReadableStream(
-		<ServerRouter
-			context={routerContext}
-			url={request.url}
-			abortDelay={ABORT_DELAY}
-		/>,
+		<ServerRouter context={routerContext} url={request.url} />,
 		{
+			signal: request.signal,
 			onError: (error: unknown) => {
 				responseStatusCode = 500
 				// Log streaming rendering errors from inside the shell.  Don't log

@@ -36,8 +36,8 @@ importers:
         specifier: ^5.1.19
         version: 5.1.19
       marked:
-        specifier: ^15.0.5
-        version: 15.0.5
+        specifier: ^15.0.6
+        version: 15.0.6
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -92,7 +92,7 @@ importers:
         version: 15.3.0
       marked-highlight:
         specifier: ^2.2.1
-        version: 2.2.1(marked@15.0.5)
+        version: 2.2.1(marked@15.0.6)
       postcss:
         specifier: ^8.4.49
         version: 8.4.49
@@ -2463,8 +2463,8 @@ packages:
     peerDependencies:
       marked: '>=4 <16'
 
-  marked@15.0.5:
-    resolution: {integrity: sha512-xN+kSuqHjxWg+Q47yhhZMUP+kO1qHobvXkkm6FX+7N6lDvanLDd8H7AQ0jWDDyq+fDt/cSrJaBGyWYHXy0KQWA==}
+  marked@15.0.6:
+    resolution: {integrity: sha512-Y07CUOE+HQXbVDCGl3LXggqJDbXDP2pArc2C1N1RRMN0ONiShoSsIInMd5Gsxupe7fKLpgimTV+HOJ9r7bA+pg==}
     engines: {node: '>= 18'}
     hasBin: true
 
@@ -6260,11 +6260,11 @@ snapshots:
     dependencies:
       sourcemap-codec: 1.4.8
 
-  marked-highlight@2.2.1(marked@15.0.5):
+  marked-highlight@2.2.1(marked@15.0.6):
     dependencies:
-      marked: 15.0.5
+      marked: 15.0.6
 
-  marked@15.0.5: {}
+  marked@15.0.6: {}
 
   math-intrinsics@1.1.0: {}
 

@@ -1,16 +1,4 @@
-import {
-	type DefaultMantineColor,
-	type MantineColorsTuple,
-	createTheme,
-} from '@mantine/core'
-
-type ExtendedCustomColors = 'primary' | DefaultMantineColor
-
-declare module '@mantine/core' {
-	export interface MantineThemeColorsOverride {
-		colors: Record<ExtendedCustomColors, MantineColorsTuple>
-	}
-}
+import { createTheme } from '@mantine/core'
 
 const mantineTheme = createTheme({
 	primaryColor: 'orange',

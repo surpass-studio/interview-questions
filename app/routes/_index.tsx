@@ -21,10 +21,26 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 
 	const page = Number(url.searchParams.get('page')) || 1
 
-	const search = url.searchParams.get('search') ?? ''
+	const query: string[] = [
+		'repo:pro-collection/interview-question',
+		'is:issue',
+		'is:open',
+	]
+
+	const label = url.searchParams.get('label')
+
+	if (label) {
+		query.push(`label:"${label}"`)
+	}
+
+	const search = url.searchParams.get('search')
+
+	if (search) {
+		query.push(search)
+	}
 
 	const { data, headers } = await octokit.search.issuesAndPullRequests({
-		q: `repo:pro-collection/interview-question is:issue is:open ${search}`,
+		q: query.join(' '),
 		page,
 		per_page: 20,
 	})

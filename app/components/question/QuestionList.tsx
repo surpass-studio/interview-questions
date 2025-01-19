@@ -10,6 +10,7 @@ import {
 	Button,
 	UnstyledButton,
 } from '@mantine/core'
+import queryString from 'query-string'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import styles from './QuestionList.module.css'
@@ -54,19 +55,21 @@ const QuestionList = () => {
 								{issue.title}
 							</Text>
 							<Group display="inline-flex" ml="xs">
-								{issue.labels.map((label, index) =>
-									typeof label === 'string' ? (
-										<QuestionLabel key={index}>{label}</QuestionLabel>
-									) : (
+								{issue.labels.map((label, index) => (
+									<Link
+										key={index}
+										to={{
+											search: queryString.stringify({ label: label.name }),
+										}}
+									>
 										<QuestionLabel
-											key={index}
 											autoContrast
 											color={label.color ? `#${label.color}` : undefined}
 										>
 											{label.name}
 										</QuestionLabel>
-									),
-								)}
+									</Link>
+								))}
 							</Group>
 						</Box>
 					</UnstyledButton>

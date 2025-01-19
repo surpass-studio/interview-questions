@@ -1,5 +1,4 @@
 import {
-	Box,
 	List,
 	Text,
 	Badge,
@@ -42,36 +41,31 @@ const QuestionList = () => {
 						component="li"
 						title={issue.title}
 						className={styles.listItem}
+						py="sm"
+						px="xs"
 					>
-						<Box
-							component={Link}
-							to={`/question/${issue.number}`}
-							viewTransition
-							display="block"
-							py="sm"
-							px="xs"
-						>
+						<Link to={`/question/${issue.number}`} viewTransition>
 							<Text span className="align-middle">
 								{issue.title}
 							</Text>
-							<Group display="inline-flex" ml="xs">
-								{issue.labels.map((label, index) => (
-									<Link
-										key={index}
-										to={{
-											search: queryString.stringify({ label: label.name }),
-										}}
+						</Link>
+						<Group display="inline-flex" ml="xs">
+							{issue.labels.map((label, index) => (
+								<Link
+									key={index}
+									to={{
+										search: queryString.stringify({ label: label.name }),
+									}}
+								>
+									<QuestionLabel
+										autoContrast
+										color={label.color ? `#${label.color}` : undefined}
 									>
-										<QuestionLabel
-											autoContrast
-											color={label.color ? `#${label.color}` : undefined}
-										>
-											{label.name}
-										</QuestionLabel>
-									</Link>
-								))}
-							</Group>
-						</Box>
+										{label.name}
+									</QuestionLabel>
+								</Link>
+							))}
+						</Group>
 					</UnstyledButton>
 				))}
 			</List>

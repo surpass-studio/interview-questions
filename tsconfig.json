@@ -1,6 +1,6 @@
 {
 	"extends": ["@epic-web/config/typescript"],
-	"include": ["@epic-web/config/reset.d.ts", "app", ".react-router/types"],
+	"include": ["app", ".react-router/types"],
 	"compilerOptions": {
 		"types": ["vite/client"],
 		"rootDirs": [".", "./.react-router/types"],

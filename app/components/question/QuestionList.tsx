@@ -1,6 +1,5 @@
 import {
 	List,
-	Text,
 	Group,
 	Stack,
 	Title,
@@ -43,10 +42,9 @@ const QuestionList = () => {
 							viewTransition
 							prefetch="intent"
 							to={`/question/${issue.number}`}
+							className="align-middle"
 						>
-							<Text span className="align-middle">
-								{issue.title}
-							</Text>
+							{issue.title}
 						</Link>
 						<Group display="inline-flex" ml="xs">
 							{issue.labels.map((label, index) => (

@@ -19,7 +19,12 @@ const QuestionListPagination = () => {
 
 				urlSearchParams.set('page', String(page))
 
-				return { component: Link, to: { search: urlSearchParams.toString() } }
+				return {
+					component: Link,
+					viewTransition: true,
+					prefetch: 'intent',
+					to: { search: urlSearchParams.toString() },
+				}
 			}}
 			getControlProps={(control) => {
 				const urlSearchParams = new URLSearchParams()
@@ -27,25 +32,45 @@ const QuestionListPagination = () => {
 				if (control === 'first') {
 					urlSearchParams.set('page', String(1))
 
-					return { component: Link, to: { search: urlSearchParams.toString() } }
+					return {
+						component: Link,
+						viewTransition: true,
+						prefetch: 'intent',
+						to: { search: urlSearchParams.toString() },
+					}
 				}
 
 				if (control === 'last') {
 					urlSearchParams.set('page', String(pagination.total))
 
-					return { component: Link, to: { search: urlSearchParams.toString() } }
+					return {
+						component: Link,
+						viewTransition: true,
+						prefetch: 'intent',
+						to: { search: urlSearchParams.toString() },
+					}
 				}
 
 				if (control === 'next') {
 					urlSearchParams.set('page', String(pagination.value + 1))
 
-					return { component: Link, to: { search: urlSearchParams.toString() } }
+					return {
+						component: Link,
+						viewTransition: true,
+						prefetch: 'intent',
+						to: { search: urlSearchParams.toString() },
+					}
 				}
 
 				if (control === 'previous') {
 					urlSearchParams.set('page', String(pagination.value - 1))
 
-					return { component: Link, to: { search: urlSearchParams.toString() } }
+					return {
+						component: Link,
+						viewTransition: true,
+						prefetch: 'intent',
+						to: { search: urlSearchParams.toString() },
+					}
 				}
 
 				return {}

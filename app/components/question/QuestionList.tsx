@@ -1,7 +1,5 @@
 import {
 	List,
-	Text,
-	Badge,
 	Group,
 	Stack,
 	Title,
@@ -14,10 +12,6 @@ import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import styles from './QuestionList.module.css'
 
-const QuestionLabel = Badge.withProps({
-	styles: { root: { textTransform: 'none' } },
-})
-
 const QuestionList = () => {
 	const { issues } = useLoaderData<Info['loaderData']>()
 
@@ -26,7 +20,7 @@ const QuestionList = () => {
 			<Stack className="h-80" justify="center" align="center" gap="xl">
 				<Title order={2}>No question found.</Title>
 				<Button component={Link} to="/" variant="subtle">
-					Back to home
+					返回首页
 				</Button>
 			</Stack>
 		)
@@ -44,26 +38,28 @@ const QuestionList = () => {
 						py="sm"
 						px="xs"
 					>
-						<Link to={`/question/${issue.number}`} viewTransition>
-							<Text span className="align-middle">
-								{issue.title}
-							</Text>
+						<Link
+							viewTransition
+							prefetch="intent"
+							to={`/question/${issue.number}`}
+							className="align-middle"
+						>
+							{issue.title}
 						</Link>
 						<Group display="inline-flex" ml="xs">
 							{issue.labels.map((label, index) => (
-								<Link
+								<Button
 									key={index}
+									component={Link}
+									size="compact-xs"
+									autoContrast
+									color={label.color ? `#${label.color}` : undefined}
 									to={{
 										search: queryString.stringify({ label: label.name }),
 									}}
 								>
-									<QuestionLabel
-										autoContrast
-										color={label.color ? `#${label.color}` : undefined}
-									>
-										{label.name}
-									</QuestionLabel>
-								</Link>
+									{label.name}
+								</Button>
 							))}
 						</Group>
 					</UnstyledButton>

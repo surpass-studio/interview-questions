@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import styles from './AppLayout.module.css'
 import GithubLink from './GithubLink'
+import ScrollToTopButton from './ScrollToTopButton'
 import ToggleColorSchemeButton from './ToggleColorSchemeButton'
 
 const AppLayout = () => {
@@ -30,6 +31,7 @@ const AppLayout = () => {
 					<Outlet />
 				</Container>
 			</AppShell.Main>
+			<ScrollToTopButton />
 		</AppShell>
 	)
 }

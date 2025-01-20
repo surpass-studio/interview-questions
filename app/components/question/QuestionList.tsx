@@ -44,7 +44,11 @@ const QuestionList = () => {
 						py="sm"
 						px="xs"
 					>
-						<Link to={`/question/${issue.number}`} viewTransition>
+						<Link
+							viewTransition
+							prefetch="intent"
+							to={`/question/${issue.number}`}
+						>
 							<Text span className="align-middle">
 								{issue.title}
 							</Text>

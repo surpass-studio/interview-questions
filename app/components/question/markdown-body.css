@@ -1,0 +1,3 @@
+.markdown-body :where(ol, ul, menu) {
+	list-style: initial;
+}

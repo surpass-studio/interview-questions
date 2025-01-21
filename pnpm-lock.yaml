@@ -23,6 +23,9 @@ importers:
       '@react-router/fs-routes':
         specifier: 7.1.3
         version: 7.1.3(@react-router/dev@7.1.3(@types/node@22.10.7)(jiti@2.4.2)(lightningcss@1.29.1)(react-router@7.1.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(sugarss@4.0.1(postcss@8.5.1))(typescript@5.7.3)(vite@6.0.7(@types/node@22.10.7)(jiti@2.4.2)(lightningcss@1.29.1)(sugarss@4.0.1(postcss@8.5.1))(yaml@2.6.1))(wrangler@3.103.2(@cloudflare/workers-types@4.20250109.0))(yaml@2.6.1))(typescript@5.7.3)
+      '@shikijs/langs-precompiled':
+        specifier: ^2.0.3
+        version: 2.0.3
       '@tabler/icons-react':
         specifier: ^3.28.1
         version: 3.28.1(react@19.0.0)
@@ -38,6 +41,9 @@ importers:
       marked:
         specifier: ^15.0.6
         version: 15.0.6
+      marked-highlight:
+        specifier: ^2.2.1
+        version: 2.2.1(marked@15.0.6)
       query-string:
         specifier: ^9.1.1
         version: 9.1.1
@@ -96,9 +102,6 @@ importers:
       lint-staged:
         specifier: ^15.4.1
         version: 15.4.1
-      marked-highlight:
-        specifier: ^2.2.1
-        version: 2.2.1(marked@15.0.6)
       postcss:
         specifier: ^8.5.1
         version: 8.5.1
@@ -964,6 +967,10 @@ packages:
 
   '@shikijs/engine-oniguruma@2.0.3':
     resolution: {integrity: sha512-MicRzo0aNaS18yXBnXjYFLnzi5Sh3NUHtm/WXzavtpGiWd75gRdZsZDMceeFyTL9MMy9iGifK2JePXY5dlZHIA==}
+
+  '@shikijs/langs-precompiled@2.0.3':
+    resolution: {integrity: sha512-iiTrrkzl8pIkcJFahzt8anGQqn1EK7IBn/ldcEoO5cC7NF9uJCuQ1UDC9twc7IkTvjiwVGSNoAY1Th59jPnAuQ==}
+    engines: {node: '>=20'}
 
   '@shikijs/langs@2.0.3':
     resolution: {integrity: sha512-L+QcwH6tjVY21xDxe3etR+C+33mAbkyQVvUIsszwnQrRVI54r7VPNTMVWR4EbZfPFwWmwLCoO83V5YiBWusvVg==}
@@ -4243,6 +4250,11 @@ snapshots:
     dependencies:
       '@shikijs/types': 2.0.3
       '@shikijs/vscode-textmate': 10.0.1
+
+  '@shikijs/langs-precompiled@2.0.3':
+    dependencies:
+      '@shikijs/types': 2.0.3
+      oniguruma-to-es: 2.2.0
 
   '@shikijs/langs@2.0.3':
     dependencies:

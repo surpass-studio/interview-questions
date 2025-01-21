@@ -1,21 +1,19 @@
-import {
-	type HighlighterCore,
-	createJavaScriptRegexEngine,
-	createHighlighterCore,
-} from 'shiki'
+import { type HighlighterCore, createHighlighterCore } from 'shiki/core'
+import { createJavaScriptRawEngine } from 'shiki/engine/javascript'
 
 let highlighter: HighlighterCore | null = null
 
-const javascriptRegexEngine = createJavaScriptRegexEngine({ forgiving: true })
+const javascriptRegexEngine = createJavaScriptRawEngine()
 
 const getHighlighter = async () => {
 	if (highlighter === null) {
 		highlighter = await createHighlighterCore({
 			themes: [import('shiki/themes/catppuccin-mocha.mjs')],
 			langs: [
-				() => import('shiki/langs/vue.mjs'),
-				() => import('shiki/langs/scss.mjs'),
-				() => import('shiki/langs/typescript.mjs'),
+				() => import('@shikijs/langs-precompiled/vue'),
+				() => import('@shikijs/langs-precompiled/scss'),
+				() => import('@shikijs/langs-precompiled/typescript'),
+				() => import('@shikijs/langs-precompiled/jsx'),
 			],
 			engine: javascriptRegexEngine,
 		})

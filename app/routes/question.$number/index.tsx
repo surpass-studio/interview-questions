@@ -2,7 +2,6 @@ import { Stack, Title, Text, Anchor, Paper } from '@mantine/core'
 import { type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import Article from '@/components/question/Article'
-import marked from '@/configs/marked'
 import octokit from '@/configs/octokit'
 
 export const meta = ({ data }: Route.MetaArgs) => {
@@ -14,19 +13,14 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
 		owner: 'pro-collection',
 		repo: 'interview-question',
 		issue_number: Number(params.number),
+		mediaType: { format: 'html' },
 	})
 
-	const title = issue.title
-
-	const formatedIssueBody = issue.body
-		? await marked.parse(issue.body, { async: true, gfm: true })
-		: 'No description'
-
-	return { title, formatedIssueBody }
+	return { title: issue.title, body_html: issue.body_html }
 }
 
 const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
-	const { title, formatedIssueBody } = loaderData
+	const { title, body_html } = loaderData
 
 	return (
 		<Paper p="lg">
@@ -42,7 +36,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 						</Anchor>
 					</Text>
 				</Stack>
-				<Article html={formatedIssueBody} />
+				<Article html={body_html ?? 'No description'} />
 			</Stack>
 		</Paper>
 	)

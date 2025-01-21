@@ -1,5 +1,8 @@
-import { createHighlighterCore, type HighlighterCore } from 'shiki/core'
-import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
+import {
+	type HighlighterCore,
+	createJavaScriptRegexEngine,
+	createHighlighterCore,
+} from 'shiki'
 
 let highlighter: HighlighterCore | null = null
 

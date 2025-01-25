@@ -42,6 +42,7 @@ const handleRequest = async (
 	}
 
 	responseHeaders.set('Content-Type', 'text/html')
+	responseHeaders.set('Cache-Control', 'public, max-age=3600, s-maxage=3600')
 
 	return new Response(body, {
 		headers: responseHeaders,

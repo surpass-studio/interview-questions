@@ -1,14 +1,10 @@
 import { Stack } from '@mantine/core'
 import LinkHeader from 'http-link-header'
-import { type HeadersFunction, type MetaFunction } from 'react-router'
+import { type MetaFunction } from 'react-router'
 import { type Route } from './+types/_index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import octokit from '@/configs/octokit'
-
-export const headers: HeadersFunction = () => ({
-	'Cache-Control': 'public, max-age=3600, s-maxage=3600',
-})
 
 export const meta: MetaFunction = () => {
 	return [

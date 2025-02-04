@@ -1,23 +1,35 @@
 import { ClerkProvider } from '@clerk/react-router'
-import { MantineProvider } from '@mantine/core'
+import { dark } from '@clerk/themes'
+import { MantineProvider, useComputedColorScheme } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { type PropsWithChildren } from 'react'
 import { useLoaderData } from 'react-router'
 import mantineTheme from './configs/mantineTheme'
 
-const Providers = ({ children }: PropsWithChildren) => {
+const AuthProvider = ({ children }: PropsWithChildren) => {
 	const loaderData = useLoaderData()
+
+	const colorScheme = useComputedColorScheme()
 
 	return (
 		<ClerkProvider
 			loaderData={loaderData}
+			appearance={{ baseTheme: colorScheme === 'dark' ? dark : undefined }}
 			signUpFallbackRedirectUrl="/"
 			signInFallbackRedirectUrl="/"
 		>
-			<MantineProvider defaultColorScheme="auto" theme={mantineTheme}>
-				<ModalsProvider>{children}</ModalsProvider>
-			</MantineProvider>
+			{children}
 		</ClerkProvider>
+	)
+}
+
+const Providers = ({ children }: PropsWithChildren) => {
+	return (
+		<MantineProvider defaultColorScheme="auto" theme={mantineTheme}>
+			<ModalsProvider>
+				<AuthProvider>{children}</AuthProvider>
+			</ModalsProvider>
+		</MantineProvider>
 	)
 }
 

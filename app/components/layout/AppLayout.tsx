@@ -1,4 +1,10 @@
-import { AppShell, Container, Group, Title, Image } from '@mantine/core'
+import {
+	SignedIn,
+	SignedOut,
+	UserButton,
+	SignInButton,
+} from '@clerk/react-router'
+import { AppShell, Container, Group, Title, Image, Button } from '@mantine/core'
 import { Link, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import styles from './AppLayout.module.css'
@@ -21,6 +27,14 @@ const AppLayout = () => {
 							<Group gap="xs">
 								<ToggleColorSchemeButton />
 								<GithubLink />
+								<SignedOut>
+									<SignInButton>
+										<Button variant="subtle">Sign in</Button>
+									</SignInButton>
+								</SignedOut>
+								<SignedIn>
+									<UserButton />
+								</SignedIn>
 							</Group>
 						</Group>
 					</Group>

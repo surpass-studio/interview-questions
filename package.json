@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@clerk/react-router": "^1.0.5",
+    "@clerk/themes": "^2.2.16",
     "@mantine/core": "7.16.2",
     "@mantine/hooks": "7.16.2",
     "@mantine/modals": "7.16.2",

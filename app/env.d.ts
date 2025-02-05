@@ -1,4 +1,7 @@
-import { type D1Database } from '@cloudflare/workers-types'
+import {
+	type ExecutionContext,
+	type D1Database,
+} from '@cloudflare/workers-types'
 
 interface ImportMetaEnv {
 	readonly VITE_GITHUB_TOKEN: string
@@ -11,6 +14,7 @@ interface ImportMeta {
 declare module 'react-router' {
 	interface AppLoadContext {
 		cloudflare: {
+			ctx: ExecutionContext
 			env: {
 				DB: D1Database
 			}

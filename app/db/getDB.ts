@@ -1,11 +1,12 @@
-import { drizzle } from 'drizzle-orm/d1'
-import { type AppLoadContext } from 'react-router'
+import { type D1Database } from '@cloudflare/workers-types'
+import { drizzle, type DrizzleD1Database } from 'drizzle-orm/d1'
+import * as schema from './schema'
 
-let DB: ReturnType<typeof drizzle> | null = null
+let DB: DrizzleD1Database<typeof schema> | null = null
 
-const getDB = (context: AppLoadContext) => {
+const getDB = (client: D1Database) => {
 	if (DB === null) {
-		DB = drizzle(context.cloudflare.env.DB)
+		DB = drizzle(client, { schema })
 	}
 
 	return DB

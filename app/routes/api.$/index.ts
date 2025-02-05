@@ -97,7 +97,7 @@ const app = new Hono<{ Bindings: Bindings }>()
 			return c.json({ error: error.message }, error.getResponse())
 		}
 
-		return c.json({ error: 'Internal Server Error' }, 500)
+		return c.json({ error: error.message }, 500)
 	})
 	.route('/favorites', favorites)
 

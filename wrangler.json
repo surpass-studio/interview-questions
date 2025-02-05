@@ -2,5 +2,12 @@
     "compatibility_flags": [
         "nodejs_compat"
     ],
-    "compatibility_date": "2024-12-11"
+    "compatibility_date": "2024-12-11",
+    "d1_databases": [
+        {
+            "binding": "DB",
+            "database_name": "interview-questions",
+            "database_id": "abc7108d-1010-4d7e-a552-80878da00a49"
+        }
+    ]
 }

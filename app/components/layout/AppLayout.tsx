@@ -4,10 +4,19 @@ import {
 	UserButton,
 	SignInButton,
 } from '@clerk/react-router'
-import { AppShell, Container, Group, Title, Image, Button } from '@mantine/core'
+import {
+	AppShell,
+	Container,
+	Group,
+	Title,
+	Image,
+	Button,
+	Box,
+} from '@mantine/core'
 import { Link, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import styles from './AppLayout.module.css'
+import AppNavbar from './AppNavbar'
 import GithubLink from './GithubLink'
 import ScrollToTopButton from './ScrollToTopButton'
 import ToggleColorSchemeButton from './ToggleColorSchemeButton'
@@ -42,7 +51,12 @@ const AppLayout = () => {
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>
 				<Container className="w-full" size="md" py="lg">
-					<Outlet />
+					<Group align="start" gap="xl">
+						<AppNavbar />
+						<Box className="flex-1">
+							<Outlet />
+						</Box>
+					</Group>
 				</Container>
 			</AppShell.Main>
 			<ScrollToTopButton />

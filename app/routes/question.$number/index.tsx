@@ -1,22 +1,46 @@
-import { Stack, Title, Text, Anchor, Paper } from '@mantine/core'
+import { getAuth } from '@clerk/react-router/ssr.server'
+import { Stack, Title, Text, Anchor, Paper, Affix } from '@mantine/core'
+import { and, eq } from 'drizzle-orm'
 import { type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import Article from '@/components/question/Article'
+import FavoriteButton from '@/components/question/FavoriteButton'
 import octokit from '@/configs/octokit'
+import getDB from '@/db/getDB'
+import { userFavorites } from '@/db/schema'
 
 export const meta = ({ data }: Route.MetaArgs) => {
 	return [{ title: data.title }] satisfies MetaDescriptor[]
 }
 
-export const loader = async ({ params }: Route.LoaderArgs) => {
+export const loader = async (args: Route.LoaderArgs) => {
+	const questionId = Number(args.params.number)
+
 	const { data: issue } = await octokit.issues.get({
 		owner: 'pro-collection',
 		repo: 'interview-question',
-		issue_number: Number(params.number),
+		issue_number: questionId,
 		mediaType: { format: 'html' },
 	})
 
-	return { title: issue.title, body_html: issue.body_html }
+	const { userId } = await getAuth(args)
+
+	let isFavorited = false
+
+	if (userId) {
+		const db = getDB(args.context.cloudflare.env.DB)
+
+		const favorite = await db.query.userFavorites.findFirst({
+			where: and(
+				eq(userFavorites.user_id, userId as string),
+				eq(userFavorites.question_id, questionId),
+			),
+		})
+
+		isFavorited = !!favorite
+	}
+
+	return { title: issue.title, body_html: issue.body_html, isFavorited }
 }
 
 const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
@@ -38,6 +62,9 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 				</Stack>
 				<Article html={body_html ?? 'No description'} />
 			</Stack>
+			<Affix position={{ bottom: 64, right: 192 }}>
+				<FavoriteButton />
+			</Affix>
 		</Paper>
 	)
 }

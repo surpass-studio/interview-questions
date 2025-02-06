@@ -27,30 +27,7 @@ const favorites = new Hono<{ Bindings: Bindings }>()
 
 		return c.json(questionIds)
 	})
-	.post(
-		'/',
-		vValidator(
-			'json',
-			v.object({
-				questionId: v.number(),
-			}),
-		),
-		async (c) => {
-			const { userId } = c.env.auth
-
-			const db = getDB(c.env.DB)
-
-			const { questionId } = c.req.valid('json')
-
-			await db.insert(userFavorites).values({
-				user_id: userId as string,
-				question_id: questionId,
-			})
-
-			return c.json({ success: true })
-		},
-	)
-	.delete(
+	.get(
 		'/:questionId',
 		vValidator(
 			'query',
@@ -69,6 +46,64 @@ const favorites = new Hono<{ Bindings: Bindings }>()
 			const db = getDB(c.env.DB)
 
 			const { questionId } = c.req.valid('query')
+
+			const favorite = await db.query.userFavorites.findFirst({
+				where: and(
+					eq(userFavorites.user_id, userId as string),
+					eq(userFavorites.question_id, questionId),
+				),
+			})
+
+			return c.json({ isFavorited: !!favorite })
+		},
+	)
+	.post(
+		'/',
+		vValidator(
+			'form',
+			v.object({
+				questionId: v.pipe(
+					v.string(),
+					v.digits(),
+					v.transform(Number),
+					v.number(),
+				),
+			}),
+		),
+		async (c) => {
+			const { userId } = c.env.auth
+
+			const db = getDB(c.env.DB)
+
+			const { questionId } = c.req.valid('form')
+
+			await db.insert(userFavorites).values({
+				user_id: userId as string,
+				question_id: questionId,
+			})
+
+			return c.json({ success: true })
+		},
+	)
+	.delete(
+		'/:questionId',
+		vValidator(
+			'param',
+			v.object({
+				questionId: v.pipe(
+					v.string(),
+					v.digits(),
+					v.transform(Number),
+					v.number(),
+				),
+			}),
+		),
+		async (c) => {
+			const { userId } = c.env.auth
+
+			const db = getDB(c.env.DB)
+
+			const { questionId } = c.req.valid('param')
 
 			await db
 				.delete(userFavorites)

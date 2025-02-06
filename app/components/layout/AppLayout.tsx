@@ -9,57 +9,52 @@ import {
 	Container,
 	Group,
 	Title,
-	Image,
 	Button,
 	Box,
+	ThemeIcon,
 } from '@mantine/core'
+import { IconBoltFilled } from '@tabler/icons-react'
 import { Link, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import styles from './AppLayout.module.css'
 import AppNavbar from './AppNavbar'
-import GithubLink from './GithubLink'
-import ScrollToTopButton from './ScrollToTopButton'
-import ToggleColorSchemeButton from './ToggleColorSchemeButton'
 
 const AppLayout = () => {
 	return (
-		<AppShell header={{ height: 56 }}>
-			<AppShell.Header>
+		<AppShell header={{ height: 56 }} withBorder={false}>
+			<AppShell.Header className="bg-transparent backdrop-blur-lg">
 				<Container className="h-full" size="lg">
 					<Group className="h-full" justify="space-between" align="center">
 						<Group gap="sm" renderRoot={(props) => <Link to="/" {...props} />}>
-							<Image src="/logo.png" alt="logo" className="size-8" />
-							<Title order={2}>Interview Questions</Title>
+							<ThemeIcon variant="transparent">
+								<IconBoltFilled />
+							</ThemeIcon>
+							<Title order={4}>Interview Questions</Title>
 						</Group>
-						<Group gap="xl" visibleFrom="md">
+						<Group gap="xl" visibleFrom="sm">
 							<SearchInput />
-							<Group gap="xs">
-								<ToggleColorSchemeButton />
-								<GithubLink />
-								<SignedOut>
-									<SignInButton>
-										<Button variant="subtle">Sign in</Button>
-									</SignInButton>
-								</SignedOut>
-								<SignedIn>
-									<UserButton />
-								</SignedIn>
-							</Group>
+							<SignedOut>
+								<SignInButton>
+									<Button variant="subtle">Sign in</Button>
+								</SignInButton>
+							</SignedOut>
+							<SignedIn>
+								<UserButton />
+							</SignedIn>
 						</Group>
 					</Group>
 				</Container>
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>
-				<Container className="w-full" size="md" py="lg">
+				<Container className="w-full" size="lg" py="lg">
 					<Group align="start" gap="xl">
 						<AppNavbar />
-						<Box className="flex-1">
+						<Box className="min-w-0 flex-1">
 							<Outlet />
 						</Box>
 					</Group>
 				</Container>
 			</AppShell.Main>
-			<ScrollToTopButton />
 		</AppShell>
 	)
 }

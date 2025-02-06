@@ -18,8 +18,8 @@ const ToggleColorSchemeButton = () => {
 	return (
 		<Tooltip label={computedColorScheme === 'light' ? '暗色模式' : '亮色模式'}>
 			<ActionIcon
-				className="border-none"
-				variant="default"
+				color="gray"
+				variant="subtle"
 				size="lg"
 				onClick={() =>
 					setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')

@@ -3,6 +3,7 @@ import { Stack, Title, Text, Anchor, Paper, Affix } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
 import { type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
+import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
 import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
 import octokit from '@/configs/octokit'
@@ -50,7 +51,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 		<Paper p="lg">
 			<Stack className="w-full" gap="xl">
 				<Stack>
-					<Title order={2}>{title}</Title>
+					<Title order={3}>{title}</Title>
 					<Text>
 						题目来源：
 						<Anchor
@@ -62,8 +63,11 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 				</Stack>
 				<Article html={body_html ?? 'No description'} />
 			</Stack>
-			<Affix position={{ bottom: 64, right: 192 }}>
-				<FavoriteButton />
+			<Affix position={{ bottom: 128, right: 256 }}>
+				<Stack>
+					<ScrollToTopButton />
+					<FavoriteButton />
+				</Stack>
 			</Affix>
 		</Paper>
 	)

@@ -1,6 +1,6 @@
 import { SignInButton, useAuth } from '@clerk/react-router'
 import { Tooltip, ActionIcon } from '@mantine/core'
-import { IconCarambola, IconCarambolaFilled } from '@tabler/icons-react'
+import { IconHeart, IconHeartFilled } from '@tabler/icons-react'
 import { useLoaderData, useFetcher, useParams } from 'react-router'
 import { type Info } from '../../routes/question.$number/+types'
 
@@ -17,10 +17,10 @@ const FavoriteButton = () => {
 
 	if (!userId) {
 		return (
-			<Tooltip label="请登录后收藏">
+			<Tooltip label="登录后即可收藏">
 				<SignInButton>
-					<ActionIcon size="xl" radius="xl" variant="default">
-						<IconCarambola />
+					<ActionIcon color="red" size="xl" radius="xl" variant="default">
+						<IconHeart />
 					</ActionIcon>
 				</SignInButton>
 			</Tooltip>
@@ -32,8 +32,14 @@ const FavoriteButton = () => {
 			<Tooltip label="取消收藏">
 				<fetcher.Form method="delete" action={`/api/favorites/${questionId}`}>
 					<input type="hidden" name="questionId" value={questionId} />
-					<ActionIcon type="submit" size="xl" radius="xl" loading={loading}>
-						<IconCarambolaFilled />
+					<ActionIcon
+						type="submit"
+						color="red"
+						size="xl"
+						radius="xl"
+						loading={loading}
+					>
+						<IconHeartFilled />
 					</ActionIcon>
 				</fetcher.Form>
 			</Tooltip>
@@ -46,12 +52,13 @@ const FavoriteButton = () => {
 				<input type="hidden" name="questionId" value={questionId} />
 				<ActionIcon
 					type="submit"
+					color="red"
 					size="xl"
 					radius="xl"
-					variant="default"
+					variant="light"
 					loading={loading}
 				>
-					<IconCarambola />
+					<IconHeart />
 				</ActionIcon>
 			</fetcher.Form>
 		</Tooltip>

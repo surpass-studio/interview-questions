@@ -8,7 +8,7 @@ const GithubLink = () => {
 				href="https://github.com/surpass-studio/interview-questions"
 				target="_blank"
 			>
-				<ActionIcon className="border-none" variant="default" size="lg">
+				<ActionIcon color="gray" variant="subtle" size="lg">
 					<IconBrandGithub className="stroke-1.5" />
 				</ActionIcon>
 			</Anchor>

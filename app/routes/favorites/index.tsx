@@ -29,6 +29,16 @@ export const loader = async (args: Route.LoaderArgs) => {
 			eq(userFavorites.user_id, userId as string),
 		)
 
+		if (count === 0) {
+			return {
+				issues: [],
+				pagination: {
+					value: 0,
+					total: 0,
+				},
+			}
+		}
+
 		const total = Math.ceil(count / PAGE_SIZE)
 
 		const questionIds = await db.query.userFavorites.findMany({

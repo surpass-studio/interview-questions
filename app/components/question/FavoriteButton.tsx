@@ -1,3 +1,4 @@
+import { SignInButton, useAuth } from '@clerk/react-router'
 import { Tooltip, ActionIcon } from '@mantine/core'
 import { IconCarambola, IconCarambolaFilled } from '@tabler/icons-react'
 import { useLoaderData, useFetcher, useParams } from 'react-router'
@@ -8,9 +9,23 @@ const FavoriteButton = () => {
 
 	const { isFavorited } = useLoaderData<Info['loaderData']>()
 
+	const { userId } = useAuth()
+
 	const fetcher = useFetcher()
 
 	const loading = fetcher.state !== 'idle'
+
+	if (!userId) {
+		return (
+			<Tooltip label="请登录后收藏">
+				<SignInButton>
+					<ActionIcon size="xl" radius="xl" variant="default">
+						<IconCarambola />
+					</ActionIcon>
+				</SignInButton>
+			</Tooltip>
+		)
+	}
 
 	if (isFavorited) {
 		return (

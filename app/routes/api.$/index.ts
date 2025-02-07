@@ -1,6 +1,6 @@
 import { type AuthObject } from '@clerk/react-router/api.server'
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { vValidator } from '@hono/valibot-validator'
+import { sValidator } from '@hono/standard-validator'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
@@ -29,7 +29,7 @@ const favorites = new Hono<{ Bindings: Bindings }>()
 	})
 	.get(
 		'/:questionId',
-		vValidator(
+		sValidator(
 			'query',
 			v.object({
 				questionId: v.pipe(
@@ -59,7 +59,7 @@ const favorites = new Hono<{ Bindings: Bindings }>()
 	)
 	.post(
 		'/',
-		vValidator(
+		sValidator(
 			'form',
 			v.object({
 				questionId: v.pipe(
@@ -87,7 +87,7 @@ const favorites = new Hono<{ Bindings: Bindings }>()
 	)
 	.delete(
 		'/:questionId',
-		vValidator(
+		sValidator(
 			'param',
 			v.object({
 				questionId: v.pipe(

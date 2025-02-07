@@ -3,9 +3,7 @@ import {
 	type D1Database,
 } from '@cloudflare/workers-types'
 
-interface ImportMetaEnv {
-	readonly VITE_GITHUB_TOKEN: string
-}
+interface ImportMetaEnv {}
 
 interface ImportMeta {
 	readonly env: ImportMetaEnv

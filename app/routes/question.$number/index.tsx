@@ -63,7 +63,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 				</Stack>
 				<Article html={body_html ?? 'No description'} />
 			</Stack>
-			<Affix position={{ bottom: 128, right: 256 }}>
+			<Affix position={{ bottom: 128, right: 128 }}>
 				<Stack>
 					<ScrollToTopButton />
 					<FavoriteButton />

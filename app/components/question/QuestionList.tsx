@@ -7,6 +7,7 @@ import {
 	Button,
 	UnstyledButton,
 } from '@mantine/core'
+import clsx from 'clsx'
 import queryString from 'query-string'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
@@ -33,16 +34,15 @@ const QuestionList = () => {
 					<UnstyledButton
 						key={issue.number}
 						component="li"
+						p="sm"
 						title={issue.title}
 						className={styles.listItem}
-						py="sm"
-						px="xs"
 					>
 						<Link
 							viewTransition
 							prefetch="intent"
 							to={`/question/${issue.number}`}
-							className="align-middle"
+							className={clsx('align-middle', styles.stretchedLink)}
 						>
 							{issue.title}
 						</Link>
@@ -51,6 +51,7 @@ const QuestionList = () => {
 								<Button
 									key={index}
 									component={Link}
+									className="z-1"
 									size="compact-xs"
 									autoContrast
 									color={label.color ? `#${label.color}` : undefined}

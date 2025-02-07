@@ -1,8 +1,15 @@
 .listItem {
+	position: relative;
 	@mixin hover {
 		background-color: light-dark(
 			var(--mantine-color-gray-0),
 			var(--mantine-color-dark-8)
 		);
 	}
+}
+
+.stretchedLink::after {
+	position: absolute;
+	inset: 0;
+	content: '';
 }

@@ -10,7 +10,7 @@ import {
 	Group,
 	Title,
 	Button,
-	Box,
+	Grid,
 	ThemeIcon,
 } from '@mantine/core'
 import { IconBoltFilled } from '@tabler/icons-react'
@@ -23,7 +23,7 @@ const AppLayout = () => {
 	return (
 		<AppShell header={{ height: 56 }} withBorder={false}>
 			<AppShell.Header className="bg-transparent backdrop-blur-lg">
-				<Container className="h-full" size="lg">
+				<Container className="h-full" size="xl">
 					<Group className="h-full" justify="space-between" align="center">
 						<Group gap="sm" renderRoot={(props) => <Link to="/" {...props} />}>
 							<ThemeIcon variant="transparent">
@@ -46,13 +46,15 @@ const AppLayout = () => {
 				</Container>
 			</AppShell.Header>
 			<AppShell.Main className={styles.main}>
-				<Container className="w-full" size="lg" py="lg">
-					<Group align="start" gap="xl">
-						<AppNavbar />
-						<Box className="min-w-0 flex-1">
+				<Container className="w-full" size="xl" py="lg">
+					<Grid>
+						<Grid.Col span={2}>
+							<AppNavbar />
+						</Grid.Col>
+						<Grid.Col span={8}>
 							<Outlet />
-						</Box>
-					</Group>
+						</Grid.Col>
+					</Grid>
 				</Container>
 			</AppShell.Main>
 		</AppShell>

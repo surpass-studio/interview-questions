@@ -56,6 +56,7 @@ const QuestionList = () => {
 									autoContrast
 									color={label.color ? `#${label.color}` : undefined}
 									to={{
+										pathname: '/',
 										search: queryString.stringify({ label: label.name }),
 									}}
 								>

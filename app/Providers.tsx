@@ -1,5 +1,5 @@
 import { ClerkProvider } from '@clerk/react-router'
-import { dark, neobrutalism } from '@clerk/themes'
+import { dark } from '@clerk/themes'
 import { MantineProvider, useComputedColorScheme } from '@mantine/core'
 import { ModalsProvider } from '@mantine/modals'
 import { type PropsWithChildren } from 'react'
@@ -15,7 +15,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 		<ClerkProvider
 			loaderData={loaderData}
 			appearance={{
-				baseTheme: colorScheme === 'dark' ? [dark, neobrutalism] : neobrutalism,
+				baseTheme: colorScheme === 'dark' ? dark : undefined,
 			}}
 			signUpFallbackRedirectUrl="/"
 			signInFallbackRedirectUrl="/"

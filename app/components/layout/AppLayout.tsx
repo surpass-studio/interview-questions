@@ -20,7 +20,7 @@ import {
 	IconHeart,
 	IconHeartFilled,
 } from '@tabler/icons-react'
-import { Link, Outlet, NavLink } from 'react-router'
+import { Link, NavLink, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import styles from './AppLayout.module.css'
 import GithubLink from './GithubLink'
@@ -45,13 +45,18 @@ const AppLayout = () => {
 	return (
 		<AppShell
 			layout="alt"
-			padding="xl"
-			navbar={{ width: 256, breakpoint: 0 }}
+			padding="lg"
+			navbar={{ width: 256, breakpoint: 'sm', collapsed: { mobile: true } }}
 			withBorder={false}
 		>
 			<AppShell.Navbar className="bg-transparent" p="md">
 				<AppShell.Section>
-					<Group gap="sm" renderRoot={(props) => <Link to="/" {...props} />}>
+					<Group
+						gap="sm"
+						renderRoot={(props) => (
+							<Link to="/" title="Interview Questions" {...props} />
+						)}
+					>
 						<ThemeIcon variant="transparent">
 							<IconBoltFilled />
 						</ThemeIcon>
@@ -75,10 +80,16 @@ const AppLayout = () => {
 										fullWidth
 										size="compact-lg"
 										title={link.label}
-										classNames={{ inner: 'justify-start' }}
+										classNames={{ inner: 'justify-start font-normal' }}
 										variant={isActive ? 'light' : 'transparent'}
 										color={isActive ? undefined : 'gray'}
-										leftSection={isActive ? <link.iconFilled /> : <link.icon />}
+										leftSection={
+											isActive ? (
+												<link.iconFilled className="stroke-1.5" />
+											) : (
+												<link.icon className="stroke-1.5" />
+											)
+										}
 									>
 										{link.label}
 									</Button>

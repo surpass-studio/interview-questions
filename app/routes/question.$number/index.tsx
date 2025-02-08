@@ -1,7 +1,17 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { Stack, Title, Text, Anchor, Paper, Affix } from '@mantine/core'
+import {
+	Stack,
+	Title,
+	Text,
+	Anchor,
+	Paper,
+	Affix,
+	Button,
+	Group,
+} from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
-import { type MetaDescriptor } from 'react-router'
+import queryString from 'query-string'
+import { Link, type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
 import Article from '@/components/question/Article'
@@ -41,17 +51,46 @@ export const loader = async (args: Route.LoaderArgs) => {
 		isFavorited = !!favorite
 	}
 
-	return { title: issue.title, body_html: issue.body_html, isFavorited }
+	return {
+		title: issue.title,
+		labels: issue.labels,
+		body_html: issue.body_html,
+		isFavorited,
+	}
 }
 
 const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
-	const { title, body_html } = loaderData
+	const { title, labels, body_html } = loaderData
 
 	return (
 		<Paper p="lg">
 			<Stack className="w-full" gap="xl">
 				<Stack>
 					<Title order={3}>{title}</Title>
+					<Group>
+						{labels.map((label, index) => (
+							<Button
+								key={index}
+								component={Link}
+								className="z-1"
+								size="compact-xs"
+								autoContrast
+								color={
+									typeof label !== 'string' && label.color
+										? `#${label.color}`
+										: undefined
+								}
+								to={{
+									pathname: '/',
+									search: queryString.stringify({
+										label: typeof label === 'string' ? label : label.name,
+									}),
+								}}
+							>
+								{typeof label === 'string' ? label : label.name}
+							</Button>
+						))}
+					</Group>
 					<Text>
 						题目来源：
 						<Anchor

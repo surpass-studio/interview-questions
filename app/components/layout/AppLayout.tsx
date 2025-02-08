@@ -12,6 +12,7 @@ import {
 	Title,
 	Box,
 	Stack,
+	Text,
 } from '@mantine/core'
 import {
 	IconBoltFilled,
@@ -78,10 +79,10 @@ const AppLayout = () => {
 								{({ isActive }) => (
 									<Button
 										fullWidth
-										size="compact-lg"
+										size="md"
+										variant="subtle"
 										title={link.label}
 										classNames={{ inner: 'justify-start font-normal' }}
-										variant={isActive ? 'light' : 'transparent'}
 										color={isActive ? undefined : 'gray'}
 										leftSection={
 											isActive ? (
@@ -99,18 +100,23 @@ const AppLayout = () => {
 					</Stack>
 				</AppShell.Section>
 				<AppShell.Section>
-					<Group>
-						<ToggleColorSchemeButton />
-						<GithubLink />
-						<SignedOut>
-							<SignInButton>
-								<Button variant="subtle">Sign in</Button>
-							</SignInButton>
-						</SignedOut>
-						<SignedIn>
-							<UserButton />
-						</SignedIn>
-					</Group>
+					<Stack>
+						<Group>
+							<ToggleColorSchemeButton />
+							<GithubLink />
+							<SignedOut>
+								<SignInButton>
+									<Button variant="subtle">Sign in</Button>
+								</SignInButton>
+							</SignedOut>
+							<SignedIn>
+								<UserButton />
+							</SignedIn>
+						</Group>
+						<Text c="gray" size="xs">
+							Made with ❤️ by the Suprass Studio
+						</Text>
+					</Stack>
 				</AppShell.Section>
 			</AppShell.Navbar>
 			<AppShell.Main className={styles.main}>

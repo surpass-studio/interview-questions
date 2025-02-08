@@ -25,7 +25,7 @@ export const meta = ({ data }: Route.MetaArgs) => {
 }
 
 export const loader = async (args: Route.LoaderArgs) => {
-	const questionId = Number(args.params.number)
+	const questionId = Number(args.params.questionId)
 
 	const { data: issue } = await octokit.issues.get({
 		owner: 'pro-collection',
@@ -94,7 +94,7 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 					<Text>
 						题目来源：
 						<Anchor
-							href={`https://github.com/pro-collection/interview-question/issues/${params.number}`}
+							href={`https://github.com/pro-collection/interview-question/issues/${params.questionId}`}
 						>
 							pro-collection/interview-question
 						</Anchor>

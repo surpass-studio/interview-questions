@@ -13,6 +13,7 @@ const ScrollToTopButton = () => {
 						style={style}
 						size="xl"
 						radius="xl"
+						variant="light"
 						onClick={() => scrollTo({ y: 0 })}
 					>
 						<IconArrowUp />

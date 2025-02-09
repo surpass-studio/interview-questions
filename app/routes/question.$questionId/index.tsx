@@ -1,14 +1,5 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import {
-	Stack,
-	Title,
-	Text,
-	Anchor,
-	Paper,
-	Affix,
-	Button,
-	Group,
-} from '@mantine/core'
+import { Stack, Title, Paper, Affix, Button, Group } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
 import queryString from 'query-string'
 import { Link, type MetaDescriptor } from 'react-router'
@@ -16,6 +7,8 @@ import { type Route } from './+types/index'
 import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
 import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
+import FullTextCopyButton from '@/components/question/FullTextCopyButton'
+import SourceButton from '@/components/question/SourceButton'
 import octokit from '@/configs/octokit'
 import getDB from '@/db/getDB'
 import { userFavorites } from '@/db/schema'
@@ -31,7 +24,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 		owner: 'pro-collection',
 		repo: 'interview-question',
 		issue_number: questionId,
-		mediaType: { format: 'html' },
+		mediaType: { format: 'full' },
 	})
 
 	const { userId } = await getAuth(args)
@@ -54,20 +47,21 @@ export const loader = async (args: Route.LoaderArgs) => {
 	return {
 		title: issue.title,
 		labels: issue.labels,
+		body_text: issue.body_text,
 		body_html: issue.body_html,
 		isFavorited,
 	}
 }
 
-const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
-	const { title, labels, body_html } = loaderData
+const IssuePage = ({ loaderData }: Route.ComponentProps) => {
+	const { title, labels, body_text, body_html } = loaderData
 
 	return (
 		<Paper p="lg">
 			<Stack className="w-full" gap="xl">
-				<Stack>
+				<Stack gap="lg">
 					<Title order={3}>{title}</Title>
-					<Group>
+					<Group gap="lg">
 						{labels.map((label, index) => (
 							<Button
 								key={index}
@@ -91,22 +85,16 @@ const IssuePage = ({ loaderData, params }: Route.ComponentProps) => {
 							</Button>
 						))}
 					</Group>
-					<Text>
-						题目来源：
-						<Anchor
-							href={`https://github.com/pro-collection/interview-question/issues/${params.questionId}`}
-						>
-							pro-collection/interview-question
-						</Anchor>
-					</Text>
+					<Group gap="lg">
+						<FavoriteButton />
+						{body_text && <FullTextCopyButton text={body_text} />}
+						<SourceButton />
+					</Group>
 				</Stack>
 				<Article html={body_html ?? 'No description'} />
 			</Stack>
-			<Affix position={{ bottom: 128, right: 128 }}>
-				<Stack>
-					<ScrollToTopButton />
-					<FavoriteButton />
-				</Stack>
+			<Affix position={{ bottom: '12%', right: '8%' }}>
+				<ScrollToTopButton />
 			</Affix>
 		</Paper>
 	)

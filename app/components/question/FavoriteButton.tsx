@@ -19,8 +19,8 @@ const FavoriteButton = () => {
 		return (
 			<Tooltip label="登录后即可收藏">
 				<SignInButton>
-					<ActionIcon color="red" size="xl" radius="xl" variant="default">
-						<IconHeart />
+					<ActionIcon color="red" size="lg" radius="lg" variant="default">
+						<IconHeart className="stroke-1.5" />
 					</ActionIcon>
 				</SignInButton>
 			</Tooltip>
@@ -35,11 +35,11 @@ const FavoriteButton = () => {
 					<ActionIcon
 						type="submit"
 						color="red"
-						size="xl"
-						radius="xl"
+						size="lg"
+						radius="lg"
 						loading={loading}
 					>
-						<IconHeartFilled />
+						<IconHeartFilled className="stroke-1.5" />
 					</ActionIcon>
 				</fetcher.Form>
 			</Tooltip>
@@ -53,12 +53,12 @@ const FavoriteButton = () => {
 				<ActionIcon
 					type="submit"
 					color="red"
-					size="xl"
-					radius="xl"
+					size="lg"
+					radius="lg"
 					variant="light"
 					loading={loading}
 				>
-					<IconHeart />
+					<IconHeart className="stroke-1.5" />
 				</ActionIcon>
 			</fetcher.Form>
 		</Tooltip>

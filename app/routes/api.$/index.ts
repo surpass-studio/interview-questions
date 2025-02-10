@@ -15,48 +15,6 @@ type Bindings = AppLoadContext['cloudflare']['env'] & {
 }
 
 const favorites = new Hono<{ Bindings: Bindings }>()
-	.get('/', async (c) => {
-		const { userId } = c.env.auth
-
-		const db = getDB(c.env.DB)
-
-		const questionIds = await db.query.userFavorites.findMany({
-			where: eq(userFavorites.user_id, userId as string),
-			columns: { question_id: true },
-		})
-
-		return c.json(questionIds)
-	})
-	.get(
-		'/:questionId',
-		sValidator(
-			'query',
-			v.object({
-				questionId: v.pipe(
-					v.string(),
-					v.digits(),
-					v.transform(Number),
-					v.number(),
-				),
-			}),
-		),
-		async (c) => {
-			const { userId } = c.env.auth
-
-			const db = getDB(c.env.DB)
-
-			const { questionId } = c.req.valid('query')
-
-			const favorite = await db.query.userFavorites.findFirst({
-				where: and(
-					eq(userFavorites.user_id, userId as string),
-					eq(userFavorites.question_id, questionId),
-				),
-			})
-
-			return c.json({ isFavorited: !!favorite })
-		},
-	)
 	.post(
 		'/',
 		sValidator(

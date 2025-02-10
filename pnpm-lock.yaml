@@ -83,7 +83,7 @@ importers:
         version: 4.20250204.0
       '@epic-web/config':
         specifier: ^1.16.5
-        version: 1.16.5(@typescript-eslint/utils@8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.0(jiti@2.4.2))(prettier@3.4.2)(typescript@5.7.3)
+        version: 1.16.5(@typescript-eslint/utils@8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.0(jiti@2.4.2))(prettier@3.5.0)(typescript@5.7.3)
       '@react-router/cloudflare':
         specifier: ^7.1.5
         version: 7.1.5(@cloudflare/workers-types@4.20250204.0)(react-router@7.1.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(tsup@8.3.5(jiti@2.4.2)(postcss@8.5.1)(typescript@5.7.3)(yaml@2.7.0))(typescript@5.7.3)
@@ -130,8 +130,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1(postcss@8.5.1)
       prettier:
-        specifier: ^3.4.2
-        version: 3.4.2
+        specifier: ^3.5.0
+        version: 3.5.0
       tailwindcss:
         specifier: 4.0.4
         version: 4.0.4
@@ -3024,8 +3024,8 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
 
-  prettier@3.4.2:
-    resolution: {integrity: sha512-e9MewbtFo+Fevyuxn/4rrcDAaq0IYxPGLvObpQjiZBMAzB9IGmzlnG9RZy3FFas+eBMu2vA0CszMeduow5dIuQ==}
+  prettier@3.5.0:
+    resolution: {integrity: sha512-quyMrVt6svPS7CjQ9gKb3GLEX/rl3BCL2oa/QkNcXv4YNVBC9olt3s+H7ukto06q7B1Qz46PbrKLO34PR6vXcA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -4107,7 +4107,7 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.2': {}
 
-  '@epic-web/config@1.16.5(@typescript-eslint/utils@8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.0(jiti@2.4.2))(prettier@3.4.2)(typescript@5.7.3)':
+  '@epic-web/config@1.16.5(@typescript-eslint/utils@8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.0(jiti@2.4.2))(prettier@3.5.0)(typescript@5.7.3)':
     dependencies:
       '@total-typescript/ts-reset': 0.6.1
       '@vitest/eslint-plugin': 1.1.26(@typescript-eslint/utils@8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3)
@@ -4117,7 +4117,7 @@ snapshots:
       eslint-plugin-react-hooks: 5.1.0(eslint@9.20.0(jiti@2.4.2))
       eslint-plugin-testing-library: 7.1.1(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3)
       globals: 15.14.0
-      prettier-plugin-tailwindcss: 0.6.11(prettier@3.4.2)
+      prettier-plugin-tailwindcss: 0.6.11(prettier@3.5.0)
       tslib: 2.8.1
       typescript-eslint: 8.23.0(eslint@9.20.0(jiti@2.4.2))(typescript@5.7.3)
     transitivePeerDependencies:
@@ -6570,13 +6570,13 @@ snapshots:
 
   prelude-ls@1.2.1: {}
 
-  prettier-plugin-tailwindcss@0.6.11(prettier@3.4.2):
+  prettier-plugin-tailwindcss@0.6.11(prettier@3.5.0):
     dependencies:
-      prettier: 3.4.2
+      prettier: 3.5.0
 
   prettier@2.8.8: {}
 
-  prettier@3.4.2: {}
+  prettier@3.5.0: {}
 
   printable-characters@1.0.42: {}
 

@@ -1,80 +1,15 @@
 import { type AuthObject } from '@clerk/react-router/api.server'
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { sValidator } from '@hono/standard-validator'
-import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
 import { type AppLoadContext } from 'react-router'
-import * as v from 'valibot'
 import { type Route } from '../+types/_index'
-import getDB from '@/db/getDB'
-import { userFavorites } from '@/db/schema'
+import chatAPI from './chatAPI'
+import favoritesAPI from './favoritesAPI'
 
-type Bindings = AppLoadContext['cloudflare']['env'] & {
+export type Bindings = AppLoadContext['cloudflare']['env'] & {
 	auth: AuthObject
 }
-
-const favorites = new Hono<{ Bindings: Bindings }>()
-	.post(
-		'/',
-		sValidator(
-			'form',
-			v.object({
-				questionId: v.pipe(
-					v.string(),
-					v.digits(),
-					v.transform(Number),
-					v.number(),
-				),
-			}),
-		),
-		async (c) => {
-			const { userId } = c.env.auth
-
-			const db = getDB(c.env.DB)
-
-			const { questionId } = c.req.valid('form')
-
-			await db.insert(userFavorites).values({
-				user_id: userId as string,
-				question_id: questionId,
-			})
-
-			return c.json({ success: true })
-		},
-	)
-	.delete(
-		'/:questionId',
-		sValidator(
-			'param',
-			v.object({
-				questionId: v.pipe(
-					v.string(),
-					v.digits(),
-					v.transform(Number),
-					v.number(),
-				),
-			}),
-		),
-		async (c) => {
-			const { userId } = c.env.auth
-
-			const db = getDB(c.env.DB)
-
-			const { questionId } = c.req.valid('param')
-
-			await db
-				.delete(userFavorites)
-				.where(
-					and(
-						eq(userFavorites.user_id, userId as string),
-						eq(userFavorites.question_id, questionId),
-					),
-				)
-
-			return c.json({ success: true })
-		},
-	)
 
 const app = new Hono<{ Bindings: Bindings }>()
 	.basePath('/api')
@@ -92,7 +27,8 @@ const app = new Hono<{ Bindings: Bindings }>()
 
 		return c.json({ error: error.message }, 500)
 	})
-	.route('/favorites', favorites)
+	.route('/favorites', favoritesAPI)
+	.route('/chat', chatAPI)
 
 export const loader = async (args: Route.LoaderArgs) => {
 	const auth = await getAuth(args)

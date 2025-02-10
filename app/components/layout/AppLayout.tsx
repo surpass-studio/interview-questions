@@ -13,13 +13,17 @@ import {
 	Box,
 	Stack,
 	Text,
+	Container,
 } from '@mantine/core'
 import {
+	type Icon,
 	IconBoltFilled,
 	IconHome,
 	IconHomeFilled,
 	IconHeart,
 	IconHeartFilled,
+	IconMessageChatbot,
+	IconMessageChatbotFilled,
 } from '@tabler/icons-react'
 import { Link, NavLink, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
@@ -28,8 +32,15 @@ import { AppNavigationProgress } from './AppNavigationProgress'
 import GithubLink from './GithubLink'
 import ToggleColorSchemeButton from './ToggleColorSchemeButton'
 
+interface NavLinkItem {
+	to: string
+	label: string
+	icon: Icon
+	iconFilled: Icon
+}
+
 const AppLayout = () => {
-	const links = [
+	const links: NavLinkItem[] = [
 		{
 			to: '/',
 			label: 'Home',
@@ -41,6 +52,12 @@ const AppLayout = () => {
 			label: 'Favorites',
 			icon: IconHeart,
 			iconFilled: IconHeartFilled,
+		},
+		{
+			to: '/chat',
+			label: 'Chat',
+			icon: IconMessageChatbot,
+			iconFilled: IconMessageChatbotFilled,
 		},
 	]
 
@@ -123,9 +140,9 @@ const AppLayout = () => {
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main className={styles.main}>
-					<Box className="w-full">
+					<Container className="w-full" size="lg">
 						<Outlet />
-					</Box>
+					</Container>
 				</AppShell.Main>
 			</AppShell>
 		</>

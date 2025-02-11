@@ -2,6 +2,7 @@ import { useChat } from '@ai-sdk/react'
 import {
 	Avatar,
 	Card,
+	Center,
 	Group,
 	Stack,
 	Text,
@@ -27,6 +28,22 @@ const MessageList = ({ id }: MessageListProps) => {
 			behavior: 'smooth',
 		})
 	}, [messages])
+
+	if (messages.length === 0) {
+		return (
+			<Center className="flex-1">
+				<Group>
+					<ThemeIcon variant="transparent">
+						<IconSparkles className="stroke-1.5" />
+					</ThemeIcon>
+					<Text>
+						No messages yet. Start the conversation by typing a message in the
+						input.
+					</Text>
+				</Group>
+			</Center>
+		)
+	}
 
 	return (
 		<Stack className="flex-1" gap="xl">

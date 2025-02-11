@@ -28,7 +28,13 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 				onCompositionStart={() => setIsCompositionInput(true)}
 				onCompositionEnd={() => setIsCompositionInput(false)}
 				onKeyDown={(event) => {
-					if (event.key === 'Enter' && !event.shiftKey && !isCompositionInput) {
+					const canSendMessage =
+						!isLoading &&
+						event.key === 'Enter' &&
+						!event.shiftKey &&
+						!isCompositionInput
+
+					if (canSendMessage) {
 						event.preventDefault()
 
 						handleSubmit()

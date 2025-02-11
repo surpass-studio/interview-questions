@@ -3,6 +3,7 @@ import {
 	Avatar,
 	Center,
 	Group,
+	Loader,
 	Paper,
 	Stack,
 	Text,
@@ -10,7 +11,7 @@ import {
 	TypographyStylesProvider,
 } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
-import { motion } from 'motion/react'
+import { type AnimationProps, motion } from 'motion/react'
 import { useEffect } from 'react'
 import Markdown from 'react-markdown'
 import styles from './MessageList.module.css'
@@ -19,8 +20,17 @@ interface MessageListProps {
 	id: string
 }
 
+const animationProps: AnimationProps = {
+	initial: { y: 5, opacity: 0 },
+	animate: { y: 0, opacity: 1 },
+}
+
 const MessageList = ({ id }: MessageListProps) => {
-	const { messages } = useChat({ id })
+	const { isLoading, messages } = useChat({ id })
+
+	const lastMessage = messages[messages.length - 1]
+
+	const isThinking = isLoading && lastMessage && lastMessage.role === 'user'
 
 	useEffect(() => {
 		window.scrollTo({
@@ -53,8 +63,7 @@ const MessageList = ({ id }: MessageListProps) => {
 						<motion.li
 							key={message.id}
 							className="max-w-5/6 self-end"
-							initial={{ y: 5, opacity: 0 }}
-							animate={{ y: 0, opacity: 1 }}
+							{...animationProps}
 						>
 							<Paper p="sm" className={styles.userListItemContent}>
 								<Text>{message.content}</Text>
@@ -64,11 +73,7 @@ const MessageList = ({ id }: MessageListProps) => {
 				}
 
 				return (
-					<motion.li
-						key={message.id}
-						initial={{ y: 5, opacity: 0 }}
-						animate={{ y: 0, opacity: 1 }}
-					>
+					<motion.li key={message.id} {...animationProps}>
 						<Group align="start">
 							<Avatar>
 								<ThemeIcon variant="transparent">
@@ -84,6 +89,19 @@ const MessageList = ({ id }: MessageListProps) => {
 					</motion.li>
 				)
 			})}
+
+			{isThinking && (
+				<motion.li {...animationProps}>
+					<Group>
+						<Avatar>
+							<ThemeIcon variant="transparent">
+								<IconSparkles className="stroke-1.5" />
+							</ThemeIcon>
+						</Avatar>
+						<Loader type="dots" />
+					</Group>
+				</motion.li>
+			)}
 		</Stack>
 	)
 }

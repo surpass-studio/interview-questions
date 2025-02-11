@@ -16,13 +16,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 		messages,
 	})
 
-	return result.toTextStreamResponse({
-		headers: {
-			'Content-Type': 'text/x-unknown',
-			'content-encoding': 'identity',
-			'transfer-encoding': 'chunked',
-		},
-	})
+	return result.toDataStreamResponse()
 })
 
 export default chatAPI

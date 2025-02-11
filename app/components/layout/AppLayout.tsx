@@ -140,7 +140,7 @@ const AppLayout = () => {
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main className={styles.main}>
-					<Container className="w-full" size="lg">
+					<Container className="w-full" size="md">
 						<Outlet />
 					</Container>
 				</AppShell.Main>

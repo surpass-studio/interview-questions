@@ -19,7 +19,7 @@ const FavoriteButton = () => {
 		return (
 			<Tooltip label="登录后即可收藏">
 				<SignInButton>
-					<ActionIcon color="red" size="lg" radius="lg" variant="default">
+					<ActionIcon color="red" size="lg" radius="lg" variant="light">
 						<IconHeart className="stroke-1.5" />
 					</ActionIcon>
 				</SignInButton>

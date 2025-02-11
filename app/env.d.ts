@@ -1,6 +1,7 @@
 import {
 	type ExecutionContext,
 	type D1Database,
+	type Ai,
 } from '@cloudflare/workers-types'
 
 interface ImportMetaEnv {}
@@ -15,6 +16,7 @@ declare module 'react-router' {
 			ctx: ExecutionContext
 			env: {
 				DB: D1Database
+				AI: Ai
 			}
 		}
 	}

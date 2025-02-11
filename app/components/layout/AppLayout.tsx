@@ -66,7 +66,6 @@ const AppLayout = () => {
 			<AppNavigationProgress />
 			<AppShell
 				layout="alt"
-				padding="lg"
 				navbar={{ width: 256, breakpoint: 'sm', collapsed: { mobile: true } }}
 				withBorder={false}
 			>
@@ -140,7 +139,7 @@ const AppLayout = () => {
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main className={styles.main}>
-					<Container className="w-full" size="md">
+					<Container className="w-full" size="md" py="lg">
 						<Outlet />
 					</Container>
 				</AppShell.Main>

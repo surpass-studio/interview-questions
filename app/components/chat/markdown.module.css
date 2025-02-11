@@ -1,3 +1,0 @@
-.markdown :where(ol, ul, menu) {
-	list-style: auto;
-}

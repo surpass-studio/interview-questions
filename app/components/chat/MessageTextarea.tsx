@@ -1,6 +1,7 @@
 import { useChat } from '@ai-sdk/react'
-import { Paper, Textarea } from '@mantine/core'
+import { Textarea } from '@mantine/core'
 import { useState } from 'react'
+import SendMessageButton from './SendMessageButton'
 
 interface MessageTextareaProps {
 	id: string
@@ -9,37 +10,41 @@ interface MessageTextareaProps {
 const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
 
-	const { input, handleInputChange, handleSubmit } = useChat({
+	const { input, isLoading, stop, handleInputChange, handleSubmit } = useChat({
 		id,
 	})
 
 	return (
-		<Paper className="sticky bottom-6">
-			<form onSubmit={handleSubmit}>
-				<Textarea
-					autosize
-					minRows={2}
-					maxRows={8}
-					size="lg"
-					placeholder="Type a message..."
-					value={input}
-					onChange={handleInputChange}
-					onCompositionStart={() => setIsCompositionInput(true)}
-					onCompositionEnd={() => setIsCompositionInput(false)}
-					onKeyDown={(event) => {
-						if (
-							event.key === 'Enter' &&
-							!event.shiftKey &&
-							!isCompositionInput
-						) {
-							event.preventDefault()
+		<form className="sticky bottom-9" onSubmit={handleSubmit}>
+			<Textarea
+				autosize
+				minRows={1}
+				rows={1}
+				maxRows={10}
+				size="md"
+				placeholder="Type a message..."
+				value={input}
+				onChange={handleInputChange}
+				onCompositionStart={() => setIsCompositionInput(true)}
+				onCompositionEnd={() => setIsCompositionInput(false)}
+				onKeyDown={(event) => {
+					const canSendMessage =
+						!isLoading &&
+						event.key === 'Enter' &&
+						!event.shiftKey &&
+						!isCompositionInput
 
-							handleSubmit()
-						}
-					}}
-				/>
-			</form>
-		</Paper>
+					if (canSendMessage) {
+						event.preventDefault()
+
+						handleSubmit()
+					}
+				}}
+				rightSection={
+					<SendMessageButton input={input} isLoading={isLoading} stop={stop} />
+				}
+			/>
+		</form>
 	)
 }
 

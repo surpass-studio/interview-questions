@@ -1,6 +1,6 @@
 import { type UseChatHelpers } from '@ai-sdk/react'
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { IconPlayerStopFilled, IconSend } from '@tabler/icons-react'
+import { IconPlayerStop, IconSend } from '@tabler/icons-react'
 import * as v from 'valibot'
 
 type SendMessageButtonProps = Pick<
@@ -15,9 +15,9 @@ const SendMessageButton = ({
 }: SendMessageButtonProps) => {
 	if (isLoading) {
 		return (
-			<Tooltip label="Stop Response">
+			<Tooltip label="Stop">
 				<ActionIcon color="red" variant="subtle" size="input-xs" onClick={stop}>
-					<IconPlayerStopFilled className="stroke-1.5" />
+					<IconPlayerStop className="stroke-1.5" />
 				</ActionIcon>
 			</Tooltip>
 		)

@@ -10,6 +10,7 @@ import {
 } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
 import clsx from 'clsx'
+import { useEffect } from 'react'
 import Markdown from 'react-markdown'
 import styles from './MessageList.module.css'
 
@@ -19,6 +20,13 @@ interface MessageListProps {
 
 const MessageList = ({ id }: MessageListProps) => {
 	const { messages } = useChat({ id })
+
+	useEffect(() => {
+		window.scrollTo({
+			top: document.body.scrollHeight,
+			behavior: 'smooth',
+		})
+	}, [messages])
 
 	return (
 		<Stack className="flex-1" gap="xl">
@@ -38,7 +46,7 @@ const MessageList = ({ id }: MessageListProps) => {
 				return (
 					<Group key={message.id} align="start">
 						<Avatar>
-							<ThemeIcon color="blue" variant="transparent">
+							<ThemeIcon variant="transparent">
 								<IconSparkles className="stroke-1.5" />
 							</ThemeIcon>
 						</Avatar>

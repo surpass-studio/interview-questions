@@ -4,7 +4,7 @@ import { type MetaFunction } from 'react-router'
 import { type Route } from './+types/_index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
-import octokit from '@/configs/octokit'
+import getOctokit from '@/configs/octokit'
 
 export const meta: MetaFunction = () => {
 	return [
@@ -16,7 +16,7 @@ export const meta: MetaFunction = () => {
 	]
 }
 
-export const loader = async ({ request }: Route.LoaderArgs) => {
+export const loader = async ({ request, context }: Route.LoaderArgs) => {
 	const url = new URL(request.url)
 
 	const page = Number(url.searchParams.get('page')) || 1
@@ -39,7 +39,9 @@ export const loader = async ({ request }: Route.LoaderArgs) => {
 		query.push(search)
 	}
 
-	const { data, headers } = await octokit.search.issuesAndPullRequests({
+	const { data, headers } = await getOctokit(
+		context,
+	).search.issuesAndPullRequests({
 		q: query.join(' '),
 		page,
 		per_page: 32,

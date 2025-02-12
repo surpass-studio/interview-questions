@@ -26,3 +26,6 @@ dist-ssr
 # React Router
 build
 .react-router
+
+# Wrangler
+.dev.vars

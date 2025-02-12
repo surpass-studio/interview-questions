@@ -9,7 +9,7 @@ import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
 import FullTextCopyButton from '@/components/question/FullTextCopyButton'
 import SourceButton from '@/components/question/SourceButton'
-import octokit from '@/configs/octokit'
+import getOctokit from '@/configs/octokit'
 import getDB from '@/db/getDB'
 import { userFavorites } from '@/db/schema'
 
@@ -20,7 +20,7 @@ export const meta = ({ data }: Route.MetaArgs) => {
 export const loader = async (args: Route.LoaderArgs) => {
 	const questionId = Number(args.params.questionId)
 
-	const { data: issue } = await octokit.issues.get({
+	const { data: issue } = await getOctokit(args.context).issues.get({
 		owner: 'pro-collection',
 		repo: 'interview-question',
 		issue_number: questionId,

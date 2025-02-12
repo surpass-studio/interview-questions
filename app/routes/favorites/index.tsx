@@ -4,7 +4,7 @@ import { eq } from 'drizzle-orm'
 import { type Route } from './+types/index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
-import octokit from '@/configs/octokit'
+import getOctokit from '@/configs/octokit'
 import getDB from '@/db/getDB'
 import { userFavorites } from '@/db/schema'
 
@@ -67,7 +67,9 @@ export const loader = async (args: Route.LoaderArgs) => {
 			query.push(search)
 		}
 
-		const { data } = await octokit.search.issuesAndPullRequests({
+		const { data } = await getOctokit(
+			args.context,
+		).search.issuesAndPullRequests({
 			q: query.join(' '),
 			page: 1,
 			per_page: PAGE_SIZE,

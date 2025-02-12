@@ -5,8 +5,14 @@ import { type Bindings } from './'
 
 let model: LanguageModelV1 | null = null
 
+interface ChatAPIRequestBody {
+	messages: Message[]
+	sendReasoning: boolean
+}
+
 const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
-	const { messages } = await c.req.json<{ messages: Message[] }>()
+	const { messages, sendReasoning = true } =
+		await c.req.json<ChatAPIRequestBody>()
 
 	if (model === null) {
 		model = createOpenAICompatible({
@@ -21,7 +27,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 		messages,
 	})
 
-	return result.toDataStreamResponse({ sendReasoning: true })
+	return result.toDataStreamResponse({ sendReasoning })
 })
 
 export default chatAPI

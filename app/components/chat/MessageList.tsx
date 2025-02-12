@@ -1,5 +1,6 @@
 import { useChat } from '@ai-sdk/react'
-import { Center, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import { SignInButton, useAuth } from '@clerk/react-router'
+import { Center, Button, Group, Stack, Text, ThemeIcon } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import MessageListItem from './MessageListItem'
@@ -15,12 +16,30 @@ const MessageList = ({ id }: MessageListProps) => {
 
 	const isPending = isLoading && lastMessage && lastMessage.role === 'user'
 
+	const { userId } = useAuth()
+
 	useEffect(() => {
 		window.scrollTo({
 			top: document.body.scrollHeight,
 			behavior: 'smooth',
 		})
 	}, [messages])
+
+	if (!userId) {
+		return (
+			<Stack className="flex-1" justify="center" align="center">
+				<Group>
+					<ThemeIcon variant="transparent">
+						<IconSparkles className="stroke-1.5" />
+					</ThemeIcon>
+					<Text>Please sign in to start the conversation.</Text>
+				</Group>
+				<SignInButton>
+					<Button variant="subtle">Sign in</Button>
+				</SignInButton>
+			</Stack>
+		)
+	}
 
 	if (messages.length === 0) {
 		return (

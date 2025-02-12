@@ -28,7 +28,7 @@ const MessageList = ({ id }: MessageListProps) => {
 	if (!userId) {
 		return (
 			<Stack className="flex-1" justify="center" align="center">
-				<Group>
+				<Group gap="xs">
 					<ThemeIcon variant="transparent">
 						<IconSparkles className="stroke-1.5" />
 					</ThemeIcon>
@@ -44,7 +44,7 @@ const MessageList = ({ id }: MessageListProps) => {
 	if (messages.length === 0) {
 		return (
 			<Center className="flex-1">
-				<Group>
+				<Group gap="xs">
 					<ThemeIcon variant="transparent">
 						<IconSparkles className="stroke-1.5" />
 					</ThemeIcon>

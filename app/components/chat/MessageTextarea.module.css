@@ -1,12 +1,12 @@
 .textareaContainer {
 	/* Custom Properties */
 	--input-bd: light-dark(
-		var(--mantine-color-gray-4),
+		var(--mantine-color-gray-2),
 		var(--mantine-color-dark-4)
 	);
 	--input-bg: light-dark(
-		var(--mantine-color-white),
-		var(--mantine-color-dark-6)
+		var(--mantine-color-gray-1),
+		var(--mantine-color-dark-5)
 	);
 	--input-bd-focus: var(--mantine-primary-color-filled);
 
@@ -35,6 +35,7 @@
 	--input-padding-inline-end: 0;
 	--input-padding-y: 0;
 	--input-height: auto;
+	--input-bg: transparent;
 
 	/* Box Model */
 	border: none;

@@ -1,5 +1,5 @@
 import { useChat } from '@ai-sdk/react'
-import { Button, Group, Stack, Textarea } from '@mantine/core'
+import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconAtom } from '@tabler/icons-react'
 import clsx from 'clsx'
@@ -26,7 +26,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	return (
-		<Stack
+		<Box
 			className={clsx(styles.textareaContainer, 'sticky bottom-9')}
 			onClick={() => {
 				textareaRef.current && textareaRef.current.focus()
@@ -59,22 +59,31 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 							handleSubmit()
 						}
 					}}
+					inputContainer={(children) => (
+						<Stack>
+							{children}
+							<Group justify="space-between">
+								<Button
+									color={sendReasoning ? undefined : 'gray'}
+									size="compact-sm"
+									radius="lg"
+									variant={sendReasoning ? 'light' : 'light'}
+									leftSection={<IconAtom className="stroke-1.5 size-5" />}
+									onClick={() => toggle()}
+								>
+									Reasoning
+								</Button>
+								<SendMessageButton
+									input={input}
+									isLoading={isLoading}
+									stop={stop}
+								/>
+							</Group>
+						</Stack>
+					)}
 				/>
 			</form>
-			<Group justify="space-between">
-				<Button
-					color={sendReasoning ? undefined : 'gray'}
-					size="compact-sm"
-					radius="lg"
-					variant={sendReasoning ? 'light' : 'light'}
-					leftSection={<IconAtom className="stroke-1.5 size-5" />}
-					onClick={() => toggle()}
-				>
-					Reasoning
-				</Button>
-				<SendMessageButton input={input} isLoading={isLoading} stop={stop} />
-			</Group>
-		</Stack>
+		</Box>
 	)
 }
 

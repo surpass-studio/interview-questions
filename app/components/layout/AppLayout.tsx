@@ -101,7 +101,7 @@ const AppLayout = () => {
 											size="md"
 											variant="subtle"
 											title={link.label}
-											classNames={{ inner: 'justify-start font-normal' }}
+											classNames={{ inner: 'justify-start' }}
 											color={isActive ? undefined : 'gray'}
 											leftSection={
 												isActive ? (

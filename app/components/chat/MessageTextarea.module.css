@@ -1,0 +1,41 @@
+.textareaContainer {
+	/* Custom Properties */
+	--input-bd: light-dark(
+		var(--mantine-color-gray-4),
+		var(--mantine-color-dark-4)
+	);
+	--input-bg: light-dark(
+		var(--mantine-color-white),
+		var(--mantine-color-dark-6)
+	);
+	--input-bd-focus: var(--mantine-primary-color-filled);
+
+	/* Box Model */
+	border: rem(1px) solid var(--input-bd);
+	border-radius: var(--mantine-radius-lg);
+	padding-inline-start: var(--mantine-spacing-md);
+	padding-inline-end: var(--mantine-spacing-md);
+	padding-top: var(--mantine-spacing-sm);
+	padding-bottom: var(--mantine-spacing-sm);
+	background-color: var(--input-bg);
+	gap: rem(8px);
+
+	/* Misc */
+	cursor: text;
+}
+
+.textareaContainer:focus-within {
+	--input-bd: var(--mantine-primary-color-filled);
+}
+
+.textarea {
+	/* Custom Properties */
+	--input-radius: 0;
+	--input-padding-inline-start: 0;
+	--input-padding-inline-end: 0;
+	--input-padding-y: 0;
+	--input-height: auto;
+
+	/* Box Model */
+	border: none;
+}

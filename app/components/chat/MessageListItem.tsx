@@ -51,15 +51,14 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 						return (
 							<Stack key={part.type} align="start" gap="xs">
 								<Button
-									className="font-normal"
 									size="compact-sm"
 									color={isOpened ? undefined : 'gray'}
 									variant="subtle"
 									rightSection={
 										isOpened ? (
-											<IconChevronDown className="stroke-1.5 size-4" />
+											<IconChevronDown className="stroke-1.5 size-5" />
 										) : (
-											<IconChevronRight className="stroke-1.5 size-4" />
+											<IconChevronRight className="stroke-1.5 size-5" />
 										)
 									}
 									onClick={() => toggle()}

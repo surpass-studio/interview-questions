@@ -1,11 +1,11 @@
 import { useChat } from '@ai-sdk/react'
 import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
 import { IconAtom } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import styles from './MessageTextarea.module.css'
 import SendMessageButton from './SendMessageButton'
+import useChatReasoningToggle from './useChatReasoningToggle'
 
 interface MessageTextareaProps {
 	id: string
@@ -14,12 +14,12 @@ interface MessageTextareaProps {
 const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
 
-	const [sendReasoning, { toggle }] = useDisclosure(true)
+	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
 
 	const { input, isLoading, stop, handleInputChange, handleSubmit } = useChat({
 		id,
 		body: {
-			sendReasoning,
+			sendReasoning: isReasoningEnabled,
 		},
 	})
 
@@ -64,12 +64,12 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 							{children}
 							<Group justify="space-between">
 								<Button
-									color={sendReasoning ? undefined : 'gray'}
+									color={isReasoningEnabled ? undefined : 'gray'}
 									size="compact-sm"
 									radius="lg"
-									variant={sendReasoning ? 'light' : 'light'}
+									variant={isReasoningEnabled ? 'light' : 'light'}
 									leftSection={<IconAtom className="stroke-1.5 size-5" />}
-									onClick={() => toggle()}
+									onClick={() => toggleReasoning()}
 								>
 									Reasoning
 								</Button>

@@ -1,11 +1,12 @@
 import { useChat } from '@ai-sdk/react'
-import { Button, Group, ThemeIcon, type MantineColor } from '@mantine/core'
+import { type MantineColor, Button, Group, ThemeIcon } from '@mantine/core'
 import {
 	type Icon,
 	IconCloud,
 	IconDeviceMobile,
 	IconFileTypeCss,
 } from '@tabler/icons-react'
+import useChatReasoningToggle from './useChatReasoningToggle'
 
 interface QuickPromptListProps {
 	id: string
@@ -18,7 +19,14 @@ interface QuickPrompt {
 }
 
 const QuickPromptList = ({ id }: QuickPromptListProps) => {
-	const { append } = useChat({ id })
+	const { isReasoningEnabled } = useChatReasoningToggle()
+
+	const { append } = useChat({
+		id,
+		body: {
+			sendReasoning: isReasoningEnabled,
+		},
+	})
 
 	const quickPrompts: QuickPrompt[] = [
 		{

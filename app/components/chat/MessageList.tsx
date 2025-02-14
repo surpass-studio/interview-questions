@@ -2,9 +2,9 @@ import { useChat } from '@ai-sdk/react'
 import { SignInButton, useAuth } from '@clerk/react-router'
 import { Button, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
-import { useEffect } from 'react'
 import MessageListItem from './MessageListItem'
 import QuickPromptList from './QuickPromptList'
+import useChatAutoScroll from './useChatAutoScroll'
 
 interface MessageListProps {
 	id: string
@@ -19,12 +19,7 @@ const MessageList = ({ id }: MessageListProps) => {
 
 	const { userId } = useAuth()
 
-	useEffect(() => {
-		window.scrollTo({
-			top: document.body.scrollHeight,
-			behavior: 'smooth',
-		})
-	}, [messages])
+	useChatAutoScroll(id)
 
 	if (!userId) {
 		return (

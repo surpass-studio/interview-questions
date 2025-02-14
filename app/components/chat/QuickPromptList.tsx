@@ -47,7 +47,7 @@ const QuickPromptList = ({ id }: QuickPromptListProps) => {
 	]
 
 	return (
-		<Group component="ul">
+		<Group component="ul" justify="center">
 			{quickPrompts.map((prompt) => (
 				<Button
 					key={prompt.label}

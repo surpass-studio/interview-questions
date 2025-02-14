@@ -1,9 +1,10 @@
 import { useChat } from '@ai-sdk/react'
 import { SignInButton, useAuth } from '@clerk/react-router'
-import { Center, Button, Group, Stack, Text, ThemeIcon } from '@mantine/core'
+import { Button, Group, Stack, Text, ThemeIcon, Title } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import MessageListItem from './MessageListItem'
+import QuickPromptList from './QuickPromptList'
 
 interface MessageListProps {
 	id: string
@@ -43,17 +44,18 @@ const MessageList = ({ id }: MessageListProps) => {
 
 	if (messages.length === 0) {
 		return (
-			<Center className="flex-1">
+			<Stack className="flex-1" justify="center" align="center" gap="xl">
 				<Group gap="xs">
-					<ThemeIcon variant="transparent">
-						<IconSparkles className="stroke-1.5" />
+					<ThemeIcon size="lg" variant="transparent">
+						<IconSparkles className="stroke-1.5 size-full" />
 					</ThemeIcon>
-					<Text>
-						No messages yet. Start the conversation by typing a message in the
-						input.
-					</Text>
+					<Title order={2}>开始与 AI 助手对话吧</Title>
 				</Group>
-			</Center>
+				<Text c="gray" size="sm">
+					选择下方预设问题，或直接输入您想问的问题
+				</Text>
+				<QuickPromptList id={id} />
+			</Stack>
 		)
 	}
 

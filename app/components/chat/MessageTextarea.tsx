@@ -1,11 +1,11 @@
 import { useChat } from '@ai-sdk/react'
-import { Button, Group, Stack, Textarea } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
+import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
 import { IconAtom } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import styles from './MessageTextarea.module.css'
 import SendMessageButton from './SendMessageButton'
+import useChatReasoningToggle from './useChatReasoningToggle'
 
 interface MessageTextareaProps {
 	id: string
@@ -14,19 +14,19 @@ interface MessageTextareaProps {
 const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
 
-	const [sendReasoning, { toggle }] = useDisclosure(true)
+	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
 
 	const { input, isLoading, stop, handleInputChange, handleSubmit } = useChat({
 		id,
 		body: {
-			sendReasoning,
+			sendReasoning: isReasoningEnabled,
 		},
 	})
 
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	return (
-		<Stack
+		<Box
 			className={clsx(styles.textareaContainer, 'sticky bottom-9')}
 			onClick={() => {
 				textareaRef.current && textareaRef.current.focus()
@@ -59,22 +59,31 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 							handleSubmit()
 						}
 					}}
+					inputContainer={(children) => (
+						<Stack>
+							{children}
+							<Group justify="space-between">
+								<Button
+									color={isReasoningEnabled ? undefined : 'gray'}
+									size="compact-sm"
+									radius="lg"
+									variant={isReasoningEnabled ? 'light' : 'light'}
+									leftSection={<IconAtom className="stroke-1.5 size-5" />}
+									onClick={() => toggleReasoning()}
+								>
+									Reasoning
+								</Button>
+								<SendMessageButton
+									input={input}
+									isLoading={isLoading}
+									stop={stop}
+								/>
+							</Group>
+						</Stack>
+					)}
 				/>
 			</form>
-			<Group justify="space-between">
-				<Button
-					color={sendReasoning ? undefined : 'gray'}
-					size="compact-sm"
-					radius="lg"
-					variant={sendReasoning ? 'light' : 'light'}
-					leftSection={<IconAtom className="stroke-1.5 size-5" />}
-					onClick={() => toggle()}
-				>
-					Reasoning
-				</Button>
-				<SendMessageButton input={input} isLoading={isLoading} stop={stop} />
-			</Group>
-		</Stack>
+		</Box>
 	)
 }
 

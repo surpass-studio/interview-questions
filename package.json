@@ -22,7 +22,7 @@
     "@mantine/hooks": "7.16.3",
     "@mantine/modals": "7.16.3",
     "@mantine/nprogress": "^7.16.3",
-    "@octokit/rest": "^21.1.0",
+    "@octokit/rest": "^21.1.1",
     "@react-router/fs-routes": "7.1.5",
     "@tabler/icons-react": "^3.30.0",
     "ai": "^4.1.34",

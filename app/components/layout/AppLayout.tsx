@@ -27,7 +27,7 @@ import {
 } from '@tabler/icons-react'
 import { Link, NavLink, Outlet } from 'react-router'
 import SearchInput from '../form/SearchInput'
-import styles from './AppLayout.module.css'
+import classes from './AppLayout.module.css'
 import { AppNavigationProgress } from './AppNavigationProgress'
 import GithubLink from './GithubLink'
 import ToggleColorSchemeButton from './ToggleColorSchemeButton'
@@ -138,7 +138,7 @@ const AppLayout = () => {
 						</Stack>
 					</AppShell.Section>
 				</AppShell.Navbar>
-				<AppShell.Main className={styles.main}>
+				<AppShell.Main className={classes.main}>
 					<Container className="w-full" size="md" py="lg">
 						<Outlet />
 					</Container>

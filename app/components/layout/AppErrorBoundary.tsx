@@ -10,7 +10,7 @@ import {
 import { type Ref } from 'react'
 import { isRouteErrorResponse, Link } from 'react-router'
 import { type Route } from '../../routes/+types/_index'
-import styles from './AppLayout.module.css'
+import classes from './AppLayout.module.css'
 
 const glitchEffectRef: Ref<HTMLHeadingElement> = (instance) => {
 	if (instance) {
@@ -23,7 +23,7 @@ const glitchEffectRef: Ref<HTMLHeadingElement> = (instance) => {
 const AppErrorBoundary = ({ error }: Route.ErrorBoundaryProps) => {
 	return (
 		<AppShell padding="lg">
-			<AppShell.Main className={styles.main}>
+			<AppShell.Main className={classes.main}>
 				<Container size="xl">
 					<Stack className="h-full w-full" justify="center" align="center">
 						{isRouteErrorResponse(error) ? (

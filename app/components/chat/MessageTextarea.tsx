@@ -3,7 +3,7 @@ import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
 import { IconAtom } from '@tabler/icons-react'
 import clsx from 'clsx'
 import { useRef, useState } from 'react'
-import styles from './MessageTextarea.module.css'
+import classes from './MessageTextarea.module.css'
 import SendMessageButton from './SendMessageButton'
 import useChatReasoningToggle from './useChatReasoningToggle'
 
@@ -27,7 +27,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 
 	return (
 		<Box
-			className={clsx(styles.textareaContainer, 'sticky bottom-9')}
+			className={clsx(classes.textareaContainer, 'sticky bottom-9')}
 			onClick={() => {
 				textareaRef.current && textareaRef.current.focus()
 			}}
@@ -41,7 +41,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 					maxRows={10}
 					size="md"
 					placeholder="Type a message..."
-					classNames={{ input: styles.textarea }}
+					classNames={{ input: classes.textarea }}
 					value={input}
 					onChange={handleInputChange}
 					onCompositionStart={() => setIsCompositionInput(true)}

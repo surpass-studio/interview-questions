@@ -11,7 +11,7 @@ import clsx from 'clsx'
 import queryString from 'query-string'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
-import styles from './QuestionList.module.css'
+import classes from './QuestionList.module.css'
 
 const QuestionList = () => {
 	const { issues } = useLoaderData<Info['loaderData']>()
@@ -36,13 +36,13 @@ const QuestionList = () => {
 						component="li"
 						p="sm"
 						title={issue.title}
-						className={styles.listItem}
+						className={classes.listItem}
 					>
 						<Link
 							viewTransition
 							prefetch="intent"
 							to={`/question/${issue.number}`}
-							className={clsx('align-middle', styles.stretchedLink)}
+							className={clsx('align-middle', classes.stretchedLink)}
 						>
 							{issue.title}
 						</Link>

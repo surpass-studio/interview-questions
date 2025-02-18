@@ -1,19 +1,30 @@
-import { TextInput } from '@mantine/core'
+import { Pill, PillsInput } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
-import { Form, useSearchParams } from 'react-router'
+import { useQueryState } from 'nuqs'
+import { Form } from 'react-router'
 
 const SearchInput = () => {
-	const [searchParams] = useSearchParams()
+	const [label, setLabel] = useQueryState('label', { shallow: false })
+
+	const [search] = useQueryState('search', { defaultValue: '' })
 
 	return (
 		<Form action="/" method="get">
-			<TextInput
-				type="search"
-				name="search"
-				placeholder="Type Something..."
-				defaultValue={searchParams.get('search') ?? ''}
-				leftSection={<IconSearch className="stroke-1.5 size-4" />}
-			/>
+			<PillsInput leftSection={<IconSearch className="stroke-1.5 size-4" />}>
+				<Pill.Group>
+					{label && (
+						<Pill withRemoveButton onRemove={() => setLabel(null, {})}>
+							{label}
+						</Pill>
+					)}
+					<PillsInput.Field
+						name="search"
+						placeholder="Type Something..."
+						defaultValue={search}
+					/>
+				</Pill.Group>
+			</PillsInput>
+			{label && <input name="label" value={label} hidden />}
 			<button type="submit" hidden />
 		</Form>
 	)

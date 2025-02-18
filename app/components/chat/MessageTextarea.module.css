@@ -25,7 +25,8 @@
 }
 
 .textareaContainer:focus-within {
-	--input-bd: var(--mantine-primary-color-filled);
+	--input-bd: transparent;
+	outline: rem(2px) solid var(--mantine-primary-color-filled);
 }
 
 .textarea {
@@ -39,4 +40,8 @@
 
 	/* Box Model */
 	border: none;
+
+	&:focus-within {
+		outline: none;
+	}
 }

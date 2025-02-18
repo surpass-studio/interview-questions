@@ -1,11 +1,11 @@
 import { createTheme, Input } from '@mantine/core'
-import styles from './components.module.css'
+import classes from './components.module.css'
 
 const mantineTheme = createTheme({
 	components: {
 		Input: Input.extend({
 			classNames: {
-				input: styles.input,
+				input: classes.input,
 			},
 		}),
 	},

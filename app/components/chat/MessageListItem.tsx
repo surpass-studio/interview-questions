@@ -19,7 +19,7 @@ import {
 	IconSparkles,
 } from '@tabler/icons-react'
 import Markdown from 'react-markdown'
-import styles from './MessageListItem.module.css'
+import classes from './MessageListItem.module.css'
 
 interface MessageListItemProps {
 	message: UseChatHelpers['messages'][number]
@@ -31,7 +31,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 	if (message.role === 'user') {
 		return (
 			<li key={message.id} className="max-w-5/6 self-end">
-				<Paper p="sm" className={styles.userListItemContent}>
+				<Paper p="sm" className={classes.userListItemContent}>
 					<Text>{message.content}</Text>
 				</Paper>
 			</li>
@@ -70,7 +70,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 									<Group key={part.type}>
 										<Divider orientation="vertical" />
 										<TypographyStylesProvider className="flex-1" c="gray">
-											<Markdown className={styles.markdown}>
+											<Markdown className={classes.markdown}>
 												{part.reasoning}
 											</Markdown>
 										</TypographyStylesProvider>
@@ -83,7 +83,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 					if (part.type === 'text') {
 						return (
 							<TypographyStylesProvider key={part.type}>
-								<Markdown className={styles.markdown}>
+								<Markdown className={classes.markdown}>
 									{message.content}
 								</Markdown>
 							</TypographyStylesProvider>

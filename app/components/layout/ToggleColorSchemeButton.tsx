@@ -6,7 +6,7 @@ import {
 } from '@mantine/core'
 import { IconSun, IconMoon } from '@tabler/icons-react'
 import { clsx } from 'clsx'
-import styles from './ToggleColorSchemeButton.module.css'
+import classes from './ToggleColorSchemeButton.module.css'
 
 const ToggleColorSchemeButton = () => {
 	const { setColorScheme } = useMantineColorScheme()
@@ -25,8 +25,8 @@ const ToggleColorSchemeButton = () => {
 					setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
 				}
 			>
-				<IconSun className={clsx('stroke-1.5', styles.light)} />
-				<IconMoon className={clsx('stroke-1.5', styles.dark)} />
+				<IconSun className={clsx('stroke-1.5', classes.light)} />
+				<IconMoon className={clsx('stroke-1.5', classes.dark)} />
 			</ActionIcon>
 		</Tooltip>
 	)

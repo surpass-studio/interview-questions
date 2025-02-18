@@ -7,10 +7,10 @@ const ScrollToTopButton = () => {
 
 	return (
 		<Transition transition="slide-up" mounted={scroll.y > 64}>
-			{(style) => (
+			{(styles) => (
 				<Tooltip label="回到顶部">
 					<ActionIcon
-						style={style}
+						style={styles}
 						size="xl"
 						radius="xl"
 						variant="light"

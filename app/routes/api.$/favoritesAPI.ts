@@ -3,7 +3,7 @@ import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import * as v from 'valibot'
 import { type Bindings } from './'
-import getDB from '@/db/getDB'
+
 import { userFavorites } from '@/db/schema'
 
 const favoritesAPI = new Hono<{ Bindings: Bindings }>()
@@ -23,11 +23,9 @@ const favoritesAPI = new Hono<{ Bindings: Bindings }>()
 		async (c) => {
 			const { userId } = c.env.auth
 
-			const db = getDB(c.env.DB)
-
 			const { questionId } = c.req.valid('form')
 
-			await db.insert(userFavorites).values({
+			await c.env.db.insert(userFavorites).values({
 				user_id: userId as string,
 				question_id: questionId,
 			})
@@ -51,11 +49,9 @@ const favoritesAPI = new Hono<{ Bindings: Bindings }>()
 		async (c) => {
 			const { userId } = c.env.auth
 
-			const db = getDB(c.env.DB)
-
 			const { questionId } = c.req.valid('param')
 
-			await db
+			await await c.env.db
 				.delete(userFavorites)
 				.where(
 					and(

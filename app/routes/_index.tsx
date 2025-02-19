@@ -4,7 +4,6 @@ import { type MetaFunction } from 'react-router'
 import { type Route } from './+types/_index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
-import getOctokit from '@/configs/octokit'
 import loadSearchParams from '@/helpers/loadSearchParams'
 
 export const meta: MetaFunction = () => {
@@ -34,9 +33,7 @@ export const loader = async ({ request, context }: Route.LoaderArgs) => {
 		query.push(search)
 	}
 
-	const { data, headers } = await getOctokit(
-		context,
-	).search.issuesAndPullRequests({
+	const { data, headers } = await context.octokit.search.issuesAndPullRequests({
 		q: query.join(' '),
 		page,
 		per_page: 32,

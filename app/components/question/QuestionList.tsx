@@ -8,7 +8,7 @@ import {
 	UnstyledButton,
 } from '@mantine/core'
 import clsx from 'clsx'
-import { Link, useLoaderData } from 'react-router'
+import { Link, href, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import classes from './QuestionList.module.css'
 import serialize from '@/helpers/serialize'
@@ -41,7 +41,9 @@ const QuestionList = () => {
 						<Link
 							viewTransition
 							prefetch="intent"
-							to={`/question/${issue.number}`}
+							to={href('/question/:questionId', {
+								questionId: String(issue.number),
+							})}
 							className={clsx('align-middle', classes.stretchedLink)}
 						>
 							{issue.title}

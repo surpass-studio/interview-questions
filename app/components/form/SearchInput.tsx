@@ -2,11 +2,12 @@ import { Pill, PillsInput } from '@mantine/core'
 import { IconSearch } from '@tabler/icons-react'
 import { useQueryState } from 'nuqs'
 import { Form } from 'react-router'
+import SEARCH_PARAMS from '@/helpers/SEARCH_PARAMS'
 
 const SearchInput = () => {
-	const [label, setLabel] = useQueryState('label', { shallow: false })
+	const [label, setLabel] = useQueryState('label', SEARCH_PARAMS.label)
 
-	const [search] = useQueryState('search', { defaultValue: '' })
+	const [search] = useQueryState('search', SEARCH_PARAMS.search)
 
 	return (
 		<Form action="/" method="get">

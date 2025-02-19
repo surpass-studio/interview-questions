@@ -3,17 +3,10 @@ import { ActionIcon, Tooltip } from '@mantine/core'
 import { IconPlayerStop, IconArrowUp } from '@tabler/icons-react'
 import * as v from 'valibot'
 
-type SendMessageButtonProps = Pick<
-	UseChatHelpers,
-	'input' | 'isLoading' | 'stop'
->
+type SendMessageButtonProps = Pick<UseChatHelpers, 'input' | 'status' | 'stop'>
 
-const SendMessageButton = ({
-	isLoading,
-	input,
-	stop,
-}: SendMessageButtonProps) => {
-	if (isLoading) {
+const SendMessageButton = ({ status, input, stop }: SendMessageButtonProps) => {
+	if (status === 'streaming' || status === 'submitted') {
 		return (
 			<Tooltip label="Stop">
 				<ActionIcon color="red" size="lg" variant="subtle" onClick={stop}>

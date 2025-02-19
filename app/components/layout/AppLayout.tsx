@@ -25,7 +25,7 @@ import {
 	IconMessageChatbot,
 	IconMessageChatbotFilled,
 } from '@tabler/icons-react'
-import { Link, NavLink, Outlet } from 'react-router'
+import { Link, NavLink, Outlet, href } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import classes from './AppLayout.module.css'
 import { AppNavigationProgress } from './AppNavigationProgress'
@@ -42,19 +42,19 @@ interface NavLinkItem {
 const AppLayout = () => {
 	const links: NavLinkItem[] = [
 		{
-			to: '/',
+			to: href('/'),
 			label: 'Home',
 			icon: IconHome,
 			iconFilled: IconHomeFilled,
 		},
 		{
-			to: '/favorites',
+			to: href('/favorites'),
 			label: 'Favorites',
 			icon: IconHeart,
 			iconFilled: IconHeartFilled,
 		},
 		{
-			to: '/chat',
+			to: href('/chat'),
 			label: 'Chat',
 			icon: IconMessageChatbot,
 			iconFilled: IconMessageChatbotFilled,

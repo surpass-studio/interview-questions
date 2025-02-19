@@ -3,7 +3,7 @@ import { useWindowEvent } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
 
 const useChatAutoScroll = (id: string) => {
-	const { isLoading, messages } = useChat({ id })
+	const { status, messages } = useChat({ id })
 
 	const [shouldAutoScroll, setShouldAutoScroll] = useState(true)
 	const [touchStartY, setTouchStartY] = useState(0)
@@ -46,10 +46,10 @@ const useChatAutoScroll = (id: string) => {
 	})
 
 	useEffect(() => {
-		if (isLoading) {
+		if (status === 'submitted') {
 			setShouldAutoScroll(true)
 		}
-	}, [isLoading])
+	}, [status])
 
 	useEffect(() => {
 		if (shouldAutoScroll) {

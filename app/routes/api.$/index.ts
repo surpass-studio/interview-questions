@@ -7,19 +7,12 @@ import { type Route } from '../+types/_index'
 import chatAPI from './chatAPI'
 import favoritesAPI from './favoritesAPI'
 
-export type Bindings = AppLoadContext['cloudflare']['env'] & {
+export type Bindings = AppLoadContext & {
 	auth: AuthObject
 }
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: AppLoadContext }>()
 	.basePath('/api')
-	.use(async (c, next) => {
-		if (!c.env.auth.userId) {
-			throw new HTTPException(401, { message: 'Unauthorized' })
-		}
-
-		await next()
-	})
 	.onError((error, c) => {
 		if (error instanceof HTTPException) {
 			return c.json({ error: error.message }, error.getResponse())
@@ -33,19 +26,15 @@ const app = new Hono<{ Bindings: Bindings }>()
 export const loader = async (args: Route.LoaderArgs) => {
 	const auth = await getAuth(args)
 
-	return app.fetch(
-		args.request,
-		{ ...args.context.cloudflare.env, auth },
-		args.context.cloudflare.ctx,
-	)
+	args.context.auth = auth
+
+	return app.fetch(args.request, args.context, args.context.cloudflare.ctx)
 }
 
 export const action = async (args: Route.ActionArgs) => {
 	const auth = await getAuth(args)
 
-	return app.fetch(
-		args.request,
-		{ ...args.context.cloudflare.env, auth },
-		args.context.cloudflare.ctx,
-	)
+	args.context.auth = auth
+
+	return app.fetch(args.request, args.context, args.context.cloudflare.ctx)
 }

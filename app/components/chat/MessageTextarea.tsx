@@ -1,9 +1,9 @@
 import { useChat } from '@ai-sdk/react'
 import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
 import { IconAtom } from '@tabler/icons-react'
-import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import classes from './MessageTextarea.module.css'
+import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import useChatReasoningToggle from './useChatReasoningToggle'
 
@@ -16,7 +16,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 
 	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
 
-	const { input, isLoading, stop, handleInputChange, handleSubmit } = useChat({
+	const { input, status, stop, handleInputChange, handleSubmit } = useChat({
 		id,
 		body: {
 			sendReasoning: isReasoningEnabled,
@@ -26,12 +26,10 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	return (
-		<Box
-			className={clsx(classes.textareaContainer, 'sticky bottom-9')}
-			onClick={() => {
-				textareaRef.current && textareaRef.current.focus()
-			}}
-		>
+		<Box className="sticky bottom-9">
+			<Box className="absolute -top-12">
+				<ScrollToBottomButton />
+			</Box>
 			<form onSubmit={handleSubmit}>
 				<Textarea
 					ref={textareaRef}
@@ -48,7 +46,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 					onCompositionEnd={() => setIsCompositionInput(false)}
 					onKeyDown={(event) => {
 						const canSendMessage =
-							!isLoading &&
+							(status === 'ready' || status === 'error') &&
 							event.key === 'Enter' &&
 							!event.shiftKey &&
 							!isCompositionInput
@@ -60,7 +58,12 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 						}
 					}}
 					inputContainer={(children) => (
-						<Stack>
+						<Stack
+							className={classes.textareaContainer}
+							onClick={() => {
+								textareaRef.current && textareaRef.current.focus()
+							}}
+						>
 							{children}
 							<Group justify="space-between">
 								<Button
@@ -73,11 +76,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 								>
 									Reasoning
 								</Button>
-								<SendMessageButton
-									input={input}
-									isLoading={isLoading}
-									stop={stop}
-								/>
+								<SendMessageButton input={input} status={status} stop={stop} />
 							</Group>
 						</Stack>
 					)}

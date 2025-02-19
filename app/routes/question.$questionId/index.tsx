@@ -1,7 +1,6 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { Stack, Title, Paper, Affix, Button, Group } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
-import queryString from 'query-string'
 import { Link, type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
@@ -9,9 +8,8 @@ import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
 import FullTextCopyButton from '@/components/question/FullTextCopyButton'
 import SourceButton from '@/components/question/SourceButton'
-import getOctokit from '@/configs/octokit'
-import getDB from '@/db/getDB'
 import { userFavorites } from '@/db/schema'
+import serialize from '@/helpers/serialize'
 
 export const meta = ({ data }: Route.MetaArgs) => {
 	return [{ title: data.title }] satisfies MetaDescriptor[]
@@ -20,7 +18,7 @@ export const meta = ({ data }: Route.MetaArgs) => {
 export const loader = async (args: Route.LoaderArgs) => {
 	const questionId = Number(args.params.questionId)
 
-	const { data: issue } = await getOctokit(args.context).issues.get({
+	const { data: issue } = await args.context.octokit.issues.get({
 		owner: 'pro-collection',
 		repo: 'interview-question',
 		issue_number: questionId,
@@ -32,9 +30,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 	let isFavorited = false
 
 	if (userId) {
-		const db = getDB(args.context.cloudflare.env.DB)
-
-		const favorite = await db.query.userFavorites.findFirst({
+		const favorite = await args.context.db.query.userFavorites.findFirst({
 			where: and(
 				eq(userFavorites.user_id, userId as string),
 				eq(userFavorites.question_id, questionId),
@@ -53,7 +49,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 	}
 }
 
-const IssuePage = ({ loaderData }: Route.ComponentProps) => {
+const QuestionPage = ({ loaderData }: Route.ComponentProps) => {
 	const { title, labels, body_text, body_html } = loaderData
 
 	return (
@@ -76,8 +72,11 @@ const IssuePage = ({ loaderData }: Route.ComponentProps) => {
 								}
 								to={{
 									pathname: '/',
-									search: queryString.stringify({
-										label: typeof label === 'string' ? label : label.name,
+									search: serialize({
+										label:
+											typeof label === 'string'
+												? label
+												: (label.name as string),
 									}),
 								}}
 							>
@@ -100,4 +99,4 @@ const IssuePage = ({ loaderData }: Route.ComponentProps) => {
 	)
 }
 
-export default IssuePage
+export default QuestionPage

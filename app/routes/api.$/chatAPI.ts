@@ -18,7 +18,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 		model = createOpenAICompatible({
 			name: 'SiliconFlow',
 			baseURL: 'https://api.siliconflow.cn/v1',
-			apiKey: c.env.SILICON_CLOUD_API_KEY,
+			apiKey: c.env.cloudflare.env.SILICON_CLOUD_API_KEY,
 		}).chatModel('deepseek-ai/DeepSeek-R1-Distill-Qwen-7B')
 	}
 

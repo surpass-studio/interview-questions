@@ -44,7 +44,7 @@ const getLoadContext = ({ context }: GetLoadContextArgs): AppLoadContext => {
 	const db = drizzle(context.cloudflare.env.DB, { schema })
 
 	return {
-		...context,
+		cloudflare: context.cloudflare,
 		octokit,
 		db,
 	}

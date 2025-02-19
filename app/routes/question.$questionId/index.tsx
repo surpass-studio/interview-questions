@@ -49,7 +49,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 	}
 }
 
-const IssuePage = ({ loaderData }: Route.ComponentProps) => {
+const QuestionPage = ({ loaderData }: Route.ComponentProps) => {
 	const { title, labels, body_text, body_html } = loaderData
 
 	return (
@@ -99,4 +99,4 @@ const IssuePage = ({ loaderData }: Route.ComponentProps) => {
 	)
 }
 
-export default IssuePage
+export default QuestionPage

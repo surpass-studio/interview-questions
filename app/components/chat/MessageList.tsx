@@ -11,11 +11,14 @@ interface MessageListProps {
 }
 
 const MessageList = ({ id }: MessageListProps) => {
-	const { isLoading, messages } = useChat({ id })
+	const { status, messages } = useChat({ id })
 
 	const lastMessage = messages[messages.length - 1]
 
-	const isPending = isLoading && lastMessage && lastMessage.role === 'user'
+	const isPending =
+		(status === 'submitted' || status === 'streaming') &&
+		lastMessage &&
+		lastMessage.role === 'user'
 
 	const { userId } = useAuth()
 

@@ -16,7 +16,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 
 	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
 
-	const { input, isLoading, stop, handleInputChange, handleSubmit } = useChat({
+	const { input, status, stop, handleInputChange, handleSubmit } = useChat({
 		id,
 		body: {
 			sendReasoning: isReasoningEnabled,
@@ -48,7 +48,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 					onCompositionEnd={() => setIsCompositionInput(false)}
 					onKeyDown={(event) => {
 						const canSendMessage =
-							!isLoading &&
+							(status === 'ready' || status === 'error') &&
 							event.key === 'Enter' &&
 							!event.shiftKey &&
 							!isCompositionInput
@@ -73,11 +73,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 								>
 									Reasoning
 								</Button>
-								<SendMessageButton
-									input={input}
-									isLoading={isLoading}
-									stop={stop}
-								/>
+								<SendMessageButton input={input} status={status} stop={stop} />
 							</Group>
 						</Stack>
 					)}

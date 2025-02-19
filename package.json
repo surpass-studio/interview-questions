@@ -35,7 +35,6 @@
     "isbot": "^5.1.22",
     "nuqs": "^2.4.0",
     "powerglitch": "^2.4.0",
-    "query-string": "^9.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-markdown": "^9.0.3",

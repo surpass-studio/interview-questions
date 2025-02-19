@@ -1,7 +1,6 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { Stack, Title, Paper, Affix, Button, Group } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
-import queryString from 'query-string'
 import { Link, type MetaDescriptor } from 'react-router'
 import { type Route } from './+types/index'
 import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
@@ -12,6 +11,7 @@ import SourceButton from '@/components/question/SourceButton'
 import getOctokit from '@/configs/octokit'
 import getDB from '@/db/getDB'
 import { userFavorites } from '@/db/schema'
+import serialize from '@/helpers/serialize'
 
 export const meta = ({ data }: Route.MetaArgs) => {
 	return [{ title: data.title }] satisfies MetaDescriptor[]
@@ -76,8 +76,11 @@ const IssuePage = ({ loaderData }: Route.ComponentProps) => {
 								}
 								to={{
 									pathname: '/',
-									search: queryString.stringify({
-										label: typeof label === 'string' ? label : label.name,
+									search: serialize({
+										label:
+											typeof label === 'string'
+												? label
+												: (label.name as string),
 									}),
 								}}
 							>

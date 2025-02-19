@@ -1,9 +1,10 @@
-import { parseAsBoolean, useQueryState } from 'nuqs'
+import { useQueryState } from 'nuqs'
+import SEARCH_PARAMS from '@/helpers/SEARCH_PARAMS'
 
 const useChatReasoningToggle = () => {
 	const [isReasoningEnabled, setIsReasoningEnabled] = useQueryState(
 		'reasoning',
-		parseAsBoolean.withDefault(true),
+		SEARCH_PARAMS.reasoning,
 	)
 
 	const toggleReasoning = () => {

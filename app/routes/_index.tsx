@@ -5,6 +5,7 @@ import { type Route } from './+types/_index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import getOctokit from '@/configs/octokit'
+import loadSearchParams from '@/helpers/loadSearchParams'
 
 export const meta: MetaFunction = () => {
 	return [
@@ -17,9 +18,7 @@ export const meta: MetaFunction = () => {
 }
 
 export const loader = async ({ request, context }: Route.LoaderArgs) => {
-	const url = new URL(request.url)
-
-	const page = Number(url.searchParams.get('page')) || 1
+	const { label, page, search } = loadSearchParams(request)
 
 	const query: string[] = [
 		'repo:pro-collection/interview-question',
@@ -27,13 +26,9 @@ export const loader = async ({ request, context }: Route.LoaderArgs) => {
 		'is:open',
 	]
 
-	const label = url.searchParams.get('label')
-
 	if (label) {
 		query.push(`label:"${label}"`)
 	}
-
-	const search = url.searchParams.get('search')
 
 	if (search) {
 		query.push(search)
@@ -55,13 +50,8 @@ export const loader = async ({ request, context }: Route.LoaderArgs) => {
 			last = link.rel('last')[0]
 
 		if (last) {
-			const page = new URL(last.uri).searchParams.get('page')
-
-			total = Number(page) || 1
-		} else if (
-			prev &&
-			Number(new URL(prev.uri).searchParams.get('page')) === page - 1
-		) {
+			total = loadSearchParams(last.uri).page
+		} else if (prev && loadSearchParams(prev.uri).page === page - 1) {
 			total = page
 		}
 	}

@@ -8,10 +8,10 @@ import {
 	UnstyledButton,
 } from '@mantine/core'
 import clsx from 'clsx'
-import queryString from 'query-string'
 import { Link, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import classes from './QuestionList.module.css'
+import serialize from '@/helpers/serialize'
 
 const QuestionList = () => {
 	const { issues } = useLoaderData<Info['loaderData']>()
@@ -57,7 +57,7 @@ const QuestionList = () => {
 									color={label.color ? `#${label.color}` : undefined}
 									to={{
 										pathname: '/',
-										search: queryString.stringify({ label: label.name }),
+										search: serialize({ label: label.name as string }),
 									}}
 								>
 									{label.name}

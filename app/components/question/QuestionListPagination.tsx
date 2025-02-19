@@ -1,6 +1,7 @@
 import { Pagination } from '@mantine/core'
 import { Link, useLoaderData, useSearchParams } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
+import serialize from '@/helpers/serialize'
 
 const QuestionListPagination = () => {
 	const { issues, pagination } = useLoaderData<Info['loaderData']>()
@@ -15,61 +16,51 @@ const QuestionListPagination = () => {
 		<Pagination
 			{...pagination}
 			getItemProps={(page) => {
-				const urlSearchParams = new URLSearchParams(searchParams)
-
-				urlSearchParams.set('page', String(page))
-
 				return {
 					component: Link,
 					viewTransition: true,
 					prefetch: 'intent',
-					to: { search: urlSearchParams.toString() },
+					to: { search: serialize(searchParams, { page }) },
 				}
 			}}
 			getControlProps={(control) => {
-				const urlSearchParams = new URLSearchParams()
-
 				if (control === 'first') {
-					urlSearchParams.set('page', String(1))
-
 					return {
 						component: Link,
 						viewTransition: true,
 						prefetch: 'intent',
-						to: { search: urlSearchParams.toString() },
+						to: { search: serialize(searchParams, { page: 1 }) },
 					}
 				}
 
 				if (control === 'last') {
-					urlSearchParams.set('page', String(pagination.total))
-
 					return {
 						component: Link,
 						viewTransition: true,
 						prefetch: 'intent',
-						to: { search: urlSearchParams.toString() },
+						to: { search: serialize(searchParams, { page: pagination.total }) },
 					}
 				}
 
 				if (control === 'next') {
-					urlSearchParams.set('page', String(pagination.value + 1))
-
 					return {
 						component: Link,
 						viewTransition: true,
 						prefetch: 'intent',
-						to: { search: urlSearchParams.toString() },
+						to: {
+							search: serialize(searchParams, { page: pagination.value + 1 }),
+						},
 					}
 				}
 
 				if (control === 'previous') {
-					urlSearchParams.set('page', String(pagination.value - 1))
-
 					return {
 						component: Link,
 						viewTransition: true,
 						prefetch: 'intent',
-						to: { search: urlSearchParams.toString() },
+						to: {
+							search: serialize(searchParams, { page: pagination.value - 1 }),
+						},
 					}
 				}
 

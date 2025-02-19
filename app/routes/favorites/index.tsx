@@ -5,6 +5,7 @@ import { type Route } from './+types/index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import { userFavorites } from '@/db/schema'
+import loadSearchParams from '@/helpers/loadSearchParams'
 
 export const meta = () => {
 	return [{ title: '收藏夹' }]
@@ -14,10 +15,6 @@ export const loader = async (args: Route.LoaderArgs) => {
 	const { userId } = await getAuth(args)
 
 	if (userId) {
-		const url = new URL(args.request.url)
-
-		const page = Number(url.searchParams.get('page')) || 1
-
 		const PAGE_SIZE = 32
 
 		const count = await args.context.db.$count(
@@ -37,6 +34,8 @@ export const loader = async (args: Route.LoaderArgs) => {
 
 		const total = Math.ceil(count / PAGE_SIZE)
 
+		const { page, label, search } = loadSearchParams(args.request)
+
 		const questionIds = await args.context.db.query.userFavorites.findMany({
 			where: eq(userFavorites.user_id, userId as string),
 			columns: { question_id: true },
@@ -51,13 +50,9 @@ export const loader = async (args: Route.LoaderArgs) => {
 			questionIds.map(({ question_id }) => question_id).join(' '),
 		]
 
-		const label = url.searchParams.get('label')
-
 		if (label) {
 			query.push(`label:"${label}"`)
 		}
-
-		const search = url.searchParams.get('search')
 
 		if (search) {
 			query.push(search)

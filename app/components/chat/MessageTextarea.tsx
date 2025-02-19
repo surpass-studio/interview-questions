@@ -1,9 +1,9 @@
 import { useChat } from '@ai-sdk/react'
 import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
 import { IconAtom } from '@tabler/icons-react'
-import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import classes from './MessageTextarea.module.css'
+import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import useChatReasoningToggle from './useChatReasoningToggle'
 
@@ -26,12 +26,10 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	return (
-		<Box
-			className={clsx(classes.textareaContainer, 'sticky bottom-9')}
-			onClick={() => {
-				textareaRef.current && textareaRef.current.focus()
-			}}
-		>
+		<Box className="sticky bottom-9">
+			<Box className="absolute -top-12">
+				<ScrollToBottomButton />
+			</Box>
 			<form onSubmit={handleSubmit}>
 				<Textarea
 					ref={textareaRef}
@@ -60,7 +58,12 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 						}
 					}}
 					inputContainer={(children) => (
-						<Stack>
+						<Stack
+							className={classes.textareaContainer}
+							onClick={() => {
+								textareaRef.current && textareaRef.current.focus()
+							}}
+						>
 							{children}
 							<Group justify="space-between">
 								<Button

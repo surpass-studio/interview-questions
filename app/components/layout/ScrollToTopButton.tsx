@@ -16,7 +16,7 @@ const ScrollToTopButton = () => {
 						variant="light"
 						onClick={() => scrollTo({ y: 0 })}
 					>
-						<IconArrowUp />
+						<IconArrowUp className="stroke-1.5" />
 					</ActionIcon>
 				</Tooltip>
 			)}

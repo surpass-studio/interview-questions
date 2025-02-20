@@ -1,10 +1,10 @@
 import { useChat } from '@ai-sdk/react'
-import { Box, Button, Group, Stack, Textarea } from '@mantine/core'
-import { IconAtom } from '@tabler/icons-react'
+import { Box, Flex, Group, Stack, Textarea } from '@mantine/core'
 import { useRef, useState } from 'react'
 import classes from './MessageTextarea.module.css'
 import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
+import ToggleReasoningButton from './ToggleReasoningButton'
 import useChatReasoningToggle from './useChatReasoningToggle'
 
 interface MessageTextareaProps {
@@ -14,7 +14,7 @@ interface MessageTextareaProps {
 const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
 
-	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
+	const { isReasoningEnabled } = useChatReasoningToggle()
 
 	const { input, status, stop, handleInputChange, handleSubmit } = useChat({
 		id,
@@ -26,7 +26,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 	return (
-		<Box className="sticky bottom-9">
+		<Stack className="sticky bottom-9" gap="xs">
 			<Box className="absolute -top-12">
 				<ScrollToBottomButton />
 			</Box>
@@ -39,7 +39,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 					maxRows={10}
 					size="md"
 					placeholder="Type a message..."
-					classNames={{ input: classes.textarea }}
+					classNames={{ wrapper: 'flex-1', input: classes.textarea }}
 					value={input}
 					onChange={handleInputChange}
 					onCompositionStart={() => setIsCompositionInput(true)}
@@ -58,31 +58,24 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 						}
 					}}
 					inputContainer={(children) => (
-						<Stack
+						<Flex
 							className={classes.textareaContainer}
 							onClick={() => {
 								textareaRef.current && textareaRef.current.focus()
 							}}
 						>
 							{children}
-							<Group justify="space-between">
-								<Button
-									color={isReasoningEnabled ? undefined : 'gray'}
-									size="compact-sm"
-									radius="lg"
-									variant={isReasoningEnabled ? 'light' : 'light'}
-									leftSection={<IconAtom className="stroke-1.5 size-5" />}
-									onClick={() => toggleReasoning()}
-								>
-									Reasoning
-								</Button>
+							<Group className={classes.submitButtonContainer}>
 								<SendMessageButton input={input} status={status} stop={stop} />
 							</Group>
-						</Stack>
+						</Flex>
 					)}
 				/>
 			</form>
-		</Box>
+			<Group>
+				<ToggleReasoningButton />
+			</Group>
+		</Stack>
 	)
 }
 

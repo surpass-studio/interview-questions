@@ -9,7 +9,7 @@ const FullTextCopyButton = ({ text }: FullTextCopyButtonProps) => {
 	return (
 		<CopyButton value={text}>
 			{({ copied, copy }) => (
-				<Tooltip label="复制全文">
+				<Tooltip label={copied ? '已成功复制' : '复制全文'}>
 					<ActionIcon
 						size="lg"
 						color={copied ? 'green' : undefined}

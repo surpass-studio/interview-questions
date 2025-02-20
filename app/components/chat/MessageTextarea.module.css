@@ -14,9 +14,6 @@
 	border: rem(1px) solid var(--input-bd);
 	border-radius: var(--mantine-radius-lg);
 	background-color: var(--input-bg);
-
-	/* Misc */
-	cursor: text;
 }
 
 .textareaContainer:focus-within {
@@ -43,7 +40,7 @@
 	}
 }
 
-.submitButtonContainer {
+.submitButtonContainer:not(:empty) {
 	margin-left: auto;
 	align-self: flex-end;
 	padding-block: rem(8px);

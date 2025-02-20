@@ -1,6 +1,6 @@
 import { useChat } from '@ai-sdk/react'
 import { Box, Flex, Group, Stack, Textarea } from '@mantine/core'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import classes from './MessageTextarea.module.css'
 import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
@@ -23,8 +23,6 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 		},
 	})
 
-	const textareaRef = useRef<HTMLTextAreaElement>(null)
-
 	return (
 		<Stack className="sticky bottom-9" gap="xs">
 			<Box className="absolute -top-12">
@@ -32,7 +30,6 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 			</Box>
 			<form onSubmit={handleSubmit}>
 				<Textarea
-					ref={textareaRef}
 					autosize
 					minRows={1}
 					rows={1}
@@ -58,12 +55,7 @@ const MessageTextarea = ({ id }: MessageTextareaProps) => {
 						}
 					}}
 					inputContainer={(children) => (
-						<Flex
-							className={classes.textareaContainer}
-							onClick={() => {
-								textareaRef.current && textareaRef.current.focus()
-							}}
-						>
+						<Flex className={classes.textareaContainer}>
 							{children}
 							<Group className={classes.submitButtonContainer}>
 								<SendMessageButton input={input} status={status} stop={stop} />

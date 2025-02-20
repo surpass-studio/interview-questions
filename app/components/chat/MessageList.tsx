@@ -47,7 +47,13 @@ const MessageList = ({ id }: MessageListProps) => {
 					<ThemeIcon size="lg" variant="transparent">
 						<IconSparkles className="stroke-1.5 size-full" />
 					</ThemeIcon>
-					<Title order={2}>开始与 AI 助手对话吧</Title>
+					<Title order={2}>
+						开始与
+						<Text span inherit variant="gradient">
+							{' AI '}
+						</Text>
+						助手对话吧
+					</Title>
 				</Group>
 				<Text c="gray" size="sm">
 					选择下方预设问题，或直接输入您想问的问题

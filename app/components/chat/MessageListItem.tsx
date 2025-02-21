@@ -1,4 +1,3 @@
-import { type UseChatHelpers } from '@ai-sdk/react'
 import {
 	Avatar,
 	Button,
@@ -18,11 +17,12 @@ import {
 	IconChevronRight,
 	IconSparkles,
 } from '@tabler/icons-react'
+import { type UIMessage } from 'ai'
 import Markdown from 'react-markdown'
 import classes from './MessageListItem.module.css'
 
 interface MessageListItemProps {
-	message: UseChatHelpers['messages'][number]
+	message: UIMessage
 }
 
 const MessageListItem = ({ message }: MessageListItemProps) => {

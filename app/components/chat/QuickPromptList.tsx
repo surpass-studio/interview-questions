@@ -6,11 +6,9 @@ import {
 	IconDeviceMobile,
 	IconFileTypeCss,
 } from '@tabler/icons-react'
+import { href, useFetcher } from 'react-router'
+import useChatId from './useChatId'
 import useChatReasoningToggle from './useChatReasoningToggle'
-
-interface QuickPromptListProps {
-	id: string
-}
 
 interface QuickPrompt {
 	icon: Icon
@@ -18,11 +16,15 @@ interface QuickPrompt {
 	label: string
 }
 
-const QuickPromptList = ({ id }: QuickPromptListProps) => {
+const QuickPromptList = () => {
 	const { isReasoningEnabled } = useChatReasoningToggle()
 
+	const { chatId } = useChatId()
+
+	const fetcher = useFetcher()
+
 	const { append } = useChat({
-		id,
+		id: chatId,
 		body: {
 			sendReasoning: isReasoningEnabled,
 		},
@@ -59,7 +61,14 @@ const QuickPromptList = ({ id }: QuickPromptListProps) => {
 							<prompt.icon className="stroke-1.5 size-full" />
 						</ThemeIcon>
 					}
-					onClick={() => append({ role: 'user', content: prompt.label })}
+					onClick={async () => {
+						await fetcher.submit(null, {
+							action: href('/chat'),
+							method: 'post',
+						})
+
+						await append({ role: 'user', content: prompt.label })
+					}}
 				>
 					{prompt.label}
 				</Button>

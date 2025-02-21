@@ -28,4 +28,5 @@ build
 .react-router
 
 # Wrangler
+.wrangler
 .dev.vars

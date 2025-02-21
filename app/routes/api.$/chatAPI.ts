@@ -1,18 +1,28 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
-import { type LanguageModelV1, type Message, streamText } from 'ai'
+import {
+	appendResponseMessages,
+	type LanguageModelV1,
+	type Message,
+	streamText,
+} from 'ai'
 import { Hono } from 'hono'
 import { type Bindings } from './'
+import * as schema from '@/db/schema'
 
 let model: LanguageModelV1 | null = null
 
 interface ChatAPIRequestBody {
+	id: string
 	messages: Message[]
 	sendReasoning: boolean
 }
 
 const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
-	const { messages, sendReasoning = true } =
-		await c.req.json<ChatAPIRequestBody>()
+	const {
+		id,
+		messages,
+		sendReasoning = true,
+	} = await c.req.json<ChatAPIRequestBody>()
 
 	if (model === null) {
 		model = createOpenAICompatible({
@@ -25,6 +35,29 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 	const result = streamText({
 		model,
 		messages,
+		onFinish: async ({ response }) => {
+			const finalMessages = appendResponseMessages({
+				messages,
+				responseMessages: response.messages,
+			})
+
+			const firstUserMessage = finalMessages.find(
+				(message) => message.role === 'user',
+			) as Message
+
+			await c.env.db
+				.insert(schema.chatConversations)
+				.values({
+					id,
+					user_id: c.env.auth.userId as string,
+					title: firstUserMessage.content.slice(0, 20),
+					messages: finalMessages,
+				})
+				.onConflictDoUpdate({
+					target: schema.chatConversations.id,
+					set: { messages: finalMessages },
+				})
+		},
 	})
 
 	return result.toDataStreamResponse({ sendReasoning })

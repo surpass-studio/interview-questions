@@ -8,7 +8,7 @@
             "binding": "DB",
             "database_name": "interview-questions",
             "database_id": "abc7108d-1010-4d7e-a552-80878da00a49",
-            "preview_database_id": "DB"
+            "migrations_dir": "drizzle"
         }
     ],
     "ai": {

@@ -1,9 +1,12 @@
 import { useChat } from '@ai-sdk/react'
 import { useWindowEvent } from '@mantine/hooks'
 import { useEffect, useState } from 'react'
+import useChatId from './useChatId'
 
-const useChatAutoScroll = (id: string) => {
-	const { status, messages } = useChat({ id })
+const useChatAutoScroll = () => {
+	const { chatId } = useChatId()
+
+	const { status, messages } = useChat({ id: chatId })
 
 	const [shouldAutoScroll, setShouldAutoScroll] = useState(true)
 	const [touchStartY, setTouchStartY] = useState(0)

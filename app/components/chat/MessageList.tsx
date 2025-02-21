@@ -5,13 +5,12 @@ import { IconSparkles } from '@tabler/icons-react'
 import MessageListItem from './MessageListItem'
 import QuickPromptList from './QuickPromptList'
 import useChatAutoScroll from './useChatAutoScroll'
+import useChatId from './useChatId'
 
-interface MessageListProps {
-	id: string
-}
+const MessageList = () => {
+	const { chatId } = useChatId()
 
-const MessageList = ({ id }: MessageListProps) => {
-	const { status, messages } = useChat({ id })
+	const { status, messages } = useChat({ id: chatId })
 
 	const lastMessage = messages[messages.length - 1]
 
@@ -22,7 +21,7 @@ const MessageList = ({ id }: MessageListProps) => {
 
 	const { userId } = useAuth()
 
-	useChatAutoScroll(id)
+	useChatAutoScroll()
 
 	if (!userId) {
 		return (
@@ -58,7 +57,7 @@ const MessageList = ({ id }: MessageListProps) => {
 				<Text c="gray" size="sm">
 					选择下方预设问题，或直接输入您想问的问题
 				</Text>
-				<QuickPromptList id={id} />
+				<QuickPromptList />
 			</Stack>
 		)
 	}

@@ -1,18 +1,16 @@
 import { ActionIcon, Tooltip, Transition } from '@mantine/core'
-import { useWindowScroll } from '@mantine/hooks'
+import { useWindowEvent } from '@mantine/hooks'
 import { IconArrowDown } from '@tabler/icons-react'
-import { useMemo } from 'react'
+import { useState } from 'react'
 
 const ScrollToBottomButton = () => {
-	const [scroll, scrollTo] = useWindowScroll()
+	const [mounted, setMounted] = useState(false)
 
-	const mounted = useMemo(() => {
-		if (typeof window === 'undefined') {
-			return false
-		}
-
-		return document.body.scrollHeight - window.innerHeight - scroll.y > 64
-	}, [scroll.y])
+	useWindowEvent('scroll', () => {
+		setMounted(
+			document.body.scrollHeight - window.innerHeight - window.scrollY > 64,
+		)
+	})
 
 	return (
 		<Transition transition="slide-up" mounted={mounted}>
@@ -22,7 +20,12 @@ const ScrollToBottomButton = () => {
 						style={styles}
 						radius="xl"
 						variant="light"
-						onClick={() => scrollTo({ y: document.body.scrollHeight })}
+						onClick={() =>
+							window.scrollTo({
+								top: document.body.scrollHeight,
+								behavior: 'smooth',
+							})
+						}
 					>
 						<IconArrowDown className="stroke-1.5" />
 					</ActionIcon>

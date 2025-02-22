@@ -7,8 +7,8 @@ import {
 	IconFileTypeCss,
 } from '@tabler/icons-react'
 import { href, useFetcher } from 'react-router'
-import useChatId from './useChatId'
 import useChatReasoningToggle from './useChatReasoningToggle'
+import useConversationId from './useConversationId'
 
 interface QuickPrompt {
 	icon: Icon
@@ -19,12 +19,12 @@ interface QuickPrompt {
 const QuickPromptList = () => {
 	const { isReasoningEnabled } = useChatReasoningToggle()
 
-	const { chatId } = useChatId()
+	const { conversationId } = useConversationId()
 
 	const fetcher = useFetcher()
 
 	const { append } = useChat({
-		id: chatId,
+		id: conversationId,
 		body: {
 			sendReasoning: isReasoningEnabled,
 		},

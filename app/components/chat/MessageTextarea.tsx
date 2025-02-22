@@ -6,18 +6,18 @@ import classes from './MessageTextarea.module.css'
 import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import ToggleReasoningButton from './ToggleReasoningButton'
-import useChatId from './useChatId'
 import useChatReasoningToggle from './useChatReasoningToggle'
+import useConversationId from './useConversationId'
 
 const MessageTextarea = () => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
 
 	const { isReasoningEnabled } = useChatReasoningToggle()
 
-	const { chatId } = useChatId()
+	const { conversationId } = useConversationId()
 
 	const { input, status, stop, handleInputChange, handleSubmit } = useChat({
-		id: chatId,
+		id: conversationId,
 		body: {
 			sendReasoning: isReasoningEnabled,
 		},
@@ -28,7 +28,7 @@ const MessageTextarea = () => {
 	const submit: UseChatHelpers['handleSubmit'] = async (event) => {
 		event && event.preventDefault && event.preventDefault()
 
-		if (!chatId) {
+		if (!conversationId) {
 			await fetcher.submit(null, { action: href('/chat'), method: 'post' })
 		}
 

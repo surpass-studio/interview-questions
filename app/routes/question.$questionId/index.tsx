@@ -8,7 +8,7 @@ import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
 import FullTextCopyButton from '@/components/question/FullTextCopyButton'
 import SourceButton from '@/components/question/SourceButton'
-import { userFavorites } from '@/db/schema'
+import * as schema from '@/db/schema'
 import serialize from '@/helpers/serialize'
 
 export const meta = ({ data }: Route.MetaArgs) => {
@@ -32,8 +32,8 @@ export const loader = async (args: Route.LoaderArgs) => {
 	if (userId) {
 		const favorite = await args.context.db.query.userFavorites.findFirst({
 			where: and(
-				eq(userFavorites.user_id, userId as string),
-				eq(userFavorites.question_id, questionId),
+				eq(schema.userFavorites.user_id, userId),
+				eq(schema.userFavorites.question_id, questionId),
 			),
 		})
 

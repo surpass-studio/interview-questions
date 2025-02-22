@@ -1,12 +1,9 @@
-import { useAuth } from '@clerk/react-router'
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { MantineProvider, Paper, Stack } from '@mantine/core'
+import { MantineProvider, Paper } from '@mantine/core'
 import { generateId } from 'ai'
 import { eq } from 'drizzle-orm'
-import { href, redirect } from 'react-router'
+import { data, href, Outlet, redirect } from 'react-router'
 import { type Route } from './+types/index'
-import MessageList from '@/components/chat/MessageList'
-import MessageTextarea from '@/components/chat/MessageTextarea'
 import * as schema from '@/db/schema'
 
 export const meta = () => {
@@ -28,27 +25,33 @@ export const loader = async (args: Route.LoaderArgs) => {
 	return { conversations: [] }
 }
 
-export const action = () => {
-	const chatId = generateId()
+export const action = async (args: Route.ActionArgs) => {
+	const { userId } = await getAuth(args)
 
-	return redirect(href('/chat/:chatId', { chatId }))
+	if (userId) {
+		const conversationId = generateId()
+
+		await args.context.db.insert(schema.chatConversations).values({
+			id: conversationId,
+			user_id: userId,
+		})
+
+		return redirect(href('/chat/:conversationId', { conversationId }))
+	}
+
+	throw data('Unauthorized', 401)
 }
 
 const CHAT_PAGE_ID = 'chat'
 
 const ChatPage = () => {
-	const { userId } = useAuth()
-
 	return (
 		<MantineProvider
 			theme={{ primaryColor: 'blue' }}
 			cssVariablesSelector={`#${CHAT_PAGE_ID}`}
 		>
 			<Paper id={CHAT_PAGE_ID} className="h-full" p="md">
-				<Stack className="h-full">
-					<MessageList />
-					{userId && <MessageTextarea />}
-				</Stack>
+				<Outlet />
 			</Paper>
 		</MantineProvider>
 	)

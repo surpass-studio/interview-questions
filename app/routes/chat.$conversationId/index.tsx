@@ -3,8 +3,8 @@ import { Stack } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
 import { data, href, redirect } from 'react-router'
 import { type Route } from './+types/index'
+import ConversationForm from '@/components/chat/ConversationForm'
 import MessageList from '@/components/chat/MessageList'
-import MessageTextarea from '@/components/chat/MessageTextarea'
 import * as schema from '@/db/schema'
 
 export const loader = async (args: Route.LoaderArgs) => {
@@ -31,13 +31,11 @@ export const loader = async (args: Route.LoaderArgs) => {
 	return redirect(href('/chat'))
 }
 
-const ChatPage = ({ loaderData }: Route.ComponentProps) => {
-	console.log({ loaderData })
-
+const ChatPage = () => {
 	return (
 		<Stack className="h-full">
 			<MessageList />
-			<MessageTextarea />
+			<ConversationForm />
 		</Stack>
 	)
 }

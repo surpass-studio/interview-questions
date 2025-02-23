@@ -1,9 +1,11 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { MantineProvider, Paper } from '@mantine/core'
 import { generateId } from 'ai'
-import { eq } from 'drizzle-orm'
+import { type InferSelectModel, eq } from 'drizzle-orm'
 import { data, href, Outlet, redirect } from 'react-router'
+import * as v from 'valibot'
 import { type Route } from './+types/index'
+import inputValidationSchema from '@/components/chat/inputValidationSchema'
 import * as schema from '@/db/schema'
 
 export const meta = () => {
@@ -28,15 +30,33 @@ export const loader = async (args: Route.LoaderArgs) => {
 export const action = async (args: Route.ActionArgs) => {
 	const { userId } = await getAuth(args)
 
+	const formData = await args.request.formData()
+
+	const content = v.parse(inputValidationSchema, formData.get('content'))
+
 	if (userId) {
-		const conversationId = generateId()
+		const insertedConversation = await args.context.db
+			.insert(schema.chatConversations)
+			.values({
+				user_id: userId,
+				messages: [
+					{
+						id: generateId(),
+						role: 'user',
+						content,
+						createdAt: new Date(),
+					},
+				],
+			})
+			.returning()
 
-		await args.context.db.insert(schema.chatConversations).values({
-			id: conversationId,
-			user_id: userId,
-		})
+		const conversation = insertedConversation[0] as InferSelectModel<
+			typeof schema.chatConversations
+		>
 
-		return redirect(href('/chat/:conversationId', { conversationId }))
+		return redirect(
+			href('/chat/:conversationId', { conversationId: conversation.id }),
+		)
 	}
 
 	throw data('Unauthorized', 401)

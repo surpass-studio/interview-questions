@@ -1,5 +1,10 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
-import { appendResponseMessages, type Message, streamText } from 'ai'
+import {
+	type Message,
+	appendResponseMessages,
+	smoothStream,
+	streamText,
+} from 'ai'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { type Bindings } from './'
@@ -27,6 +32,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 	const result = streamText({
 		model,
 		messages,
+		experimental_transform: smoothStream(),
 		onFinish: async ({ response }) => {
 			const finalMessages = appendResponseMessages({
 				messages,

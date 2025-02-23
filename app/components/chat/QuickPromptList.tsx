@@ -1,4 +1,3 @@
-import { useChat } from '@ai-sdk/react'
 import { type MantineColor, Button, Group, ThemeIcon } from '@mantine/core'
 import {
 	type Icon,
@@ -6,72 +5,53 @@ import {
 	IconDeviceMobile,
 	IconFileTypeCss,
 } from '@tabler/icons-react'
-import { href, useFetcher } from 'react-router'
-import useChatReasoningToggle from './useChatReasoningToggle'
-import useConversationId from './useConversationId'
+import { useFetcher } from 'react-router'
 
 interface QuickPrompt {
 	icon: Icon
 	color: MantineColor
-	label: string
+	content: string
 }
 
 const QuickPromptList = () => {
-	const { isReasoningEnabled } = useChatReasoningToggle()
-
-	const { conversationId } = useConversationId()
-
 	const fetcher = useFetcher()
-
-	const { append } = useChat({
-		id: conversationId,
-		body: {
-			sendReasoning: isReasoningEnabled,
-		},
-	})
 
 	const quickPrompts: QuickPrompt[] = [
 		{
 			icon: IconCloud,
 			color: 'blue',
-			label: 'Why is the sky blue?',
+			content: 'Why is the sky blue?',
 		},
 		{
 			icon: IconDeviceMobile,
 			color: 'pink',
-			label: 'Mobile-first design principles?',
+			content: 'Mobile-first design principles?',
 		},
 		{
 			icon: IconFileTypeCss,
 			color: 'violet',
-			label: 'How do I center a div in CSS?',
+			content: 'How do I center a div in CSS?',
 		},
 	]
 
 	return (
-		<Group component="ul" justify="center">
+		<Group justify="center">
 			{quickPrompts.map((prompt) => (
-				<Button
-					key={prompt.label}
-					component="li"
-					radius="xl"
-					variant="default"
-					leftSection={
-						<ThemeIcon c={prompt.color} size="sm" variant="transparent">
-							<prompt.icon className="stroke-1.5 size-full" />
-						</ThemeIcon>
-					}
-					onClick={async () => {
-						await fetcher.submit(null, {
-							action: href('/chat'),
-							method: 'post',
-						})
-
-						await append({ role: 'user', content: prompt.label })
-					}}
-				>
-					{prompt.label}
-				</Button>
+				<fetcher.Form key={prompt.content} method="post" action="/chat">
+					<input type="hidden" name="content" value={prompt.content} />
+					<Button
+						type="submit"
+						radius="xl"
+						variant="default"
+						leftSection={
+							<ThemeIcon c={prompt.color} size="sm" variant="transparent">
+								<prompt.icon className="stroke-1.5 size-full" />
+							</ThemeIcon>
+						}
+					>
+						{prompt.content}
+					</Button>
+				</fetcher.Form>
 			))}
 		</Group>
 	)

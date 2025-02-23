@@ -1,47 +1,31 @@
-import { useChat, type UseChatHelpers } from '@ai-sdk/react'
 import { Box, Flex, Group, Stack, Textarea } from '@mantine/core'
+import { useInputState } from '@mantine/hooks'
 import { useState } from 'react'
-import { href, useFetcher } from 'react-router'
-import classes from './MessageTextarea.module.css'
+import { useFetcher } from 'react-router'
+import * as v from 'valibot'
+import classes from './ConversationForm.module.css'
+import inputValidationSchema from './inputValidationSchema'
 import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import ToggleReasoningButton from './ToggleReasoningButton'
-import useChatReasoningToggle from './useChatReasoningToggle'
-import useConversationId from './useConversationId'
 
-const MessageTextarea = () => {
+const StartConversationForm = () => {
 	const [isCompositionInput, setIsCompositionInput] = useState(false)
-
-	const { isReasoningEnabled } = useChatReasoningToggle()
-
-	const { conversationId } = useConversationId()
-
-	const { input, status, stop, handleInputChange, handleSubmit } = useChat({
-		id: conversationId,
-		body: {
-			sendReasoning: isReasoningEnabled,
-		},
-	})
 
 	const fetcher = useFetcher()
 
-	const submit: UseChatHelpers['handleSubmit'] = async (event) => {
-		event && event.preventDefault && event.preventDefault()
+	const [input, handleInputChange] = useInputState('')
 
-		if (!conversationId) {
-			await fetcher.submit(null, { action: href('/chat'), method: 'post' })
-		}
-
-		handleSubmit(event)
-	}
+	const isInputValid = v.is(inputValidationSchema, input)
 
 	return (
 		<Stack className="sticky bottom-9" gap="xs">
 			<Box className="absolute -top-12">
 				<ScrollToBottomButton />
 			</Box>
-			<form onSubmit={submit}>
+			<fetcher.Form method="post" action="/chat">
 				<Textarea
+					name="content"
 					autosize
 					minRows={1}
 					rows={1}
@@ -53,28 +37,38 @@ const MessageTextarea = () => {
 					onChange={handleInputChange}
 					onCompositionStart={() => setIsCompositionInput(true)}
 					onCompositionEnd={() => setIsCompositionInput(false)}
-					onKeyDown={(event) => {
+					onKeyDown={async (event) => {
 						const canSendMessage =
-							(status === 'ready' || status === 'error') &&
 							fetcher.state === 'idle' &&
 							event.key === 'Enter' &&
 							!event.shiftKey &&
-							!isCompositionInput
+							!isCompositionInput &&
+							isInputValid
 
 						if (canSendMessage) {
-							submit(event)
+							event.preventDefault()
+
+							const form = (event.target as HTMLElement).closest('form')
+
+							await fetcher.submit(form)
 						}
 					}}
 					inputContainer={(children) => (
 						<Flex className={classes.textareaContainer}>
 							{children}
 							<Group className={classes.submitButtonContainer}>
-								<SendMessageButton input={input} status={status} stop={stop} />
+								<SendMessageButton
+									isLoading={
+										fetcher.state === 'loading' ||
+										fetcher.state === 'submitting'
+									}
+									isInputValid={isInputValid}
+								/>
 							</Group>
 						</Flex>
 					)}
 				/>
-			</form>
+			</fetcher.Form>
 			<Group>
 				<ToggleReasoningButton />
 			</Group>
@@ -82,4 +76,4 @@ const MessageTextarea = () => {
 	)
 }
 
-export default MessageTextarea
+export default StartConversationForm

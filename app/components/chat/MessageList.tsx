@@ -1,13 +1,10 @@
-import { useChat } from '@ai-sdk/react'
 import { Stack } from '@mantine/core'
 import MessageListItem from './MessageListItem'
 import useChatAutoScroll from './useChatAutoScroll'
-import useConversationId from './useConversationId'
+import useSharedChat from './useSharedChat'
 
 const MessageList = () => {
-	const { conversationId } = useConversationId()
-
-	const { status, messages } = useChat({ id: conversationId })
+	const { status, messages } = useSharedChat()
 
 	const lastMessage = messages[messages.length - 1]
 
@@ -23,7 +20,6 @@ const MessageList = () => {
 			{messages.map((message) => (
 				<MessageListItem key={message.id} message={message} />
 			))}
-
 			{isPending && <MessageListItem.Pending />}
 		</Stack>
 	)

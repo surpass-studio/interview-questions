@@ -1,8 +1,8 @@
 import { useAuth, SignInButton } from '@clerk/react-router'
 import { Stack, Group, ThemeIcon, Title, Button, Text } from '@mantine/core'
 import { IconSparkles } from '@tabler/icons-react'
-import MessageTextarea from '@/components/chat/MessageTextarea'
 import QuickPromptList from '@/components/chat/QuickPromptList'
+import StartConversationForm from '@/components/chat/StartConversationForm'
 
 const ChatPage = () => {
 	const { userId } = useAuth()
@@ -28,7 +28,7 @@ const ChatPage = () => {
 					</Text>
 					<QuickPromptList />
 				</Stack>
-				<MessageTextarea />
+				<StartConversationForm />
 			</Stack>
 		)
 	}

@@ -1,11 +1,10 @@
-import { Box, Flex, Group, Stack, Textarea } from '@mantine/core'
+import { Flex, Group, Stack, Textarea } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { useState } from 'react'
 import { useFetcher } from 'react-router'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
-import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import ToggleReasoningButton from './ToggleReasoningButton'
 
@@ -19,10 +18,7 @@ const StartConversationForm = () => {
 	const isInputValid = v.is(inputValidationSchema, input)
 
 	return (
-		<Stack className="sticky bottom-9" gap="xs">
-			<Box className="absolute -top-12">
-				<ScrollToBottomButton />
-			</Box>
+		<Stack gap="xs">
 			<fetcher.Form method="post" action="/chat">
 				<Textarea
 					name="content"

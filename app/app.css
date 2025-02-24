@@ -4,6 +4,6 @@
 
 @import '@mantine/core/styles.layer.css';
 
-@utility stroke-1.5 {
+.tabler-icon {
 	stroke-width: 1.5;
 }

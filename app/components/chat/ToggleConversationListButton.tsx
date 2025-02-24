@@ -37,7 +37,7 @@ const ToggleConversationListButton = () => {
 					variant="subtle"
 					onClick={open}
 				>
-					<IconList className="stroke-1.5" />
+					<IconList />
 				</ActionIcon>
 			</Tooltip>
 		</>

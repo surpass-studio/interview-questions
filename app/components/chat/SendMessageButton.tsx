@@ -16,7 +16,7 @@ const SendMessageButton = ({
 		return (
 			<Tooltip label="Stop">
 				<ActionIcon color="red" variant="subtle" onClick={stop}>
-					<IconPlayerStop className="stroke-1.5 size-5" />
+					<IconPlayerStop className="size-5" />
 				</ActionIcon>
 			</Tooltip>
 		)
@@ -27,7 +27,7 @@ const SendMessageButton = ({
 			{(styles) => (
 				<Tooltip label="Send message">
 					<ActionIcon type="submit" radius="lg" style={styles}>
-						<IconArrowUp className="stroke-1.5 size-5" />
+						<IconArrowUp className="size-5" />
 					</ActionIcon>
 				</Tooltip>
 			)}

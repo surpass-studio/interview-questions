@@ -45,7 +45,7 @@ const QuickPromptList = () => {
 						variant="default"
 						leftSection={
 							<ThemeIcon c={prompt.color} size="sm" variant="transparent">
-								<prompt.icon className="stroke-1.5 size-full" />
+								<prompt.icon className="size-full" />
 							</ThemeIcon>
 						}
 					>

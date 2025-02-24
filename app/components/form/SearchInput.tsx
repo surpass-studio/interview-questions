@@ -11,7 +11,7 @@ const SearchInput = () => {
 
 	return (
 		<Form action="/" method="get">
-			<PillsInput leftSection={<IconSearch className="stroke-1.5 size-4" />}>
+			<PillsInput leftSection={<IconSearch className="size-4" />}>
 				<Pill.Group>
 					{label && (
 						<Pill withRemoveButton onRemove={() => setLabel(null, {})}>

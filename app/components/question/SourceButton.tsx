@@ -16,7 +16,7 @@ const SourceButton = () => {
 				radius="lg"
 				variant="light"
 			>
-				<IconLink className="stroke-1.5" />
+				<IconLink />
 			</ActionIcon>
 		</Tooltip>
 	)

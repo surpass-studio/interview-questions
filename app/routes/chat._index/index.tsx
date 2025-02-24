@@ -13,7 +13,7 @@ const ChatPage = () => {
 				<Stack className="flex-1" justify="center" align="center" gap="xl">
 					<Group gap="xs">
 						<ThemeIcon size="lg" variant="transparent">
-							<IconSparkles className="stroke-1.5 size-full" />
+							<IconSparkles className="size-full" />
 						</ThemeIcon>
 						<Title order={2}>
 							开始与
@@ -37,7 +37,7 @@ const ChatPage = () => {
 		<Stack className="h-full" justify="center" align="center">
 			<Group gap="xs">
 				<ThemeIcon variant="transparent">
-					<IconSparkles className="stroke-1.5" />
+					<IconSparkles />
 				</ThemeIcon>
 				<Text>Please sign in to start the conversation.</Text>
 			</Group>

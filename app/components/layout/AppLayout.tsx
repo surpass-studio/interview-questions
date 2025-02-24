@@ -104,11 +104,7 @@ const AppLayout = () => {
 											classNames={{ inner: 'justify-start' }}
 											color={isActive ? undefined : 'gray'}
 											leftSection={
-												isActive ? (
-													<link.iconFilled className="stroke-1.5" />
-												) : (
-													<link.icon className="stroke-1.5" />
-												)
+												isActive ? <link.iconFilled /> : <link.icon />
 											}
 										>
 											{link.label}

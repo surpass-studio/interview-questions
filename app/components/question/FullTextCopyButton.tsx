@@ -17,11 +17,7 @@ const FullTextCopyButton = ({ text }: FullTextCopyButtonProps) => {
 						variant="light"
 						onClick={copy}
 					>
-						{copied ? (
-							<IconCopyCheck className="stroke-1.5" />
-						) : (
-							<IconCopy className="stroke-1.5" />
-						)}
+						{copied ? <IconCopyCheck /> : <IconCopy />}
 					</ActionIcon>
 				</Tooltip>
 			)}

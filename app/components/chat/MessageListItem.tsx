@@ -86,7 +86,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 						return (
 							<TypographyStylesProvider
 								key={part.type}
-								className={classes.markdown}
+								className={classes.typography}
 							>
 								<Markdown>{message.content}</Markdown>
 							</TypographyStylesProvider>

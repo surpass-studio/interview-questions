@@ -39,14 +39,9 @@ const chatAPI = new Hono<{ Bindings: Bindings }>().post('/', async (c) => {
 				responseMessages: response.messages,
 			})
 
-			const firstUserMessage = finalMessages.find(
-				(message) => message.role === 'user',
-			) as Message
-
 			await c.env.db
 				.update(schema.chatConversations)
 				.set({
-					title: firstUserMessage.content.slice(0, 20),
 					messages: finalMessages,
 				})
 				.where(

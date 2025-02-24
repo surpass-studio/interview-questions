@@ -1,11 +1,12 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { MantineProvider, Paper } from '@mantine/core'
+import { MantineProvider, Paper, Stack } from '@mantine/core'
 import { generateId } from 'ai'
 import { type InferSelectModel, eq } from 'drizzle-orm'
 import { data, href, Outlet, redirect } from 'react-router'
 import * as v from 'valibot'
 import { type Route } from './+types/index'
 import inputValidationSchema from '@/components/chat/inputValidationSchema'
+import ToggleConversationListButton from '@/components/chat/ToggleConversationListButton'
 import * as schema from '@/db/schema'
 
 export const meta = () => {
@@ -19,6 +20,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 		const conversations =
 			await args.context.db.query.chatConversations.findMany({
 				where: eq(schema.chatConversations.user_id, userId),
+				orderBy: (conversations, { desc }) => [desc(conversations.updated_at)],
 			})
 
 		return { conversations }
@@ -39,6 +41,7 @@ export const action = async (args: Route.ActionArgs) => {
 			.insert(schema.chatConversations)
 			.values({
 				user_id: userId,
+				title: content.slice(0, 52),
 				messages: [
 					{
 						id: generateId(),
@@ -70,7 +73,8 @@ const ChatPage = () => {
 			theme={{ primaryColor: 'blue' }}
 			cssVariablesSelector={`#${CHAT_PAGE_ID}`}
 		>
-			<Paper id={CHAT_PAGE_ID} className="h-full" p="md">
+			<Paper component={Stack} id={CHAT_PAGE_ID} className="h-full" p="md">
+				<ToggleConversationListButton />
 				<Outlet />
 			</Paper>
 		</MantineProvider>

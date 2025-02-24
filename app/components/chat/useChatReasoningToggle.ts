@@ -1,15 +1,14 @@
-import { useQueryState } from 'nuqs'
-import SEARCH_PARAMS from '@/helpers/SEARCH_PARAMS'
+import { useLocalStorage } from '@mantine/hooks'
+import CHAT_CONSTANTS from './CHAT_CONSTANTS'
 
 const useChatReasoningToggle = () => {
-	const [isReasoningEnabled, setIsReasoningEnabled] = useQueryState(
-		'reasoning',
-		SEARCH_PARAMS.reasoning,
-	)
+	const [isReasoningEnabled, setIsReasoningEnabled] = useLocalStorage({
+		key: CHAT_CONSTANTS.STORAGE_KEY.REASONING_ENABLED,
+		sync: false,
+		defaultValue: true,
+	})
 
-	const toggleReasoning = () => {
-		void setIsReasoningEnabled((value) => !value)
-	}
+	const toggleReasoning = () => setIsReasoningEnabled((value) => !value)
 
 	return { isReasoningEnabled, toggleReasoning }
 }

@@ -1,3 +1,4 @@
+import { type Message, generateId } from 'ai'
 import { sqliteTable, primaryKey } from 'drizzle-orm/sqlite-core'
 
 export const userFavorites = sqliteTable(
@@ -8,3 +9,21 @@ export const userFavorites = sqliteTable(
 	}),
 	(table) => [primaryKey({ columns: [table.user_id, table.question_id] })],
 )
+
+export const chatConversations = sqliteTable('chat_conversations', (t) => ({
+	id: t
+		.text()
+		.primaryKey()
+		.$defaultFn(() => generateId()),
+	user_id: t.text().notNull(),
+	title: t.text().notNull().default(''),
+	messages: t.text({ mode: 'json' }).$type<Message[]>().notNull().default([]),
+	created_at: t
+		.integer({ mode: 'timestamp' })
+		.notNull()
+		.$defaultFn(() => new Date()),
+	updated_at: t
+		.integer({ mode: 'timestamp' })
+		.notNull()
+		.$onUpdateFn(() => new Date()),
+}))

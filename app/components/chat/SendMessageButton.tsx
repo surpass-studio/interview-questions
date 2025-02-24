@@ -1,12 +1,18 @@
-import { type UseChatHelpers } from '@ai-sdk/react'
 import { Tooltip, ActionIcon, Transition } from '@mantine/core'
 import { IconPlayerStop, IconArrowUp } from '@tabler/icons-react'
-import * as v from 'valibot'
 
-type SendMessageButtonProps = Pick<UseChatHelpers, 'input' | 'status' | 'stop'>
+interface SendMessageButtonProps {
+	isLoading: boolean
+	isInputValid: boolean
+	stop?: () => void
+}
 
-const SendMessageButton = ({ status, input, stop }: SendMessageButtonProps) => {
-	if (status === 'submitted' || status === 'streaming') {
+const SendMessageButton = ({
+	isLoading,
+	isInputValid,
+	stop,
+}: SendMessageButtonProps) => {
+	if (isLoading) {
 		return (
 			<Tooltip label="Stop">
 				<ActionIcon color="red" size="md" variant="subtle" onClick={stop}>
@@ -15,8 +21,6 @@ const SendMessageButton = ({ status, input, stop }: SendMessageButtonProps) => {
 			</Tooltip>
 		)
 	}
-
-	const isInputValid = v.is(v.pipe(v.string(), v.trim(), v.minLength(1)), input)
 
 	return (
 		<Transition mounted={isInputValid} transition="slide-left">

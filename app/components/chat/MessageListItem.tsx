@@ -1,4 +1,3 @@
-import { type UseChatHelpers } from '@ai-sdk/react'
 import {
 	Avatar,
 	Button,
@@ -18,11 +17,13 @@ import {
 	IconChevronRight,
 	IconSparkles,
 } from '@tabler/icons-react'
+import { type UIMessage } from 'ai'
+import clsx from 'clsx'
 import Markdown from 'react-markdown'
 import classes from './MessageListItem.module.css'
 
 interface MessageListItemProps {
-	message: UseChatHelpers['messages'][number]
+	message: UIMessage
 }
 
 const MessageListItem = ({ message }: MessageListItemProps) => {
@@ -69,10 +70,11 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 								<Collapse in={isOpened}>
 									<Group key={part.type}>
 										<Divider orientation="vertical" />
-										<TypographyStylesProvider className="flex-1" c="gray">
-											<Markdown className={classes.markdown}>
-												{part.reasoning}
-											</Markdown>
+										<TypographyStylesProvider
+											className={clsx('flex-1', classes.typography)}
+											c="gray"
+										>
+											<Markdown>{part.reasoning}</Markdown>
 										</TypographyStylesProvider>
 									</Group>
 								</Collapse>
@@ -82,10 +84,11 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
 					if (part.type === 'text') {
 						return (
-							<TypographyStylesProvider key={part.type}>
-								<Markdown className={classes.markdown}>
-									{message.content}
-								</Markdown>
+							<TypographyStylesProvider
+								key={part.type}
+								className={classes.typography}
+							>
+								<Markdown>{message.content}</Markdown>
 							</TypographyStylesProvider>
 						)
 					}

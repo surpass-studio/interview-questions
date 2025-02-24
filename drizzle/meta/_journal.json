@@ -15,6 +15,20 @@
       "when": 1738745123291,
       "tag": "0001_needy_preak",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1740132609482,
+      "tag": "0002_fine_tattoo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1740324027107,
+      "tag": "0003_small_purple_man",
+      "breakpoints": true
     }
   ]
 }

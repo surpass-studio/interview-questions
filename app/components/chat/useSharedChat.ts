@@ -6,7 +6,7 @@ import useChatReasoningToggle from './useChatReasoningToggle'
 const useSharedChat = () => {
 	const { conversationId } = useParams<Info['params']>()
 
-	const { isReasoningEnabled } = useChatReasoningToggle()
+	const { isReasoningEnabled } = useChatReasoningToggle(false)
 
 	const { conversation } = useLoaderData<Info['loaderData']>()
 

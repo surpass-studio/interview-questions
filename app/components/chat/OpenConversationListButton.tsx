@@ -19,23 +19,16 @@ const OpenConversationListButton = () => {
 	return (
 		<>
 			<Drawer
-				classNames={{ inner: 'left-0' }}
 				size="xs"
 				title="Conversations"
-				withinPortal={false}
+				closeButtonProps={{ radius: 'lg' }}
 				opened={opened}
 				onClose={close}
 			>
 				<ConversationList />
 			</Drawer>
 			<Tooltip label="Open conversations">
-				<ActionIcon
-					className="sticky top-9 border-0"
-					size="lg"
-					radius="lg"
-					variant="default"
-					onClick={open}
-				>
+				<ActionIcon size="lg" radius="lg" variant="subtle" onClick={open}>
 					<IconList />
 				</ActionIcon>
 			</Tooltip>

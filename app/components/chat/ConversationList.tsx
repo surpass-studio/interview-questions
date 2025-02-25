@@ -22,7 +22,7 @@ const ConversationList = () => {
 	if (conversations.length === 0) {
 		return (
 			<Stack align="center" pt="xl">
-				<Title>😜</Title>
+				<Title>😉</Title>
 				<Text>
 					{Date.now() % 2 ? (
 						<>
@@ -56,6 +56,7 @@ const ConversationList = () => {
 						to={href('/chat/:conversationId', {
 							conversationId: conversation.id,
 						})}
+						color="blue"
 						title={conversation.title}
 						label={conversation.title}
 					/>

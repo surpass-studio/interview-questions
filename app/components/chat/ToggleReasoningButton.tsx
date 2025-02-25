@@ -11,7 +11,7 @@ const ToggleReasoningButton = () => {
 			size="compact-sm"
 			radius="lg"
 			variant="light"
-			leftSection={<IconAtom className="stroke-1.5 size-5" />}
+			leftSection={<IconAtom className="size-5" />}
 			onClick={() => toggleReasoning()}
 		>
 			Reasoning

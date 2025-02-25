@@ -44,7 +44,7 @@ const QuestionList = () => {
 							to={href('/question/:questionId', {
 								questionId: String(issue.number),
 							})}
-							className={clsx('align-middle', classes.stretchedLink)}
+							className="stretched-link align-middle"
 						>
 							{issue.title}
 						</Link>

@@ -27,7 +27,7 @@ const ScrollToBottomButton = () => {
 							})
 						}
 					>
-						<IconArrowDown className="stroke-1.5" />
+						<IconArrowDown />
 					</ActionIcon>
 				</Tooltip>
 			)}

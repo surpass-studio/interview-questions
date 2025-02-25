@@ -9,7 +9,7 @@ const GithubLink = () => {
 				target="_blank"
 			>
 				<ActionIcon color="gray" variant="subtle" size="lg">
-					<IconBrandGithub className="stroke-1.5" />
+					<IconBrandGithub />
 				</ActionIcon>
 			</Anchor>
 		</Tooltip>

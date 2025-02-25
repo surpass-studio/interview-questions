@@ -43,7 +43,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 		<Group component="li" align="start">
 			<Avatar>
 				<ThemeIcon variant="transparent">
-					<IconSparkles className="stroke-1.5" />
+					<IconSparkles />
 				</ThemeIcon>
 			</Avatar>
 			<Stack className="flex-1">
@@ -57,9 +57,9 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 									variant="subtle"
 									rightSection={
 										isOpened ? (
-											<IconChevronDown className="stroke-1.5 size-5" />
+											<IconChevronDown className="size-5" />
 										) : (
-											<IconChevronRight className="stroke-1.5 size-5" />
+											<IconChevronRight className="size-5" />
 										)
 									}
 									onClick={() => toggle()}
@@ -104,7 +104,7 @@ MessageListItem.Pending = () => (
 	<Group component="li">
 		<Avatar>
 			<ThemeIcon variant="transparent">
-				<IconSparkles className="stroke-1.5" />
+				<IconSparkles />
 			</ThemeIcon>
 		</Avatar>
 		<Loader type="dots" />

@@ -20,7 +20,7 @@ const FavoriteButton = () => {
 			<Tooltip label="登录后即可收藏">
 				<SignInButton>
 					<ActionIcon color="red" size="lg" radius="lg" variant="light">
-						<IconHeart className="stroke-1.5" />
+						<IconHeart />
 					</ActionIcon>
 				</SignInButton>
 			</Tooltip>
@@ -39,7 +39,7 @@ const FavoriteButton = () => {
 						radius="lg"
 						loading={loading}
 					>
-						<IconHeartFilled className="stroke-1.5" />
+						<IconHeartFilled />
 					</ActionIcon>
 				</fetcher.Form>
 			</Tooltip>
@@ -58,7 +58,7 @@ const FavoriteButton = () => {
 					variant="light"
 					loading={loading}
 				>
-					<IconHeart className="stroke-1.5" />
+					<IconHeart />
 				</ActionIcon>
 			</fetcher.Form>
 		</Tooltip>

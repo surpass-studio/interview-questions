@@ -19,6 +19,9 @@ export const loader = async (args: Route.LoaderArgs) => {
 	if (userId) {
 		const conversations =
 			await args.context.db.query.chatConversations.findMany({
+				columns: {
+					messages: false,
+				},
 				where: eq(schema.chatConversations.user_id, userId),
 				orderBy: (conversations, { desc }) => [desc(conversations.updated_at)],
 			})

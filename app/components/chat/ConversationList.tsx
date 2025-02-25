@@ -10,12 +10,20 @@ import {
 } from '@mantine/core'
 import { IconDots, IconTrash } from '@tabler/icons-react'
 import clsx from 'clsx'
-import { href, useLoaderData, useFetcher, NavLink } from 'react-router'
+import {
+	href,
+	useLoaderData,
+	useFetcher,
+	NavLink,
+	useParams,
+} from 'react-router'
 import { type Info } from '../../routes/chat/+types'
 import classes from './ConversationList.module.css'
 
 const ConversationList = () => {
 	const { conversations } = useLoaderData<Info['loaderData']>()
+
+	const { conversationId } = useParams<Info['params']>()
 
 	const fetcher = useFetcher()
 
@@ -80,6 +88,13 @@ const ConversationList = () => {
 										method="delete"
 										action={`/api/chat/${conversation.id}`}
 									>
+										<input
+											type="hidden"
+											name="redirect"
+											value={
+												conversation.id === conversationId ? 'true' : 'false'
+											}
+										/>
 										<button {...props} />
 									</fetcher.Form>
 								)}

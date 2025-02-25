@@ -37,7 +37,11 @@ const QuickPromptList = () => {
 	return (
 		<Group justify="center">
 			{quickPrompts.map((prompt) => (
-				<fetcher.Form key={prompt.content} method="post" action="/chat">
+				<fetcher.Form
+					key={prompt.content}
+					method="post"
+					action="/api/chat/create"
+				>
 					<input type="hidden" name="content" value={prompt.content} />
 					<Button
 						type="submit"

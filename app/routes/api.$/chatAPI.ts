@@ -1,14 +1,18 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
+import { sValidator } from '@hono/standard-validator'
 import {
 	type Message,
 	appendResponseMessages,
+	generateId,
 	smoothStream,
 	streamText,
 } from 'ai'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
-import { redirect } from 'react-router'
+import { href, redirect } from 'react-router'
+import * as v from 'valibot'
 import { type Bindings } from './'
+import inputValidationSchema from '@/components/chat/inputValidationSchema'
 import * as schema from '@/db/schema'
 
 interface ChatAPIRequestBody {
@@ -57,6 +61,38 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 
 		return result.toDataStreamResponse({ sendReasoning })
 	})
+	.post(
+		'/create',
+		sValidator('form', v.object({ content: inputValidationSchema })),
+		async (c) => {
+			const { content } = c.req.valid('form')
+
+			const userId = c.env.auth.userId as string
+
+			const insertedConversation = await c.env.db
+				.insert(schema.chatConversations)
+				.values({
+					user_id: userId,
+					title: content.slice(0, 52),
+					messages: [
+						{
+							id: generateId(),
+							role: 'user',
+							content,
+							createdAt: new Date(),
+						},
+					],
+				})
+				.returning()
+
+			const conversation =
+				insertedConversation[0] as (typeof insertedConversation)[number]
+
+			return redirect(
+				href('/chat/:conversationId', { conversationId: conversation.id }),
+			)
+		},
+	)
 	.delete('/:conversationId', async (c) => {
 		const conversationId = c.req.param('conversationId')
 

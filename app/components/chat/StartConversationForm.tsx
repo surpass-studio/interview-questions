@@ -19,7 +19,7 @@ const StartConversationForm = () => {
 
 	return (
 		<Stack gap="xs">
-			<fetcher.Form method="post" action="/chat">
+			<fetcher.Form method="post" action="/api/chat/create">
 				<Textarea
 					name="content"
 					autosize

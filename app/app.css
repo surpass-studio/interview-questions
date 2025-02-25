@@ -4,6 +4,16 @@
 
 @import '@mantine/core/styles.layer.css';
 
-.tabler-icon {
-	stroke-width: 1.5;
+@layer base {
+	.tabler-icon {
+		stroke-width: 1.5;
+	}
+}
+
+@utility stretched-link {
+	&::after {
+		position: absolute;
+		inset: 0;
+		content: '';
+	}
 }

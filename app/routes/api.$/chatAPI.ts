@@ -93,19 +93,38 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			)
 		},
 	)
-	.delete('/:conversationId', async (c) => {
-		const conversationId = c.req.param('conversationId')
+	.delete(
+		'/:conversationId',
+		sValidator(
+			'param',
+			v.object({
+				conversationId: v.pipe(v.string(), v.trim(), v.minLength(1)),
+			}),
+		),
+		sValidator(
+			'form',
+			v.object({
+				redirect: v.union([v.literal('true'), v.literal('false')]),
+			}),
+		),
+		async (c) => {
+			const { conversationId } = c.req.valid('param')
 
-		await c.env.db
-			.delete(schema.chatConversations)
-			.where(
-				and(
-					eq(schema.chatConversations.id, conversationId),
-					eq(schema.chatConversations.user_id, c.env.auth.userId as string),
-				),
-			)
+			const shouldRedirect = c.req.valid('form').redirect === 'true'
 
-		return redirect('/chat')
-	})
+			await c.env.db
+				.delete(schema.chatConversations)
+				.where(
+					and(
+						eq(schema.chatConversations.id, conversationId),
+						eq(schema.chatConversations.user_id, c.env.auth.userId as string),
+					),
+				)
+
+			return shouldRedirect
+				? redirect(href('/chat'))
+				: c.json({ success: true })
+		},
+	)
 
 export default chatAPI

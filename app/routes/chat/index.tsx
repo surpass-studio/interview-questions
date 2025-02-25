@@ -1,8 +1,18 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { MantineProvider, Paper } from '@mantine/core'
+import {
+	Stack,
+	Group,
+	MantineProvider,
+	Paper,
+	Text,
+	Box,
+	Divider,
+} from '@mantine/core'
+import { useWindowScroll } from '@mantine/hooks'
 import { eq } from 'drizzle-orm'
-import { Outlet } from 'react-router'
+import { href, Outlet, useLocation } from 'react-router'
 import { type Route } from './+types/index'
+import NewConversationButton from '@/components/chat/NewConversationButton'
 import OpenConversationListButton from '@/components/chat/OpenConversationListButton'
 import * as schema from '@/db/schema'
 
@@ -32,13 +42,25 @@ export const loader = async (args: Route.LoaderArgs) => {
 const CHAT_PAGE_ID = 'chat'
 
 const ChatPage = () => {
+	const [position] = useWindowScroll()
+
+	const { pathname } = useLocation()
+
 	return (
 		<MantineProvider
 			theme={{ primaryColor: 'blue' }}
 			cssVariablesSelector={`#${CHAT_PAGE_ID}`}
 		>
-			<Paper id={CHAT_PAGE_ID} className="h-full" p="md">
-				<OpenConversationListButton />
+			<Paper component={Stack} id={CHAT_PAGE_ID} className="h-full" p="md">
+				<Box className="sticky top-0 backdrop-blur-md">
+					<Group className="h-12" justify="space-between">
+						<OpenConversationListButton />
+						<Text className="text-center">DeepSeek-R1-Distill-Qwen-7B</Text>
+						<NewConversationButton visible={pathname !== href('/chat')} />
+					</Group>
+					<Divider className={position.y > 64 ? 'visible' : 'invisible'} />
+				</Box>
+
 				<Outlet />
 			</Paper>
 		</MantineProvider>

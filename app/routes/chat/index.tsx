@@ -1,9 +1,9 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { MantineProvider, Paper, Stack } from '@mantine/core'
+import { MantineProvider, Paper } from '@mantine/core'
 import { eq } from 'drizzle-orm'
 import { Outlet } from 'react-router'
 import { type Route } from './+types/index'
-import ToggleConversationListButton from '@/components/chat/ToggleConversationListButton'
+import OpenConversationListButton from '@/components/chat/OpenConversationListButton'
 import * as schema from '@/db/schema'
 
 export const meta = () => {
@@ -37,8 +37,8 @@ const ChatPage = () => {
 			theme={{ primaryColor: 'blue' }}
 			cssVariablesSelector={`#${CHAT_PAGE_ID}`}
 		>
-			<Paper component={Stack} id={CHAT_PAGE_ID} className="h-full" p="md">
-				<ToggleConversationListButton />
+			<Paper id={CHAT_PAGE_ID} className="h-full" p="md">
+				<OpenConversationListButton />
 				<Outlet />
 			</Paper>
 		</MantineProvider>

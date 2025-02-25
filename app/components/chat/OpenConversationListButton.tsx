@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { href, useNavigation } from 'react-router'
 import ConversationList from './ConversationList'
 
-const ToggleConversationListButton = () => {
+const OpenConversationListButton = () => {
 	const [opened, { open, close }] = useDisclosure()
 
 	const { location } = useNavigation()
@@ -28,14 +28,12 @@ const ToggleConversationListButton = () => {
 			>
 				<ConversationList />
 			</Drawer>
-
 			<Tooltip label="Open conversations">
 				<ActionIcon
-					className="sticky top-9"
+					className="sticky top-9 border-0"
 					size="lg"
-					color="dark"
 					radius="lg"
-					variant="subtle"
+					variant="default"
 					onClick={open}
 				>
 					<IconList />
@@ -45,4 +43,4 @@ const ToggleConversationListButton = () => {
 	)
 }
 
-export default ToggleConversationListButton
+export default OpenConversationListButton

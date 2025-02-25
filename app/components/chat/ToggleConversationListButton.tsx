@@ -2,7 +2,7 @@ import { ActionIcon, Drawer, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconList } from '@tabler/icons-react'
 import { useEffect } from 'react'
-import { useNavigation } from 'react-router'
+import { href, useNavigation } from 'react-router'
 import ConversationList from './ConversationList'
 
 const ToggleConversationListButton = () => {
@@ -11,7 +11,7 @@ const ToggleConversationListButton = () => {
 	const { location } = useNavigation()
 
 	useEffect(() => {
-		if (location) {
+		if (location && location.pathname !== href('/chat')) {
 			close()
 		}
 	}, [location, close])
@@ -22,6 +22,7 @@ const ToggleConversationListButton = () => {
 				classNames={{ inner: 'left-0' }}
 				size="xs"
 				title="Conversations"
+				withinPortal={false}
 				opened={opened}
 				onClose={close}
 			>

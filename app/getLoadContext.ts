@@ -18,8 +18,6 @@ declare module 'react-router' {
 				VITE_CLERK_PUBLISHABLE_KEY: string
 				CLERK_SECRET_KEY: string
 
-				SILICON_CLOUD_API_KEY: string
-
 				CLOUDFLARE_ACCOUNT_ID: string
 				CLOUDFLARE_DATABASE_ID: string
 				CLOUDFLARE_D1_TOKEN: string

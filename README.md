@@ -2,9 +2,9 @@
 
 A carefully curated collection of interview questions for frontend developers.
 
-![346_1x_shots_so](https://github.com/user-attachments/assets/b46f8321-b52c-4e2e-b225-aa23e1aaf2c4)
+![622shots_so](https://github.com/user-attachments/assets/80583156-0a6a-4796-8118-2badbdc3c14e)
 
-![651_1x_shots_so](https://github.com/user-attachments/assets/c8b2492c-7eb9-4817-acba-bb2f1469f21f)
+![483shots_so](https://github.com/user-attachments/assets/324b7980-2204-4677-8815-6a6d68a0c6db)
 
 ## ✨ Features
 

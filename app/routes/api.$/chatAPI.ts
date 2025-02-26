@@ -1,16 +1,17 @@
-import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
 import { sValidator } from '@hono/standard-validator'
 import {
 	type Message,
-	appendResponseMessages,
 	generateId,
-	smoothStream,
 	streamText,
+	wrapLanguageModel,
+	appendResponseMessages,
+	extractReasoningMiddleware,
 } from 'ai'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { href, redirect } from 'react-router'
 import * as v from 'valibot'
+import { createWorkersAI } from 'workers-ai-provider'
 import { type Bindings } from './'
 import inputValidationSchema from '@/components/chat/inputValidationSchema'
 import * as schema from '@/db/schema'
@@ -29,16 +30,20 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			sendReasoning = true,
 		} = await c.req.json<ChatAPIRequestBody>()
 
-		const model = createOpenAICompatible({
-			name: 'SiliconFlow',
-			baseURL: 'https://api.siliconflow.cn/v1',
-			apiKey: c.env.cloudflare.env.SILICON_CLOUD_API_KEY,
-		}).chatModel('deepseek-ai/DeepSeek-R1-Distill-Qwen-7B')
+		const workersAI = createWorkersAI({ binding: c.env.cloudflare.env.AI })
+
+		const model = wrapLanguageModel({
+			model: workersAI('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b'),
+			middleware: extractReasoningMiddleware({
+				tagName: 'think',
+				startWithReasoning: true,
+			}),
+		})
 
 		const result = streamText({
 			model,
 			messages,
-			experimental_transform: smoothStream(),
+			maxTokens: 2048,
 			onFinish: async ({ response }) => {
 				const finalMessages = appendResponseMessages({
 					messages,
@@ -59,7 +64,9 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			},
 		})
 
-		return result.toDataStreamResponse({ sendReasoning })
+		return result.toDataStreamResponse({
+			sendReasoning,
+		})
 	})
 	.post(
 		'/create',

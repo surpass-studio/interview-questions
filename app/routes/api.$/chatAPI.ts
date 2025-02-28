@@ -9,7 +9,7 @@ import {
 } from 'ai'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
-import { href, redirect } from 'react-router'
+import { href } from 'react-router'
 import * as v from 'valibot'
 import { type Bindings } from './'
 import inputValidationSchema from '@/components/chat/inputValidationSchema'
@@ -88,7 +88,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			const conversation =
 				insertedConversation[0] as (typeof insertedConversation)[number]
 
-			return redirect(
+			return c.redirect(
 				href('/chat/:conversationId', { conversationId: conversation.id }),
 			)
 		},
@@ -122,7 +122,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 				)
 
 			return shouldRedirect
-				? redirect(href('/chat'))
+				? c.redirect(href('/chat'))
 				: c.json({ success: true })
 		},
 	)

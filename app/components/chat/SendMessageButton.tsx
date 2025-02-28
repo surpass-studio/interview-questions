@@ -15,7 +15,7 @@ const SendMessageButton = ({
 	if (isLoading) {
 		return (
 			<Tooltip label="Stop">
-				<ActionIcon color="red" variant="subtle" onClick={stop}>
+				<ActionIcon color="red" radius="lg" variant="light" onClick={stop}>
 					<IconPlayerStop className="size-5" />
 				</ActionIcon>
 			</Tooltip>

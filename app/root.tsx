@@ -1,5 +1,5 @@
 import { rootAuthLoader } from '@clerk/react-router/ssr.server'
-import { ColorSchemeScript } from '@mantine/core'
+import { mantineHtmlProps, ColorSchemeScript } from '@mantine/core'
 import { type PropsWithChildren } from 'react'
 import { Links, Meta, Scripts, ScrollRestoration } from 'react-router'
 import { type Route } from './+types/root'
@@ -14,7 +14,7 @@ export const loader = (args: Route.LoaderArgs) => rootAuthLoader(args)
 
 export const Layout = ({ children }: PropsWithChildren) => {
 	return (
-		<html lang="zh">
+		<html lang="zh" {...mantineHtmlProps}>
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />

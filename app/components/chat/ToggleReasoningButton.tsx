@@ -1,9 +1,10 @@
 import { Button } from '@mantine/core'
 import { IconAtom } from '@tabler/icons-react'
-import useChatReasoningToggle from './useChatReasoningToggle'
+import useChatStore from './useChatStore'
 
 const ToggleReasoningButton = () => {
-	const { isReasoningEnabled, toggleReasoning } = useChatReasoningToggle()
+	const isReasoningEnabled = useChatStore((state) => state.isReasoningEnabled),
+		toggleReasoning = useChatStore((state) => state.toggleReasoning)
 
 	return (
 		<Button

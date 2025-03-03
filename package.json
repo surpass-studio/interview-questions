@@ -54,7 +54,7 @@
     "@types/http-link-header": "^1.0.7",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
-    "drizzle-kit": "^0.30.4",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^9.21.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "husky": "^9.1.7",

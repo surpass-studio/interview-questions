@@ -31,7 +31,7 @@ const ConversationList = () => {
 		return (
 			<Stack align="center" pt="xl">
 				<Title>😉</Title>
-				<Text>
+				<Text ta="center">
 					{Date.now() % 2 ? (
 						<>
 							对话列表空空如也，

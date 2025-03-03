@@ -4,11 +4,11 @@ import { type Info } from '../../routes/+types/_index'
 import serialize from '@/helpers/serialize'
 
 const QuestionListPagination = () => {
-	const { issues, pagination } = useLoaderData<Info['loaderData']>()
+	const { questions, pagination } = useLoaderData<Info['loaderData']>()
 
 	const [searchParams] = useSearchParams()
 
-	if (issues.length === 0) {
+	if (questions.length === 0) {
 		return null
 	}
 

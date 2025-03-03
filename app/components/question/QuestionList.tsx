@@ -7,7 +7,6 @@ import {
 	Button,
 	UnstyledButton,
 } from '@mantine/core'
-import clsx from 'clsx'
 import { Link, href, useLoaderData } from 'react-router'
 import { type Info } from '../../routes/+types/_index'
 import classes from './QuestionList.module.css'

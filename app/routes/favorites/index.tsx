@@ -1,6 +1,7 @@
 import { getAuth } from '@clerk/react-router/ssr.server'
-import { Stack } from '@mantine/core'
+import { Button, Stack, Title, Text } from '@mantine/core'
 import { eq } from 'drizzle-orm'
+import { Link } from 'react-router'
 import { type Route } from './+types/index'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
@@ -82,7 +83,23 @@ export const loader = async (args: Route.LoaderArgs) => {
 	}
 }
 
-const FavoritesPage = () => {
+const FavoritesPage = ({ loaderData }: Route.ComponentProps) => {
+	if (loaderData.issues.length === 0) {
+		return (
+			<Stack className="h-4/5" justify="center" align="center">
+				<Title>⭐️</Title>
+				<Text ta="center">
+					收藏夹是空的，
+					<br />
+					您可以通过点击❤️图标将问题添加到收藏夹中~
+				</Text>
+				<Button component={Link} to="/" variant="subtle">
+					浏览问题
+				</Button>
+			</Stack>
+		)
+	}
+
 	return (
 		<Stack align="center" gap="xl">
 			<QuestionList />

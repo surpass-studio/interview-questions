@@ -25,7 +25,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 
 		if (count === 0) {
 			return {
-				issues: [],
+				questions: [],
 				pagination: {
 					value: 0,
 					total: 0,
@@ -66,7 +66,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 		})
 
 		return {
-			issues: data.items,
+			questions: data.items,
 			pagination: {
 				value: page,
 				total,
@@ -75,7 +75,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 	}
 
 	return {
-		issues: [],
+		questions: [],
 		pagination: {
 			value: 0,
 			total: 0,
@@ -84,7 +84,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 }
 
 const FavoritesPage = ({ loaderData }: Route.ComponentProps) => {
-	if (loaderData.issues.length === 0) {
+	if (loaderData.questions.length === 0) {
 		return (
 			<Stack className="h-4/5" justify="center" align="center">
 				<Title>⭐️</Title>

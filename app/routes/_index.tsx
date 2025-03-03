@@ -54,7 +54,7 @@ export const loader = async ({ request, context }: Route.LoaderArgs) => {
 	}
 
 	return {
-		issues: data.items,
+		questions: data.items,
 		pagination: {
 			value: page,
 			total,

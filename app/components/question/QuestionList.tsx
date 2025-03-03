@@ -13,9 +13,9 @@ import classes from './QuestionList.module.css'
 import serialize from '@/helpers/serialize'
 
 const QuestionList = () => {
-	const { issues } = useLoaderData<Info['loaderData']>()
+	const { questions } = useLoaderData<Info['loaderData']>()
 
-	if (issues.length === 0) {
+	if (questions.length === 0) {
 		return (
 			<Stack className="h-80" justify="center" align="center" gap="xl">
 				<Title order={2}>No question found.</Title>
@@ -29,26 +29,26 @@ const QuestionList = () => {
 	return (
 		<Paper className="w-full">
 			<List size="lg">
-				{issues.map((issue) => (
+				{questions.map((question) => (
 					<UnstyledButton
-						key={issue.number}
+						key={question.number}
 						component="li"
 						p="sm"
-						title={issue.title}
+						title={question.title}
 						className={classes.listItem}
 					>
 						<Link
 							viewTransition
 							prefetch="intent"
 							to={href('/question/:questionId', {
-								questionId: String(issue.number),
+								questionId: String(question.number),
 							})}
 							className="stretched-link align-middle"
 						>
-							{issue.title}
+							{question.title}
 						</Link>
 						<Group display="inline-flex" ml="xs">
-							{issue.labels.map((label, index) => (
+							{question.labels.map((label, index) => (
 								<Button
 									key={index}
 									component={Link}

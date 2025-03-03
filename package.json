@@ -45,7 +45,7 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250214.0",
+    "@cloudflare/workers-types": "^4.20250224.0",
     "@epic-web/config": "^1.17.0",
     "@react-router/cloudflare": "7.2.0",
     "@react-router/dev": "7.2.0",

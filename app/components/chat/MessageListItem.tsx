@@ -19,7 +19,9 @@ import {
 } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import clsx from 'clsx'
+import { useRef } from 'react'
 import Markdown from 'react-markdown'
+import CopyMessageButton from './CopyMessageButton'
 import classes from './MessageListItem.module.css'
 
 interface MessageListItemProps {
@@ -28,6 +30,8 @@ interface MessageListItemProps {
 
 const MessageListItem = ({ message }: MessageListItemProps) => {
 	const [isOpened, { toggle }] = useDisclosure(true)
+
+	const typographyRef = useRef<HTMLDivElement>(null)
 
 	if (message.role === 'user') {
 		return (
@@ -40,7 +44,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 	}
 
 	return (
-		<Group component="li" align="start">
+		<Group component="li" className="group" align="start">
 			<Avatar>
 				<ThemeIcon variant="transparent">
 					<IconSparkles />
@@ -84,12 +88,17 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
 					if (part.type === 'text') {
 						return (
-							<TypographyStylesProvider
-								key={part.type}
-								className={classes.typography}
-							>
-								<Markdown>{message.content}</Markdown>
-							</TypographyStylesProvider>
+							<Stack key={part.type} gap="xs">
+								<TypographyStylesProvider
+									ref={typographyRef}
+									className={classes.typography}
+								>
+									<Markdown>{message.content}</Markdown>
+								</TypographyStylesProvider>
+								<Group className="opacity-0 transition-opacity group-hover:opacity-100">
+									<CopyMessageButton typographyRef={typographyRef} />
+								</Group>
+							</Stack>
 						)
 					}
 

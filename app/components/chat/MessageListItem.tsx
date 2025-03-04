@@ -1,5 +1,4 @@
 import {
-	Avatar,
 	Button,
 	Collapse,
 	Divider,
@@ -8,15 +7,10 @@ import {
 	Paper,
 	Stack,
 	Text,
-	ThemeIcon,
 	TypographyStylesProvider,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import {
-	IconChevronDown,
-	IconChevronRight,
-	IconSparkles,
-} from '@tabler/icons-react'
+import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import clsx from 'clsx'
 import { useRef } from 'react'
@@ -44,78 +38,66 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 	}
 
 	return (
-		<Group component="li" className="group" align="start">
-			<Avatar>
-				<ThemeIcon variant="transparent">
-					<IconSparkles />
-				</ThemeIcon>
-			</Avatar>
-			<Stack className="flex-1">
-				{message.parts.map((part) => {
-					if (part.type === 'reasoning') {
-						return (
-							<Stack key={part.type} align="start" gap="xs">
-								<Button
-									size="compact-sm"
-									color={isOpened ? undefined : 'gray'}
-									variant="subtle"
-									rightSection={
-										isOpened ? (
-											<IconChevronDown className="size-5" />
-										) : (
-											<IconChevronRight className="size-5" />
-										)
-									}
-									onClick={() => toggle()}
-								>
-									Reasoning
-								</Button>
+		<Stack component="li" className="group">
+			{message.parts.map((part) => {
+				if (part.type === 'reasoning') {
+					return (
+						<Stack key={part.type} align="start" gap="xs">
+							<Button
+								size="compact-sm"
+								color={isOpened ? undefined : 'gray'}
+								variant="subtle"
+								rightSection={
+									isOpened ? (
+										<IconChevronDown className="size-5" />
+									) : (
+										<IconChevronRight className="size-5" />
+									)
+								}
+								onClick={() => toggle()}
+							>
+								Reasoning
+							</Button>
 
-								<Collapse in={isOpened}>
-									<Group key={part.type}>
-										<Divider orientation="vertical" />
-										<TypographyStylesProvider
-											className={clsx('flex-1', classes.typography)}
-											c="gray"
-										>
-											<Markdown>{part.reasoning}</Markdown>
-										</TypographyStylesProvider>
-									</Group>
-								</Collapse>
-							</Stack>
-						)
-					}
-
-					if (part.type === 'text') {
-						return (
-							<Stack key={part.type} gap="xs">
-								<TypographyStylesProvider
-									ref={typographyRef}
-									className={classes.typography}
-								>
-									<Markdown>{message.content}</Markdown>
-								</TypographyStylesProvider>
-								<Group className="opacity-0 transition-opacity group-hover:opacity-100">
-									<CopyMessageButton typographyRef={typographyRef} />
+							<Collapse in={isOpened}>
+								<Group key={part.type}>
+									<Divider orientation="vertical" />
+									<TypographyStylesProvider
+										className={clsx('flex-1', classes.typography)}
+										c="gray"
+									>
+										<Markdown>{part.reasoning}</Markdown>
+									</TypographyStylesProvider>
 								</Group>
-							</Stack>
-						)
-					}
+							</Collapse>
+						</Stack>
+					)
+				}
 
-					return null
-				})}
-			</Stack>
-		</Group>
+				if (part.type === 'text') {
+					return (
+						<Stack key={part.type} gap="xs">
+							<TypographyStylesProvider
+								ref={typographyRef}
+								className={classes.typography}
+							>
+								<Markdown>{message.content}</Markdown>
+							</TypographyStylesProvider>
+							<Group className="opacity-0 transition-opacity group-hover:opacity-100">
+								<CopyMessageButton typographyRef={typographyRef} />
+							</Group>
+						</Stack>
+					)
+				}
+
+				return null
+			})}
+		</Stack>
 	)
 }
 
 MessageListItem.Pending = () => (
 	<Group component="li">
-		<Avatar>
-			<ThemeIcon variant="transparent">
-				<IconSparkles />
-			</ThemeIcon>
-		</Avatar>
 		<Loader type="dots" />
 	</Group>
 )

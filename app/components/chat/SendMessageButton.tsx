@@ -15,7 +15,7 @@ const SendMessageButton = ({
 	if (isLoading) {
 		return (
 			<Tooltip label="Stop">
-				<ActionIcon color="red" radius="lg" variant="light" onClick={stop}>
+				<ActionIcon color="red" variant="light" onClick={stop}>
 					<IconPlayerStop className="size-5" />
 				</ActionIcon>
 			</Tooltip>
@@ -26,7 +26,7 @@ const SendMessageButton = ({
 		<Transition mounted={isInputValid} transition="slide-left">
 			{(styles) => (
 				<Tooltip label="Send message">
-					<ActionIcon type="submit" radius="lg" style={styles}>
+					<ActionIcon type="submit" style={styles}>
 						<IconArrowUp className="size-5" />
 					</ActionIcon>
 				</Tooltip>

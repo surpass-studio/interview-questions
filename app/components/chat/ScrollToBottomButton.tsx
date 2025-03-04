@@ -18,7 +18,6 @@ const ScrollToBottomButton = () => {
 				<Tooltip label="回到底部">
 					<ActionIcon
 						style={styles}
-						radius="xl"
 						variant="light"
 						onClick={() =>
 							window.scrollTo({

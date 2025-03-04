@@ -13,7 +13,6 @@ const SourceButton = () => {
 				href={`https://github.com/pro-collection/interview-question/issues/${questionId}`}
 				target="_blank"
 				size="lg"
-				radius="lg"
 				variant="light"
 			>
 				<IconLink />

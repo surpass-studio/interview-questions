@@ -13,7 +13,6 @@ const FullTextCopyButton = ({ text }: FullTextCopyButtonProps) => {
 					<ActionIcon
 						size="lg"
 						color={copied ? 'green' : undefined}
-						radius="lg"
 						variant="light"
 						onClick={copy}
 					>

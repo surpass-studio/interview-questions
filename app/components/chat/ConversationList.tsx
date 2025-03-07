@@ -72,7 +72,6 @@ const ConversationList = () => {
 						<Menu.Target>
 							<ActionIcon
 								className="invisible absolute right-3 group-hover:visible"
-								radius="lg"
 								variant="subtle"
 							>
 								<IconDots />

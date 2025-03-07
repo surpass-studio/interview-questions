@@ -15,7 +15,6 @@ const NewConversationButton = ({ visible }: NewConversationButtonProps) => {
 				to={href('/chat')}
 				className={clsx('border-0', visible ? 'visible' : 'invisible')}
 				size="lg"
-				radius="lg"
 				variant="subtle"
 			>
 				<IconMessagePlus />

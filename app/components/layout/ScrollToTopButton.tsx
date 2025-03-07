@@ -12,7 +12,6 @@ const ScrollToTopButton = () => {
 					<ActionIcon
 						style={styles}
 						size="xl"
-						radius="xl"
 						variant="light"
 						onClick={() => scrollTo({ y: 0 })}
 					>

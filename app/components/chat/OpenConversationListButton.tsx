@@ -28,7 +28,7 @@ const OpenConversationListButton = () => {
 				<ConversationList />
 			</Drawer>
 			<Tooltip label="Open conversations">
-				<ActionIcon size="lg" radius="lg" variant="subtle" onClick={open}>
+				<ActionIcon size="lg" variant="subtle" onClick={open}>
 					<IconList />
 				</ActionIcon>
 			</Tooltip>

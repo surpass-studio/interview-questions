@@ -1,4 +1,4 @@
-import { createTheme, Input } from '@mantine/core'
+import { createTheme, Input, ActionIcon } from '@mantine/core'
 import classes from './components.module.css'
 
 const mantineTheme = createTheme({
@@ -6,6 +6,11 @@ const mantineTheme = createTheme({
 		Input: Input.extend({
 			classNames: {
 				input: classes.input,
+			},
+		}),
+		ActionIcon: ActionIcon.extend({
+			defaultProps: {
+				radius: 'xl',
 			},
 		}),
 	},

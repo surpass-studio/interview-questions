@@ -45,7 +45,7 @@ const CopyMessageButton = ({ typographyRef }: CopyMessageButtonProps) => {
 
 	return (
 		<Tooltip label="Copy message">
-			<ActionIcon color="gray" radius="lg" variant="subtle" onClick={copy}>
+			<ActionIcon color="gray" variant="subtle" onClick={copy}>
 				<IconCopy className="size-5" />
 			</ActionIcon>
 		</Tooltip>

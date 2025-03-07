@@ -19,7 +19,7 @@ const FavoriteButton = () => {
 		return (
 			<Tooltip label="登录后即可收藏">
 				<SignInButton>
-					<ActionIcon color="red" size="lg" radius="lg" variant="light">
+					<ActionIcon color="red" size="lg" variant="light">
 						<IconHeart />
 					</ActionIcon>
 				</SignInButton>
@@ -32,13 +32,7 @@ const FavoriteButton = () => {
 			<Tooltip label="取消收藏">
 				<fetcher.Form method="delete" action={`/api/favorites/${questionId}`}>
 					<input type="hidden" name="questionId" value={questionId} />
-					<ActionIcon
-						type="submit"
-						color="red"
-						size="lg"
-						radius="lg"
-						loading={loading}
-					>
+					<ActionIcon type="submit" color="red" size="lg" loading={loading}>
 						<IconHeartFilled />
 					</ActionIcon>
 				</fetcher.Form>
@@ -54,7 +48,6 @@ const FavoriteButton = () => {
 					type="submit"
 					color="red"
 					size="lg"
-					radius="lg"
 					variant="light"
 					loading={loading}
 				>

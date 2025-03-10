@@ -17,6 +17,7 @@ import { useRef } from 'react'
 import Markdown from 'react-markdown'
 import CopyMessageButton from './CopyMessageButton'
 import classes from './MessageListItem.module.css'
+import RegenerateMessageButton from './RegenerateMessageButton'
 
 interface MessageListItemProps {
 	message: UIMessage
@@ -83,8 +84,12 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 							>
 								<Markdown>{message.content}</Markdown>
 							</TypographyStylesProvider>
-							<Group className="opacity-0 transition-opacity group-hover:opacity-100">
+							<Group
+								className="opacity-0 transition-opacity group-hover:opacity-100"
+								gap="xs"
+							>
 								<CopyMessageButton typographyRef={typographyRef} />
+								<RegenerateMessageButton message={message} />
 							</Group>
 						</Stack>
 					)

@@ -27,7 +27,7 @@
     "@octokit/rest": "^21.1.1",
     "@react-router/fs-routes": "7.3.0",
     "@tabler/icons-react": "^3.31.0",
-    "ai": "^4.1.54",
+    "ai": "^4.1.61",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.40.0",

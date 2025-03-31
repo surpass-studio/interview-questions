@@ -3,6 +3,11 @@
 
 	&:focus-within {
 		outline: rem(2px) solid var(--mantine-primary-color-filled);
+		outline-offset: rem(-1px);
 		border-color: transparent;
+	}
+
+	&:global(.mantine-Spotlight-search) {
+		outline: 0;
 	}
 }

@@ -33,7 +33,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			name: 'SiliconFlow',
 			baseURL: 'https://api.siliconflow.cn/v1',
 			apiKey: c.env.cloudflare.env.SILICON_CLOUD_API_KEY,
-		}).chatModel('deepseek-ai/DeepSeek-R1-Distill-Qwen-7B')
+		}).chatModel('Qwen/Qwen3-8B')
 
 		const result = streamText({
 			model,

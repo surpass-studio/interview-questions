@@ -38,7 +38,9 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		const result = streamText({
 			model,
 			messages,
-			experimental_transform: smoothStream(),
+			experimental_transform: smoothStream({
+				chunking: /[\u4E00-\u9FFF]|\S+\s+/,
+			}),
 			onFinish: async ({ response }) => {
 				const finalMessages = appendResponseMessages({
 					messages,

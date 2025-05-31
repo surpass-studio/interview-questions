@@ -38,7 +38,9 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		const result = streamText({
 			model,
 			messages,
-			experimental_transform: smoothStream(),
+			experimental_transform: smoothStream({
+				chunking: /[\u4E00-\u9FFF]|\S+\s+/,
+			}),
 			onFinish: async ({ response }) => {
 				const finalMessages = appendResponseMessages({
 					messages,
@@ -59,7 +61,24 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			},
 		})
 
-		return result.toDataStreamResponse({ sendReasoning })
+		return result.toDataStreamResponse({
+			sendReasoning,
+			getErrorMessage: (error) => {
+				if (error == null) {
+					return 'unknown error'
+				}
+
+				if (typeof error === 'string') {
+					return error
+				}
+
+				if (error instanceof Error) {
+					return error.message
+				}
+
+				return JSON.stringify(error)
+			},
+		})
 	})
 	.post(
 		'/create',

@@ -1,10 +1,11 @@
-import { Stack } from '@mantine/core'
+import { Box, ScrollArea, Stack } from '@mantine/core'
+import { useStickToBottom } from 'use-stick-to-bottom'
 import MessageListItem from './MessageListItem'
-import useChatAutoScroll from './useChatAutoScroll'
+import ScrollToBottomButton from './ScrollToBottomButton'
 import useSharedChat from './useSharedChat'
 
 const MessageList = () => {
-	const { status, messages } = useSharedChat()
+	const { status, error, messages } = useSharedChat()
 
 	const lastMessage = messages[messages.length - 1]
 
@@ -13,15 +14,30 @@ const MessageList = () => {
 		lastMessage &&
 		lastMessage.role === 'user'
 
-	useChatAutoScroll()
+	const { scrollRef, contentRef, isAtBottom, scrollToBottom } =
+		useStickToBottom()
 
 	return (
-		<Stack component="ul" className="flex-1" gap="xl">
-			{messages.map((message) => (
-				<MessageListItem key={message.id} message={message} />
-			))}
-			{isPending && <MessageListItem.Pending />}
-		</Stack>
+		<Box className="relative flex-1">
+			<ScrollArea.Autosize
+				viewportRef={scrollRef}
+				className="absolute max-h-full w-full"
+			>
+				<Stack ref={contentRef} component="ul" gap="xl">
+					{messages.map((message) => (
+						<MessageListItem key={message.id} message={message} />
+					))}
+					{isPending && <MessageListItem.Pending />}
+					{error && <MessageListItem.Error error={error} />}
+				</Stack>
+			</ScrollArea.Autosize>
+			<Box className="absolute bottom-6">
+				<ScrollToBottomButton
+					isAtBottom={isAtBottom}
+					scrollToBottom={scrollToBottom}
+				/>
+			</Box>
+		</Box>
 	)
 }
 

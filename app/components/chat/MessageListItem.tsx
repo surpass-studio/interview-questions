@@ -6,11 +6,16 @@ import {
 	Loader,
 	Paper,
 	Stack,
+	Alert,
 	Text,
 	TypographyStylesProvider,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
+import {
+	IconChevronDown,
+	IconChevronRight,
+	IconMoodSadDizzy,
+} from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import clsx from 'clsx'
 import { useRef } from 'react'
@@ -105,6 +110,16 @@ MessageListItem.Pending = () => (
 	<Group component="li">
 		<Loader type="dots" />
 	</Group>
+)
+
+interface MessageListItemErrorProps {
+	error: Error
+}
+
+MessageListItem.Error = ({ error }: MessageListItemErrorProps) => (
+	<Alert color="red" title={error.name} icon={<IconMoodSadDizzy />}>
+		{error.message}
+	</Alert>
 )
 
 export default MessageListItem

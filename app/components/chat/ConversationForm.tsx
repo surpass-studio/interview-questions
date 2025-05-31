@@ -1,9 +1,8 @@
-import { Box, Flex, Group, Stack, Textarea } from '@mantine/core'
+import { Flex, Group, Stack, Textarea } from '@mantine/core'
 import { useState, useEffect, useRef } from 'react'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
-import ScrollToBottomButton from './ScrollToBottomButton'
 import SendMessageButton from './SendMessageButton'
 import ToggleReasoningButton from './ToggleReasoningButton'
 import useSharedChat from './useSharedChat'
@@ -43,9 +42,6 @@ const ConversationForm = () => {
 
 	return (
 		<Stack className="sticky bottom-9" gap="xs">
-			<Box className="absolute -top-12">
-				<ScrollToBottomButton />
-			</Box>
 			<form onSubmit={handleSubmit}>
 				<Textarea
 					autosize

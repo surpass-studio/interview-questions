@@ -15,8 +15,6 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
 			appearance={{
 				baseTheme: colorScheme === 'dark' ? dark : undefined,
 			}}
-			signUpFallbackRedirectUrl="/"
-			signInFallbackRedirectUrl="/"
 		>
 			{children}
 		</ClerkProvider>

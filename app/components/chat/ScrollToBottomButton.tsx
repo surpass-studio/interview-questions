@@ -1,30 +1,26 @@
 import { ActionIcon, Tooltip, Transition } from '@mantine/core'
-import { useWindowEvent } from '@mantine/hooks'
 import { IconArrowDown } from '@tabler/icons-react'
-import { useState } from 'react'
+import { type StickToBottomInstance } from 'use-stick-to-bottom'
 
-const ScrollToBottomButton = () => {
-	const [mounted, setMounted] = useState(false)
+type ScrollToBottomButtonProps = Pick<
+	StickToBottomInstance,
+	'isAtBottom' | 'scrollToBottom'
+>
 
-	useWindowEvent('scroll', () => {
-		setMounted(
-			document.body.scrollHeight - window.innerHeight - window.scrollY > 64,
-		)
-	})
-
+const ScrollToBottomButton = ({
+	isAtBottom,
+	scrollToBottom,
+}: ScrollToBottomButtonProps) => {
 	return (
-		<Transition transition="slide-up" mounted={mounted}>
+		<Transition transition="slide-up" mounted={!isAtBottom}>
 			{(styles) => (
 				<Tooltip label="回到底部">
 					<ActionIcon
 						style={styles}
 						variant="light"
-						onClick={() =>
-							window.scrollTo({
-								top: document.body.scrollHeight,
-								behavior: 'smooth',
-							})
-						}
+						onClick={() => {
+							void scrollToBottom()
+						}}
 					>
 						<IconArrowDown />
 					</ActionIcon>

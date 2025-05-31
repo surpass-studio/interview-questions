@@ -61,7 +61,24 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 			},
 		})
 
-		return result.toDataStreamResponse({ sendReasoning })
+		return result.toDataStreamResponse({
+			sendReasoning,
+			getErrorMessage: (error) => {
+				if (error == null) {
+					return 'unknown error'
+				}
+
+				if (typeof error === 'string') {
+					return error
+				}
+
+				if (error instanceof Error) {
+					return error.message
+				}
+
+				return JSON.stringify(error)
+			},
+		})
 	})
 	.post(
 		'/create',

@@ -5,7 +5,7 @@ import ScrollToBottomButton from './ScrollToBottomButton'
 import useSharedChat from './useSharedChat'
 
 const MessageList = () => {
-	const { status, messages } = useSharedChat()
+	const { status, error, messages } = useSharedChat()
 
 	const lastMessage = messages[messages.length - 1]
 
@@ -28,6 +28,7 @@ const MessageList = () => {
 						<MessageListItem key={message.id} message={message} />
 					))}
 					{isPending && <MessageListItem.Pending />}
+					{error && <MessageListItem.Error error={error} />}
 				</Stack>
 			</ScrollArea.Autosize>
 			<Box className="absolute bottom-6">

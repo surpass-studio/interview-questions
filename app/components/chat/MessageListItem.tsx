@@ -14,7 +14,7 @@ import { useDisclosure } from '@mantine/hooks'
 import {
 	IconChevronDown,
 	IconChevronRight,
-	IconMoodSadDizzy,
+	IconAlertTriangle,
 } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import clsx from 'clsx'
@@ -117,8 +117,8 @@ interface MessageListItemErrorProps {
 }
 
 MessageListItem.Error = ({ error }: MessageListItemErrorProps) => (
-	<Alert color="red" title={error.name} icon={<IconMoodSadDizzy />}>
-		{error.message}
+	<Alert color="red" icon={<IconAlertTriangle />}>
+		<Text c="red">{error.message}</Text>
 	</Alert>
 )
 

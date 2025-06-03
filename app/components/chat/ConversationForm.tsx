@@ -1,5 +1,5 @@
 import { Flex, Group, Textarea } from '@mantine/core'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
@@ -7,8 +7,6 @@ import SendMessageButton from './SendMessageButton'
 import useSharedChat from './useSharedChat'
 
 const ConversationForm = () => {
-	const [isCompositionInput, setIsCompositionInput] = useState(false)
-
 	const {
 		input,
 		status,
@@ -51,14 +49,12 @@ const ConversationForm = () => {
 				classNames={{ wrapper: 'flex-1', input: classes.textarea }}
 				value={input}
 				onChange={handleInputChange}
-				onCompositionStart={() => setIsCompositionInput(true)}
-				onCompositionEnd={() => setIsCompositionInput(false)}
 				onKeyDown={(event) => {
 					const canSendMessage =
 						(status === 'ready' || status === 'error') &&
 						event.key === 'Enter' &&
 						!event.shiftKey &&
-						!isCompositionInput &&
+						!event.nativeEvent.isComposing &&
 						isInputValid
 
 					if (canSendMessage) {

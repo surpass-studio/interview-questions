@@ -1,10 +1,9 @@
-import { Flex, Group, Stack, Textarea } from '@mantine/core'
+import { Flex, Group, Textarea } from '@mantine/core'
 import { useState, useEffect, useRef } from 'react'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
-import ToggleReasoningButton from './ToggleReasoningButton'
 import useSharedChat from './useSharedChat'
 
 const ConversationForm = () => {
@@ -41,50 +40,45 @@ const ConversationForm = () => {
 	}, [messages, status, reload])
 
 	return (
-		<Stack className="sticky bottom-9" gap="xs">
-			<form onSubmit={handleSubmit}>
-				<Textarea
-					autosize
-					minRows={1}
-					rows={1}
-					maxRows={10}
-					size="md"
-					placeholder="Type a message..."
-					classNames={{ wrapper: 'flex-1', input: classes.textarea }}
-					value={input}
-					onChange={handleInputChange}
-					onCompositionStart={() => setIsCompositionInput(true)}
-					onCompositionEnd={() => setIsCompositionInput(false)}
-					onKeyDown={(event) => {
-						const canSendMessage =
-							(status === 'ready' || status === 'error') &&
-							event.key === 'Enter' &&
-							!event.shiftKey &&
-							!isCompositionInput &&
-							isInputValid
+		<form onSubmit={handleSubmit}>
+			<Textarea
+				autosize
+				minRows={1}
+				rows={1}
+				maxRows={10}
+				size="md"
+				placeholder="Type a message..."
+				classNames={{ wrapper: 'flex-1', input: classes.textarea }}
+				value={input}
+				onChange={handleInputChange}
+				onCompositionStart={() => setIsCompositionInput(true)}
+				onCompositionEnd={() => setIsCompositionInput(false)}
+				onKeyDown={(event) => {
+					const canSendMessage =
+						(status === 'ready' || status === 'error') &&
+						event.key === 'Enter' &&
+						!event.shiftKey &&
+						!isCompositionInput &&
+						isInputValid
 
-						if (canSendMessage) {
-							handleSubmit(event)
-						}
-					}}
-					inputContainer={(children) => (
-						<Flex className={classes.textareaContainer}>
-							{children}
-							<Group className={classes.submitButtonContainer}>
-								<SendMessageButton
-									isLoading={status === 'submitted' || status === 'streaming'}
-									isInputValid={isInputValid}
-									stop={stop}
-								/>
-							</Group>
-						</Flex>
-					)}
-				/>
-			</form>
-			<Group>
-				<ToggleReasoningButton />
-			</Group>
-		</Stack>
+					if (canSendMessage) {
+						handleSubmit(event)
+					}
+				}}
+				inputContainer={(children) => (
+					<Flex className={classes.textareaContainer}>
+						{children}
+						<Group className={classes.submitButtonContainer}>
+							<SendMessageButton
+								isLoading={status === 'submitted' || status === 'streaming'}
+								isInputValid={isInputValid}
+								stop={stop}
+							/>
+						</Group>
+					</Flex>
+				)}
+			/>
+		</form>
 	)
 }
 

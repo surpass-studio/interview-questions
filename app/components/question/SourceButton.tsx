@@ -1,10 +1,10 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { IconLink } from '@tabler/icons-react'
 import { useParams } from 'react-router'
-import { type Info } from '../../routes/question.$questionId/+types'
+import { type Route } from '../../routes/question.$questionId/+types'
 
 const SourceButton = () => {
-	const { questionId } = useParams<Info['params']>()
+	const { questionId } = useParams<Route.ComponentProps['params']>()
 
 	return (
 		<Tooltip label="题目来源">

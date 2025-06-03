@@ -18,16 +18,11 @@ import * as schema from '@/db/schema'
 interface ChatAPIRequestBody {
 	id: string
 	messages: Message[]
-	sendReasoning: boolean
 }
 
 const chatAPI = new Hono<{ Bindings: Bindings }>()
 	.post('/', async (c) => {
-		const {
-			id,
-			messages,
-			sendReasoning = true,
-		} = await c.req.json<ChatAPIRequestBody>()
+		const { id, messages } = await c.req.json<ChatAPIRequestBody>()
 
 		const model = createOpenAICompatible({
 			name: 'SiliconFlow',
@@ -62,7 +57,6 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		})
 
 		return result.toDataStreamResponse({
-			sendReasoning,
 			getErrorMessage: (error) => {
 				if (error == null) {
 					return 'unknown error'

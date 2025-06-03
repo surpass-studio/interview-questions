@@ -2,7 +2,7 @@ import { sValidator } from '@hono/standard-validator'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import * as v from 'valibot'
-import { type Bindings } from './'
+import { type Bindings } from './route'
 
 import { userFavorites } from '@/db/schema'
 

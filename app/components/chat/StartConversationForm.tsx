@@ -1,6 +1,5 @@
-import { Flex, Group, Stack, Textarea } from '@mantine/core'
+import { Flex, Group, Textarea } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
-import { useState } from 'react'
 import { useFetcher } from 'react-router'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
@@ -8,8 +7,6 @@ import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
 
 const StartConversationForm = () => {
-	const [isCompositionInput, setIsCompositionInput] = useState(false)
-
 	const fetcher = useFetcher()
 
 	const [input, handleInputChange] = useInputState('')
@@ -29,14 +26,12 @@ const StartConversationForm = () => {
 				classNames={{ wrapper: 'flex-1', input: classes.textarea }}
 				value={input}
 				onChange={handleInputChange}
-				onCompositionStart={() => setIsCompositionInput(true)}
-				onCompositionEnd={() => setIsCompositionInput(false)}
 				onKeyDown={async (event) => {
 					const canSendMessage =
 						fetcher.state === 'idle' &&
 						event.key === 'Enter' &&
 						!event.shiftKey &&
-						!isCompositionInput &&
+						!event.nativeEvent.isComposing &&
 						isInputValid
 
 					if (canSendMessage) {

@@ -18,22 +18,17 @@ import * as schema from '@/db/schema'
 interface ChatAPIRequestBody {
 	id: string
 	messages: Message[]
-	sendReasoning: boolean
 }
 
 const chatAPI = new Hono<{ Bindings: Bindings }>()
 	.post('/', async (c) => {
-		const {
-			id,
-			messages,
-			sendReasoning = true,
-		} = await c.req.json<ChatAPIRequestBody>()
+		const { id, messages } = await c.req.json<ChatAPIRequestBody>()
 
 		const model = createOpenAICompatible({
 			name: 'SiliconFlow',
 			baseURL: 'https://api.siliconflow.cn/v1',
 			apiKey: c.env.cloudflare.env.SILICON_CLOUD_API_KEY,
-		}).chatModel('Qwen/Qwen3-8B')
+		}).chatModel('deepseek-ai/DeepSeek-R1-0528-Qwen3-8B')
 
 		const result = streamText({
 			model,
@@ -62,7 +57,6 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		})
 
 		return result.toDataStreamResponse({
-			sendReasoning,
 			getErrorMessage: (error) => {
 				if (error == null) {
 					return 'unknown error'

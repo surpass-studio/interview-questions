@@ -8,12 +8,12 @@ import {
 	UnstyledButton,
 } from '@mantine/core'
 import { Link, href, useLoaderData } from 'react-router'
-import { type Info } from '../../routes/+types/_index'
+import { type Route } from '../../routes/+types/_index'
 import classes from './QuestionList.module.css'
 import serialize from '@/helpers/serialize'
 
 const QuestionList = () => {
-	const { questions } = useLoaderData<Info['loaderData']>()
+	const { questions } = useLoaderData<Route.ComponentProps['loaderData']>()
 
 	if (questions.length === 0) {
 		return (

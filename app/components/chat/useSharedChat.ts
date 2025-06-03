@@ -1,20 +1,14 @@
 import { type Message, useChat } from '@ai-sdk/react'
 import { useLoaderData, useParams } from 'react-router'
-import { type Info } from '../../routes/chat.$conversationId/+types'
-import useChatStore from './useChatStore'
+import { type Route } from '../../routes/chat.$conversationId/+types'
 
 const useSharedChat = () => {
-	const { conversationId } = useParams<Info['params']>()
+	const { conversationId } = useParams<Route.ComponentProps['params']>()
 
-	const isReasoningEnabled = useChatStore((state) => state.isReasoningEnabled)
-
-	const { conversation } = useLoaderData<Info['loaderData']>()
+	const { conversation } = useLoaderData<Route.ComponentProps['loaderData']>()
 
 	const chat = useChat({
 		id: conversationId,
-		body: {
-			sendReasoning: isReasoningEnabled,
-		},
 		initialMessages: conversation.messages as Message[],
 		sendExtraMessageFields: true,
 	})

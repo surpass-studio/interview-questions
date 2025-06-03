@@ -17,13 +17,14 @@ import {
 	NavLink,
 	useParams,
 } from 'react-router'
-import { type Info } from '../../routes/chat/+types'
+import { type Route } from '../../routes/chat/+types'
+
 import classes from './ConversationList.module.css'
 
 const ConversationList = () => {
-	const { conversations } = useLoaderData<Info['loaderData']>()
+	const { conversations } = useLoaderData<Route.ComponentProps['loaderData']>()
 
-	const { conversationId } = useParams<Info['params']>()
+	const { conversationId } = useParams<Route.ComponentProps['params']>()
 
 	const fetcher = useFetcher()
 

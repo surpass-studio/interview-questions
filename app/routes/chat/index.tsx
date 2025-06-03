@@ -55,7 +55,7 @@ const ChatPage = () => {
 				<Box className="sticky top-0 backdrop-blur-md">
 					<Group className="h-12" justify="space-between">
 						<OpenConversationListButton />
-						<Text className="text-center">Qwen/Qwen3-8B</Text>
+						<Text className="text-center">DeepSeek-R1-0528-Qwen3-8B</Text>
 						<NewConversationButton visible={pathname !== href('/chat')} />
 					</Group>
 					<Divider className={position.y > 64 ? 'visible' : 'invisible'} />

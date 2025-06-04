@@ -2,7 +2,7 @@ import { SignInButton, useAuth } from '@clerk/react-router'
 import { Tooltip, ActionIcon } from '@mantine/core'
 import { IconHeart, IconHeartFilled } from '@tabler/icons-react'
 import { useLoaderData, useFetcher, useParams } from 'react-router'
-import { type Route } from '../../routes/question.$questionId/+types'
+import { type Route } from '../../routes/question.$questionId/+types/route'
 
 const FavoriteButton = () => {
 	const { questionId } = useParams<Route.ComponentProps['params']>()

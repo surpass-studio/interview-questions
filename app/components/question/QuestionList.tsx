@@ -8,7 +8,7 @@ import {
 	UnstyledButton,
 } from '@mantine/core'
 import { Link, href, useLoaderData } from 'react-router'
-import { type Route } from '../../routes/+types/_index'
+import { type Route } from '../../routes/_index/+types/route'
 import classes from './QuestionList.module.css'
 import serialize from '@/helpers/serialize'
 

@@ -9,7 +9,7 @@ import {
 } from '@mantine/core'
 import { type Ref } from 'react'
 import { isRouteErrorResponse, Link } from 'react-router'
-import { type Route } from '../../routes/+types/_index'
+import { type Route } from '../../routes/_index/+types/route'
 import classes from './AppLayout.module.css'
 
 const glitchEffectRef: Ref<HTMLHeadingElement> = (instance) => {

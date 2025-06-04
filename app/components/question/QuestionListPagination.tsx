@@ -1,6 +1,6 @@
 import { Pagination } from '@mantine/core'
 import { Link, useLoaderData, useSearchParams } from 'react-router'
-import { type Route } from '../../routes/+types/_index'
+import { type Route } from '../../routes/_index/+types/route'
 import serialize from '@/helpers/serialize'
 
 const QuestionListPagination = () => {

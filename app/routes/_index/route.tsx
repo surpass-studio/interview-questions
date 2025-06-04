@@ -33,11 +33,14 @@ export const loader = async ({ request, context }: Route.LoaderArgs) => {
 		query.push(search)
 	}
 
-	const { data, headers } = await context.octokit.search.issuesAndPullRequests({
-		q: query.join(' '),
-		page,
-		per_page: 32,
-	})
+	const { data, headers } = await context.octokit.request(
+		'GET /search/issues',
+		{
+			q: query.join(' '),
+			page,
+			per_page: 32,
+		},
+	)
 
 	let total = 1
 

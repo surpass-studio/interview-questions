@@ -17,7 +17,7 @@ import {
 	NavLink,
 	useParams,
 } from 'react-router'
-import { type Route } from '../../routes/chat/+types'
+import { type Route } from '../../routes/chat/+types/route'
 
 import classes from './ConversationList.module.css'
 

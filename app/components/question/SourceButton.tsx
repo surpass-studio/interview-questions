@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { IconLink } from '@tabler/icons-react'
 import { useParams } from 'react-router'
-import { type Route } from '../../routes/question.$questionId/+types'
+import { type Route } from '../../routes/question.$questionId/+types/route'
 
 const SourceButton = () => {
 	const { questionId } = useParams<Route.ComponentProps['params']>()

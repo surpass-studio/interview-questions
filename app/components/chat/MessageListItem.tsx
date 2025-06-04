@@ -19,8 +19,8 @@ import {
 import { type UIMessage } from 'ai'
 import clsx from 'clsx'
 import { useRef } from 'react'
-import Markdown from 'react-markdown'
 import CopyMessageButton from './CopyMessageButton'
+import MemoizedMarkdown from './MemoizedMarkdown'
 import classes from './MessageListItem.module.css'
 import RegenerateMessageButton from './RegenerateMessageButton'
 
@@ -76,7 +76,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 										className={clsx('flex-1', classes.typography)}
 										c="gray"
 									>
-										<Markdown>{part.reasoning}</Markdown>
+										<MemoizedMarkdown content={part.reasoning} />
 									</TypographyStylesProvider>
 								</Group>
 							</Collapse>
@@ -91,7 +91,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 								ref={typographyRef}
 								className={classes.typography}
 							>
-								<Markdown>{part.text}</Markdown>
+								<MemoizedMarkdown content={part.text} />
 							</TypographyStylesProvider>
 							<Group
 								className="opacity-0 transition-opacity group-hover:opacity-100"

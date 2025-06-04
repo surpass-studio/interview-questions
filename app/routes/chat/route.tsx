@@ -11,7 +11,7 @@ import {
 import { useWindowScroll } from '@mantine/hooks'
 import { eq } from 'drizzle-orm'
 import { href, Outlet, useLocation } from 'react-router'
-import { type Route } from './+types/index'
+import { type Route } from './+types/route'
 import NewConversationButton from '@/components/chat/NewConversationButton'
 import OpenConversationListButton from '@/components/chat/OpenConversationListButton'
 import * as schema from '@/db/schema'

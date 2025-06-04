@@ -1,6 +1,6 @@
 import { type Message, useChat } from '@ai-sdk/react'
 import { useLoaderData, useParams } from 'react-router'
-import { type Route } from '../../routes/chat.$conversationId/+types'
+import { type Route } from '../../routes/chat.$conversationId/+types/route'
 
 const useSharedChat = () => {
 	const { conversationId } = useParams<Route.ComponentProps['params']>()

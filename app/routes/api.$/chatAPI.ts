@@ -57,6 +57,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		})
 
 		return result.toDataStreamResponse({
+			sendReasoning: true,
 			getErrorMessage: (error) => {
 				if (error == null) {
 					return 'unknown error'

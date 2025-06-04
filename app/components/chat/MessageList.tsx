@@ -21,7 +21,7 @@ const MessageList = () => {
 		<Box className="relative flex-1">
 			<ScrollArea.Autosize
 				viewportRef={scrollRef}
-				className="absolute max-h-full w-full"
+				className="absolute max-h-full w-full [&>*]:max-w-full"
 			>
 				<Stack ref={contentRef} component="ul" gap="xl">
 					{messages.map((message) => (

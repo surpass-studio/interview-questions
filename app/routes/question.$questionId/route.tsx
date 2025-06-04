@@ -2,7 +2,7 @@ import { getAuth } from '@clerk/react-router/ssr.server'
 import { Stack, Title, Paper, Affix, Button, Group } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
 import { Link, type MetaDescriptor } from 'react-router'
-import { type Route } from './+types/index'
+import { type Route } from './+types/route'
 import ScrollToTopButton from '@/components/layout/ScrollToTopButton'
 import Article from '@/components/question/Article'
 import FavoriteButton from '@/components/question/FavoriteButton'
@@ -12,7 +12,9 @@ import * as schema from '@/db/schema'
 import serialize from '@/helpers/serialize'
 
 export const meta = ({ data }: Route.MetaArgs) => {
-	return [{ title: data.title }] satisfies MetaDescriptor[]
+	return [
+		{ title: data ? data.title : 'Interview Question' },
+	] satisfies MetaDescriptor[]
 }
 
 export const loader = async (args: Route.LoaderArgs) => {

@@ -2,7 +2,7 @@ import { getAuth } from '@clerk/react-router/ssr.server'
 import { Button, Stack, Title, Text } from '@mantine/core'
 import { eq } from 'drizzle-orm'
 import { Link } from 'react-router'
-import { type Route } from './+types/index'
+import { type Route } from './+types/route'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import { userFavorites } from '@/db/schema'
@@ -59,7 +59,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 			query.push(search)
 		}
 
-		const { data } = await args.context.octokit.search.issuesAndPullRequests({
+		const { data } = await args.context.octokit.request('GET /search/issues', {
 			q: query.join(' '),
 			page: 1,
 			per_page: PAGE_SIZE,

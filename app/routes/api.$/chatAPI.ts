@@ -11,7 +11,7 @@ import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { href } from 'react-router'
 import * as v from 'valibot'
-import { type Bindings } from './'
+import { type Bindings } from './route'
 import inputValidationSchema from '@/components/chat/inputValidationSchema'
 import * as schema from '@/db/schema'
 
@@ -57,6 +57,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		})
 
 		return result.toDataStreamResponse({
+			sendReasoning: true,
 			getErrorMessage: (error) => {
 				if (error == null) {
 					return 'unknown error'

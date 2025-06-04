@@ -1,8 +1,10 @@
 {
+    "name": "interview-questions",
     "compatibility_flags": [
         "nodejs_compat"
     ],
-    "compatibility_date": "2024-12-11",
+    "compatibility_date": "2025-05-25",
+    "main": "workers/app.ts",
     "d1_databases": [
         {
             "binding": "DB",
@@ -10,8 +12,5 @@
             "database_id": "abc7108d-1010-4d7e-a552-80878da00a49",
             "migrations_dir": "drizzle"
         }
-    ],
-    "ai": {
-        "binding": "AI"
-    }
+    ]
 }

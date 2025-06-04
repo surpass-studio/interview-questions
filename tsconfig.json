@@ -1,12 +1,11 @@
 {
 	"extends": ["@epic-web/config/typescript"],
-	"include": ["app", ".react-router/types"],
+	"include": ["**/*", ".react-router/types/**/*"],
 	"compilerOptions": {
-		"types": ["vite/client"],
+		"types": ["node", "vite/client"],
 		"rootDirs": [".", "./.react-router/types"],
 		"paths": {
 			"@/*": ["./app/*"]
 		}
-	},
-	"references": [{ "path": "./tsconfig.node.json" }]
+	}
 }

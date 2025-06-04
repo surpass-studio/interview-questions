@@ -37,7 +37,11 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 		return (
 			<li key={message.id} className="max-w-5/6 self-end">
 				<Paper p="sm" className={classes.userListItemContent}>
-					<Text>{message.content}</Text>
+					{message.parts.map((part) =>
+						part.type === 'text' ? (
+							<Text key={part.type}>{part.text}</Text>
+						) : null,
+					)}
 				</Paper>
 			</li>
 		)
@@ -62,7 +66,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 								}
 								onClick={() => toggle()}
 							>
-								Reasoning
+								Thought process
 							</Button>
 
 							<Collapse in={isOpened}>
@@ -87,7 +91,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 								ref={typographyRef}
 								className={classes.typography}
 							>
-								<Markdown>{message.content}</Markdown>
+								<Markdown>{part.text}</Markdown>
 							</TypographyStylesProvider>
 							<Group
 								className="opacity-0 transition-opacity group-hover:opacity-100"

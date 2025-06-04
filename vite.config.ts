@@ -1,15 +1,16 @@
+import { cloudflare } from '@cloudflare/vite-plugin'
 import { reactRouter } from '@react-router/dev/vite'
-import { cloudflareDevProxy } from '@react-router/dev/vite/cloudflare'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vite'
+import devtoolsJson from 'vite-plugin-devtools-json'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import getLoadContext from './app/getLoadContext'
 
 // https://vitejs.dev/config/
 export default defineConfig({
 	plugins: [
+		devtoolsJson(),
 		tsconfigPaths(),
-		cloudflareDevProxy({ getLoadContext }),
+		cloudflare({ viteEnvironment: { name: 'ssr' } }),
 		reactRouter(),
 		tailwindcss(),
 	],
@@ -20,5 +21,10 @@ export default defineConfig({
 	},
 	server: {
 		open: true,
+	},
+	ssr: {
+		resolve: {
+			conditions: ['workerd', 'worker', 'browser'],
+		},
 	},
 })

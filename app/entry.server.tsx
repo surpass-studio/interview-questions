@@ -20,7 +20,6 @@ const handleRequest = async (
 	const body = await renderToReadableStream(
 		<ServerRouter context={routerContext} url={request.url} />,
 		{
-			signal: request.signal,
 			onError: (error: unknown) => {
 				responseStatusCode = 500
 				// Log streaming rendering errors from inside the shell.  Don't log

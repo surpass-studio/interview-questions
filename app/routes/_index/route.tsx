@@ -1,7 +1,7 @@
 import { Stack } from '@mantine/core'
 import LinkHeader from 'http-link-header'
 import { type MetaFunction } from 'react-router'
-import { type Route } from './+types/_index'
+import { type Route } from './+types/route'
 import QuestionList from '@/components/question/QuestionList'
 import QuestionListPagination from '@/components/question/QuestionListPagination'
 import loadSearchParams from '@/helpers/loadSearchParams'

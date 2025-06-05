@@ -35,7 +35,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
 	if (message.role === 'user') {
 		return (
-			<li key={message.id} className="max-w-5/6 self-end">
+			<li key={message.id} className="max-w-5/6 self-end wrap-break-word">
 				<Paper p="sm" className={classes.userListItemContent}>
 					{message.parts.map((part) =>
 						part.type === 'text' ? (
@@ -48,7 +48,7 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 	}
 
 	return (
-		<Stack component="li" className="group">
+		<Stack component="li" className="group wrap-break-word">
 			{message.parts.map((part) => {
 				if (part.type === 'reasoning') {
 					return (
@@ -69,11 +69,11 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 								Thought process
 							</Button>
 
-							<Collapse in={isOpened}>
+							<Collapse className="max-w-full" in={isOpened}>
 								<Group key={part.type}>
 									<Divider orientation="vertical" />
 									<TypographyStylesProvider
-										className={clsx('flex-1', classes.typography)}
+										className={clsx('min-w-0 flex-1', classes.typography)}
 										c="gray"
 									>
 										<MemoizedMarkdown content={part.reasoning} />

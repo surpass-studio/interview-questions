@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build",
-    "start": "react-router-serve ./build/server/index.js",
+    "preview": "pnpm run build && vite preview",
     "generate": "drizzle-kit generate",
     "apply": "wrangler d1 migrations apply DB --local",
     "migrate": "drizzle-kit migrate",

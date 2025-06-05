@@ -22,6 +22,7 @@ const MessageList = () => {
 			<ScrollArea.Autosize
 				viewportRef={scrollRef}
 				className="absolute max-h-full w-full [&>*]:max-w-full"
+				offsetScrollbars
 			>
 				<Stack ref={contentRef} component="ul" gap="xl">
 					{messages.map((message) => (

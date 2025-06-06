@@ -35,20 +35,25 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
 	if (message.role === 'user') {
 		return (
-			<li key={message.id} className="max-w-5/6 self-end wrap-break-word">
-				<Paper p="sm" className={classes.userListItemContent}>
-					{message.parts.map((part) =>
-						part.type === 'text' ? (
-							<Text key={part.type}>{part.text}</Text>
-						) : null,
-					)}
-				</Paper>
-			</li>
+			<Paper
+				key={message.id}
+				className={clsx(
+					'max-w-5/6 self-end wrap-break-word',
+					classes.userListItemContent,
+				)}
+				p="sm"
+			>
+				{message.parts.map((part) =>
+					part.type === 'text' ? (
+						<Text key={part.type}>{part.text}</Text>
+					) : null,
+				)}
+			</Paper>
 		)
 	}
 
 	return (
-		<Stack component="li" className="group wrap-break-word">
+		<Stack className="group wrap-break-word">
 			{message.parts.map((part) => {
 				if (part.type === 'reasoning') {
 					return (

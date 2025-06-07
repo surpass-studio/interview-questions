@@ -1,4 +1,4 @@
-import { Flex, Group, Textarea } from '@mantine/core'
+import { Container, Flex, Group, Textarea } from '@mantine/core'
 import { useEffect, useRef } from 'react'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
@@ -38,43 +38,45 @@ const ConversationForm = () => {
 	}, [messages, status, reload])
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Textarea
-				autosize
-				minRows={1}
-				rows={1}
-				maxRows={10}
-				size="md"
-				placeholder="Type a message..."
-				classNames={{ wrapper: 'flex-1', input: classes.textarea }}
-				value={input}
-				onChange={handleInputChange}
-				onKeyDown={(event) => {
-					const canSendMessage =
-						(status === 'ready' || status === 'error') &&
-						event.key === 'Enter' &&
-						!event.shiftKey &&
-						!event.nativeEvent.isComposing &&
-						isInputValid
+		<Container className="w-full">
+			<form onSubmit={handleSubmit}>
+				<Textarea
+					autosize
+					minRows={1}
+					rows={1}
+					maxRows={10}
+					size="md"
+					placeholder="Type a message..."
+					classNames={{ wrapper: 'flex-1', input: classes.textarea }}
+					value={input}
+					onChange={handleInputChange}
+					onKeyDown={(event) => {
+						const canSendMessage =
+							(status === 'ready' || status === 'error') &&
+							event.key === 'Enter' &&
+							!event.shiftKey &&
+							!event.nativeEvent.isComposing &&
+							isInputValid
 
-					if (canSendMessage) {
-						handleSubmit(event)
-					}
-				}}
-				inputContainer={(children) => (
-					<Flex className={classes.textareaContainer}>
-						{children}
-						<Group className={classes.submitButtonContainer}>
-							<SendMessageButton
-								isLoading={status === 'submitted' || status === 'streaming'}
-								isInputValid={isInputValid}
-								stop={stop}
-							/>
-						</Group>
-					</Flex>
-				)}
-			/>
-		</form>
+						if (canSendMessage) {
+							handleSubmit(event)
+						}
+					}}
+					inputContainer={(children) => (
+						<Flex className={classes.textareaContainer}>
+							{children}
+							<Group className={classes.submitButtonContainer}>
+								<SendMessageButton
+									isLoading={status === 'submitted' || status === 'streaming'}
+									isInputValid={isInputValid}
+									stop={stop}
+								/>
+							</Group>
+						</Flex>
+					)}
+				/>
+			</form>
+		</Container>
 	)
 }
 

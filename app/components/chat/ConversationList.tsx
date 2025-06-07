@@ -65,7 +65,6 @@ const ConversationList = () => {
 						to={href('/chat/:conversationId', {
 							conversationId: conversation.id,
 						})}
-						color="blue"
 						title={conversation.title}
 						label={conversation.title}
 					/>

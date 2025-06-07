@@ -1,4 +1,4 @@
-import { Box, ScrollArea, Stack } from '@mantine/core'
+import { Box, Container, ScrollArea, Stack } from '@mantine/core'
 import { useMemo } from 'react'
 import { useStickToBottom } from 'use-stick-to-bottom'
 import MessageListItem from './MessageListItem'
@@ -31,24 +31,25 @@ const MessageList = () => {
 				viewportRef={scrollRef}
 				className="absolute max-h-full w-full [&>*]:max-w-full"
 			>
-				<Stack ref={contentRef} gap="xl">
-					{chunkedMessages.map((messages, index) => (
-						<Stack key={index} className="last:min-h-[100cqh]" gap="xl">
-							{messages.map((message) => (
-								<MessageListItem key={message.id} message={message} />
-							))}
-
-							{index === chunkedMessages.length - 1 && (
-								<>
-									{isPending && <MessageListItem.Pending />}
-									{error && <MessageListItem.Error error={error} />}
-								</>
-							)}
-						</Stack>
-					))}
-				</Stack>
+				<Container ref={contentRef}>
+					<Stack gap="xl">
+						{chunkedMessages.map((messages, index) => (
+							<Stack key={index} className="last:min-h-[100cqh]" gap="xl">
+								{messages.map((message) => (
+									<MessageListItem key={message.id} message={message} />
+								))}
+								{index === chunkedMessages.length - 1 && (
+									<>
+										{isPending && <MessageListItem.Pending />}
+										{error && <MessageListItem.Error error={error} />}
+									</>
+								)}
+							</Stack>
+						))}
+					</Stack>
+				</Container>
 			</ScrollArea.Autosize>
-			<Box className="absolute bottom-6">
+			<Box className="absolute bottom-6 left-1/2 -translate-x-1/2">
 				<ScrollToBottomButton
 					isAtBottom={isAtBottom}
 					scrollToBottom={scrollToBottom}

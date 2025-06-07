@@ -13,7 +13,6 @@ import {
 	Box,
 	Stack,
 	Text,
-	Container,
 } from '@mantine/core'
 import {
 	type Icon,
@@ -135,9 +134,9 @@ const AppLayout = () => {
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main className={classes.main}>
-					<Container className="w-full" size="md" py="lg">
+					<Box className="w-full" py="lg">
 						<Outlet />
-					</Container>
+					</Box>
 				</AppShell.Main>
 			</AppShell>
 		</>

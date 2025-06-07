@@ -42,19 +42,19 @@ const AppLayout = () => {
 	const links: NavLinkItem[] = [
 		{
 			to: href('/'),
-			label: 'Home',
+			label: '主页',
 			icon: IconHome,
 			iconFilled: IconHomeFilled,
 		},
 		{
 			to: href('/favorites'),
-			label: 'Favorites',
+			label: '收藏',
 			icon: IconHeart,
 			iconFilled: IconHeartFilled,
 		},
 		{
 			to: href('/chat'),
-			label: 'Chat',
+			label: '对话',
 			icon: IconMessageChatbot,
 			iconFilled: IconMessageChatbotFilled,
 		},

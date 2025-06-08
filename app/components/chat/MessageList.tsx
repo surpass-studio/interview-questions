@@ -1,7 +1,7 @@
 import { Box, Container, ScrollArea, Stack } from '@mantine/core'
 import { useMemo } from 'react'
 import { useStickToBottom } from 'use-stick-to-bottom'
-import MessageListItem from './MessageListItem'
+import MessageListItem from './MessageListItem/MessageListItem'
 import ScrollToBottomButton from './ScrollToBottomButton'
 import useSharedChat from './useSharedChat'
 

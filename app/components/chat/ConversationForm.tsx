@@ -1,5 +1,5 @@
 import { Container, Flex, Group, Textarea } from '@mantine/core'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import * as v from 'valibot'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
@@ -19,20 +19,15 @@ const ConversationForm = () => {
 
 	const isInputValid = v.is(inputValidationSchema, input)
 
-	const isInitialized = useRef(false)
-
 	useEffect(() => {
-		const firstMessage = messages[0]
+		const lastMessage = messages[messages.length - 1]
 
 		if (
 			status === 'ready' &&
-			messages.length === 1 &&
-			firstMessage &&
-			firstMessage.role === 'user' &&
-			!isInitialized.current
+			messages.length > 0 &&
+			lastMessage &&
+			lastMessage.role === 'user'
 		) {
-			isInitialized.current = true
-
 			void reload()
 		}
 	}, [messages, status, reload])

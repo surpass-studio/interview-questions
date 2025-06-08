@@ -8,9 +8,9 @@ interface RegenerateMessageButtonProps {
 }
 
 const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
-	const { messages, setMessages, reload } = useSharedChat()
+	const { messages, setMessages } = useSharedChat()
 
-	const regenerate = async () => {
+	const regenerate = () => {
 		const messageIndex = messages.findIndex(
 			(_message) => _message.id === message.id,
 		)
@@ -19,9 +19,7 @@ const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
 			return
 		}
 
-		setMessages(messages.slice(0, messageIndex))
-
-		await reload()
+		setMessages((messages) => messages.slice(0, messageIndex))
 	}
 
 	return (

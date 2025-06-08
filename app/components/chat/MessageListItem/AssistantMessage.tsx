@@ -11,7 +11,7 @@ interface AssistantMessageProps {
 
 const AssistantMessage = ({ message }: AssistantMessageProps) => {
 	return (
-		<Stack className="group wrap-break-word">
+		<Stack className="wrap-break-word">
 			{message.parts.map((part) => {
 				if (part.type === 'reasoning') {
 					return <MessageReasoning key={part.type} reasoning={part.reasoning} />
@@ -21,10 +21,7 @@ const AssistantMessage = ({ message }: AssistantMessageProps) => {
 					return (
 						<Stack key={part.type} gap="xs">
 							<MessageText text={part.text} />
-							<Group
-								className="opacity-0 transition-opacity group-hover:opacity-100"
-								gap="xs"
-							>
+							<Group gap="xs">
 								<CopyMessageButton text={part.text} />
 								<RegenerateMessageButton message={message} />
 							</Group>

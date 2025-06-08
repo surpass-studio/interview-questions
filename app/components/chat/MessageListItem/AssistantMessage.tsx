@@ -1,9 +1,9 @@
 import { Group, Stack } from '@mantine/core'
 import { type UIMessage } from 'ai'
-import CopyMessageButton from '../CopyMessageButton'
-import RegenerateMessageButton from '../RegenerateMessageButton'
+import CopyMessageButton from './CopyMessageButton'
 import MessageReasoning from './MessageReasoning'
 import MessageText from './MessageText'
+import RegenerateMessageButton from './RegenerateMessageButton'
 
 interface AssistantMessageProps {
 	message: UIMessage

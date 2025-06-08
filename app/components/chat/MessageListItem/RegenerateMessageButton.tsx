@@ -1,7 +1,7 @@
 import { Tooltip, ActionIcon } from '@mantine/core'
 import { IconRefresh } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
-import useSharedChat from './useSharedChat'
+import useSharedChat from '../useSharedChat'
 
 interface RegenerateMessageButtonProps {
 	message: UIMessage

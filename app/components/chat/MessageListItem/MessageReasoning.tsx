@@ -9,7 +9,7 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
 import clsx from 'clsx'
-import MemoizedMarkdown from '../MemoizedMarkdown'
+import MemoizedMarkdown from './MemoizedMarkdown'
 import classes from './MessageListItem.module.css'
 
 interface MessageReasoningProps {

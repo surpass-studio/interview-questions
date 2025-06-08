@@ -1,19 +1,15 @@
-import { Group, Stack, TypographyStylesProvider } from '@mantine/core'
+import { Group, Stack } from '@mantine/core'
 import { type UIMessage } from 'ai'
-import { useRef } from 'react'
 import CopyMessageButton from '../CopyMessageButton'
-import MemoizedMarkdown from '../MemoizedMarkdown'
 import RegenerateMessageButton from '../RegenerateMessageButton'
-import classes from './MessageListItem.module.css'
 import MessageReasoning from './MessageReasoning'
+import MessageText from './MessageText'
 
 interface AssistantMessageProps {
 	message: UIMessage
 }
 
 const AssistantMessage = ({ message }: AssistantMessageProps) => {
-	const typographyRef = useRef<HTMLDivElement>(null)
-
 	return (
 		<Stack className="group wrap-break-word">
 			{message.parts.map((part) => {
@@ -24,17 +20,12 @@ const AssistantMessage = ({ message }: AssistantMessageProps) => {
 				if (part.type === 'text') {
 					return (
 						<Stack key={part.type} gap="xs">
-							<TypographyStylesProvider
-								ref={typographyRef}
-								className={classes.typography}
-							>
-								<MemoizedMarkdown content={part.text} />
-							</TypographyStylesProvider>
+							<MessageText text={part.text} />
 							<Group
 								className="opacity-0 transition-opacity group-hover:opacity-100"
 								gap="xs"
 							>
-								<CopyMessageButton typographyRef={typographyRef} />
+								<CopyMessageButton text={part.text} />
 								<RegenerateMessageButton message={message} />
 							</Group>
 						</Stack>

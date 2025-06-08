@@ -3,20 +3,24 @@ import { notifications } from '@mantine/notifications'
 import { IconCheck, IconMoodSad, IconCopy } from '@tabler/icons-react'
 
 interface CopyMessageButtonProps {
-	typographyRef: React.RefObject<HTMLDivElement | null>
+	text: string
 }
 
-const CopyMessageButton = ({ typographyRef }: CopyMessageButtonProps) => {
+const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 	const copy = async () => {
 		try {
-			const typography = typographyRef.current as HTMLElement
+			const { marked } = await import('marked')
+
+			const html = await marked(text)
+
+			const plainText = html.replace(/<[^>]*>/g, '')
 
 			await navigator.clipboard.write([
 				new ClipboardItem({
-					'text/plain': new Blob([typography.textContent as string], {
+					'text/plain': new Blob([plainText], {
 						type: 'text/plain',
 					}),
-					'text/html': new Blob([typography.innerHTML], {
+					'text/html': new Blob([html], {
 						type: 'text/html',
 					}),
 				}),

@@ -1,8 +1,11 @@
+import { Chat } from '@ai-sdk/react'
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { Stack } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
+import { useMemo } from 'react'
 import { data, href, redirect } from 'react-router'
 import { type Route } from './+types/route'
+import ChatContext from '@/components/chat/ChatContext'
 import ConversationForm from '@/components/chat/ConversationForm'
 import MessageList from '@/components/chat/MessageList'
 import * as schema from '@/db/schema'
@@ -31,12 +34,23 @@ export const loader = async (args: Route.LoaderArgs) => {
 	return redirect(href('/chat'))
 }
 
-const ChatPage = () => {
+const ChatPage = ({ params, loaderData }: Route.ComponentProps) => {
+	const chat = useMemo(
+		() =>
+			new Chat<unknown>({
+				id: params.conversationId,
+				messages: loaderData.conversation.messages,
+			}),
+		[loaderData.conversation.messages, params.conversationId],
+	)
+
 	return (
-		<Stack className="h-full">
-			<MessageList />
-			<ConversationForm />
-		</Stack>
+		<ChatContext value={chat}>
+			<Stack key={chat.id} className="h-full">
+				<MessageList />
+				<ConversationForm />
+			</Stack>
+		</ChatContext>
 	)
 }
 

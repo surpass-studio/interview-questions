@@ -1,13 +1,23 @@
 import { marked } from 'marked'
 import { memo, useMemo } from 'react'
 import Markdown from 'react-markdown'
+import rehypeExternalLinks, { type Options } from 'rehype-external-links'
 
 interface MemoizedMarkdownProps {
 	content: string
 }
 
 const MemoizedMarkdownBlock = memo(({ content }: MemoizedMarkdownProps) => (
-	<Markdown>{content}</Markdown>
+	<Markdown
+		rehypePlugins={[
+			[
+				rehypeExternalLinks,
+				{ target: '_blank', rel: 'noopener noreferrer' } satisfies Options,
+			],
+		]}
+	>
+		{content}
+	</Markdown>
 ))
 
 const MemoizedMarkdown = memo(({ content }: MemoizedMarkdownProps) => {

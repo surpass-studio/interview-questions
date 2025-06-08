@@ -1,8 +1,8 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
 import { sValidator } from '@hono/standard-validator'
 import {
-	type Message,
-	appendResponseMessages,
+	type UIMessage,
+	convertToModelMessages,
 	generateId,
 	smoothStream,
 	streamText,
@@ -10,14 +10,14 @@ import {
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { href } from 'react-router'
-import * as v from 'valibot'
+import { z } from 'zod/v4'
 import { type Bindings } from './route'
-import inputValidationSchema from '@/components/chat/inputValidationSchema'
+import chatSchema from '@/components/chat/chatSchema'
 import * as schema from '@/db/schema'
 
 interface ChatAPIRequestBody {
 	id: string
-	messages: Message[]
+	messages: UIMessage[]
 }
 
 const chatAPI = new Hono<{ Bindings: Bindings }>()
@@ -32,20 +32,20 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 
 		const result = streamText({
 			model,
-			messages,
+			messages: convertToModelMessages(messages),
 			experimental_transform: smoothStream({
 				chunking: /[\u4E00-\u9FFF]|\S+\s+/,
 			}),
-			onFinish: async ({ response }) => {
-				const finalMessages = appendResponseMessages({
-					messages,
-					responseMessages: response.messages,
-				})
+		})
 
+		return result.toUIMessageStreamResponse({
+			sendReasoning: true,
+			originalMessages: messages,
+			onFinish: async ({ messages }) => {
 				await c.env.db
 					.update(schema.chatConversations)
 					.set({
-						messages: finalMessages,
+						messages,
 					})
 					.where(
 						and(
@@ -54,11 +54,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 						),
 					)
 			},
-		})
-
-		return result.toDataStreamResponse({
-			sendReasoning: true,
-			getErrorMessage: (error) => {
+			onError: (error) => {
 				if (error == null) {
 					return 'unknown error'
 				}
@@ -77,7 +73,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 	})
 	.post(
 		'/create',
-		sValidator('form', v.object({ content: inputValidationSchema })),
+		sValidator('form', z.object({ content: chatSchema.input })),
 		async (c) => {
 			const { content } = c.req.valid('form')
 
@@ -92,8 +88,12 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 						{
 							id: generateId(),
 							role: 'user',
-							content,
-							createdAt: new Date(),
+							parts: [
+								{
+									type: 'text',
+									text: content,
+								},
+							],
 						},
 					],
 				})
@@ -111,14 +111,14 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		'/:conversationId',
 		sValidator(
 			'param',
-			v.object({
-				conversationId: v.pipe(v.string(), v.trim(), v.minLength(1)),
+			z.object({
+				conversationId: z.string().trim().nonempty(),
 			}),
 		),
 		sValidator(
 			'form',
-			v.object({
-				redirect: v.union([v.literal('true'), v.literal('false')]),
+			z.object({
+				redirect: z.union([z.literal('true'), z.literal('false')]),
 			}),
 		),
 		async (c) => {

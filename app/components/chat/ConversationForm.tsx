@@ -1,80 +1,83 @@
-import { Flex, Group, Textarea } from '@mantine/core'
-import { useEffect, useRef } from 'react'
-import * as v from 'valibot'
+import { useChat } from '@ai-sdk/react'
+import { Container, Flex, Group, Textarea } from '@mantine/core'
+import { useInputState } from '@mantine/hooks'
+import { type FormEventHandler, use, useEffect } from 'react'
+import ChatContext from './ChatContext'
+import chatSchema from './chatSchema'
 import classes from './ConversationForm.module.css'
-import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
-import useSharedChat from './useSharedChat'
 
 const ConversationForm = () => {
-	const {
-		input,
-		status,
-		messages,
-		stop,
-		reload,
-		handleInputChange,
-		handleSubmit,
-	} = useSharedChat()
+	const chat = use(ChatContext)
 
-	const isInputValid = v.is(inputValidationSchema, input)
+	const { status, sendMessage, stop } = useChat({
+		chat,
+	})
 
-	const isInitialized = useRef(false)
+	const [input, handleInputChange] = useInputState('')
+
+	const isInputValid = chatSchema.input.safeParse(input).success
+
+	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+		event.preventDefault()
+
+		handleInputChange('')
+
+		await sendMessage({ text: input })
+	}
 
 	useEffect(() => {
-		const firstMessage = messages[0]
-
 		if (
-			status === 'ready' &&
-			messages.length === 1 &&
-			firstMessage &&
-			firstMessage.role === 'user' &&
-			!isInitialized.current
+			chat.status === 'ready' &&
+			chat.lastMessage &&
+			chat.lastMessage.role === 'user'
 		) {
-			isInitialized.current = true
-
-			void reload()
+			void chat.reload()
 		}
-	}, [messages, status, reload])
+	}, [chat])
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<Textarea
-				autosize
-				minRows={1}
-				rows={1}
-				maxRows={10}
-				size="md"
-				placeholder="Type a message..."
-				classNames={{ wrapper: 'flex-1', input: classes.textarea }}
-				value={input}
-				onChange={handleInputChange}
-				onKeyDown={(event) => {
-					const canSendMessage =
-						(status === 'ready' || status === 'error') &&
-						event.key === 'Enter' &&
-						!event.shiftKey &&
-						!event.nativeEvent.isComposing &&
-						isInputValid
+		<Container className="w-full">
+			<form onSubmit={handleSubmit}>
+				<Textarea
+					autosize
+					minRows={1}
+					rows={1}
+					maxRows={10}
+					size="md"
+					placeholder="Type a message..."
+					classNames={{ wrapper: 'flex-1', input: classes.textarea }}
+					value={input}
+					onChange={handleInputChange}
+					onKeyDown={(event) => {
+						const canSendMessage =
+							(status === 'ready' || status === 'error') &&
+							event.key === 'Enter' &&
+							!event.shiftKey &&
+							!event.nativeEvent.isComposing &&
+							isInputValid
 
-					if (canSendMessage) {
-						handleSubmit(event)
-					}
-				}}
-				inputContainer={(children) => (
-					<Flex className={classes.textareaContainer}>
-						{children}
-						<Group className={classes.submitButtonContainer}>
-							<SendMessageButton
-								isLoading={status === 'submitted' || status === 'streaming'}
-								isInputValid={isInputValid}
-								stop={stop}
-							/>
-						</Group>
-					</Flex>
-				)}
-			/>
-		</form>
+						if (canSendMessage) {
+							const form = event.currentTarget.form as HTMLFormElement
+
+							form.requestSubmit()
+						}
+					}}
+					inputContainer={(children) => (
+						<Flex className={classes.textareaContainer}>
+							{children}
+							<Group className={classes.submitButtonContainer}>
+								<SendMessageButton
+									isLoading={status === 'submitted' || status === 'streaming'}
+									isInputValid={isInputValid}
+									stop={stop}
+								/>
+							</Group>
+						</Flex>
+					)}
+				/>
+			</form>
+		</Container>
 	)
 }
 

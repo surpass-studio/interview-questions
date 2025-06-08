@@ -13,7 +13,6 @@ import {
 	Box,
 	Stack,
 	Text,
-	Container,
 } from '@mantine/core'
 import {
 	type Icon,
@@ -43,19 +42,19 @@ const AppLayout = () => {
 	const links: NavLinkItem[] = [
 		{
 			to: href('/'),
-			label: 'Home',
+			label: '主页',
 			icon: IconHome,
 			iconFilled: IconHomeFilled,
 		},
 		{
 			to: href('/favorites'),
-			label: 'Favorites',
+			label: '收藏',
 			icon: IconHeart,
 			iconFilled: IconHeartFilled,
 		},
 		{
 			to: href('/chat'),
-			label: 'Chat',
+			label: '对话',
 			icon: IconMessageChatbot,
 			iconFilled: IconMessageChatbotFilled,
 		},
@@ -135,9 +134,9 @@ const AppLayout = () => {
 					</AppShell.Section>
 				</AppShell.Navbar>
 				<AppShell.Main className={classes.main}>
-					<Container className="w-full" size="md" py="lg">
+					<Box className="w-full" py="lg">
 						<Outlet />
-					</Container>
+					</Box>
 				</AppShell.Main>
 			</AppShell>
 		</>

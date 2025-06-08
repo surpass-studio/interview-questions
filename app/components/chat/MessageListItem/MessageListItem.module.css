@@ -6,5 +6,5 @@
 }
 
 .typography :where(ol, ul, menu) {
-	list-style: auto;
+	list-style: revert;
 }

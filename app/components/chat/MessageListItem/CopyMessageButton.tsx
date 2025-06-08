@@ -11,9 +11,11 @@ const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 		try {
 			const { marked } = await import('marked')
 
+			const { htmlToText } = await import('html-to-text')
+
 			const html = await marked(text)
 
-			const plainText = html.replace(/<[^>]*>/g, '')
+			const plainText = htmlToText(html)
 
 			await navigator.clipboard.write([
 				new ClipboardItem({

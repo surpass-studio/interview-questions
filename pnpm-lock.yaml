@@ -98,9 +98,6 @@ importers:
       use-stick-to-bottom:
         specifier: ^1.1.1
         version: 1.1.1(react@19.1.0)
-      valibot:
-        specifier: 1.1.0
-        version: 1.1.0(typescript@5.8.3)
       zod:
         specifier: ^3.25.56
         version: 3.25.56
@@ -4057,14 +4054,6 @@ packages:
 
   valibot@0.41.0:
     resolution: {integrity: sha512-igDBb8CTYr8YTQlOKgaN9nSS0Be7z+WRuaeYqGf3Cjz3aKmSnqEmYnkfVjzIuumGqfHpa3fLIvMEAfhrpqN8ng==}
-    peerDependencies:
-      typescript: '>=5'
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-
-  valibot@1.1.0:
-    resolution: {integrity: sha512-Nk8lX30Qhu+9txPYTwM0cFlWLdPFsFr6LblzqIySfbZph9+BFsAHsNvHOymEviUepeIW6KFHzpX8TKhbptBXXw==}
     peerDependencies:
       typescript: '>=5'
     peerDependenciesMeta:
@@ -8290,10 +8279,6 @@ snapshots:
   uuid@11.1.0: {}
 
   valibot@0.41.0(typescript@5.8.3):
-    optionalDependencies:
-      typescript: 5.8.3
-
-  valibot@1.1.0(typescript@5.8.3):
     optionalDependencies:
       typescript: 5.8.3
 

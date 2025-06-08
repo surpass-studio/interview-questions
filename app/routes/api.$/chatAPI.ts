@@ -10,7 +10,7 @@ import {
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
 import { href } from 'react-router'
-import * as v from 'valibot'
+import { z } from 'zod/v4'
 import { type Bindings } from './route'
 import chatSchema from '@/components/chat/chatSchema'
 import * as schema from '@/db/schema'
@@ -73,7 +73,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 	})
 	.post(
 		'/create',
-		sValidator('form', v.object({ content: chatSchema.input })),
+		sValidator('form', z.object({ content: chatSchema.input })),
 		async (c) => {
 			const { content } = c.req.valid('form')
 
@@ -111,14 +111,14 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		'/:conversationId',
 		sValidator(
 			'param',
-			v.object({
-				conversationId: v.pipe(v.string(), v.trim(), v.minLength(1)),
+			z.object({
+				conversationId: z.string().trim().nonempty(),
 			}),
 		),
 		sValidator(
 			'form',
-			v.object({
-				redirect: v.union([v.literal('true'), v.literal('false')]),
+			z.object({
+				redirect: z.union([z.literal('true'), z.literal('false')]),
 			}),
 		),
 		async (c) => {

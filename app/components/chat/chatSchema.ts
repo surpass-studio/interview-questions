@@ -1,7 +1,7 @@
-import * as v from 'valibot'
+import { z } from 'zod/v4'
 
 const chatSchema = {
-	input: v.pipe(v.string(), v.trim(), v.minLength(1)),
+	input: z.string().trim().nonempty(),
 }
 
 export default chatSchema

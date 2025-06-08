@@ -11,7 +11,6 @@ import { useInputState } from '@mantine/hooks'
 import { IconArrowBackUp, IconArrowUp } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import { use, type FormEventHandler } from 'react'
-import * as v from 'valibot'
 import ChatContext from '../ChatContext'
 import chatSchema from '../chatSchema'
 
@@ -26,7 +25,7 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 
 	const [input, handleInputChange] = useInputState(text)
 
-	const isInputValid = v.is(chatSchema.input, input)
+	const isInputValid = chatSchema.input.safeParse(input).success
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
 		event.preventDefault()

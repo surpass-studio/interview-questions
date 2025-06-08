@@ -1,7 +1,7 @@
 import { sValidator } from '@hono/standard-validator'
 import { and, eq } from 'drizzle-orm'
 import { Hono } from 'hono'
-import * as v from 'valibot'
+import { z } from 'zod/v4'
 import { type Bindings } from './route'
 
 import { userFavorites } from '@/db/schema'
@@ -11,13 +11,8 @@ const favoritesAPI = new Hono<{ Bindings: Bindings }>()
 		'/',
 		sValidator(
 			'form',
-			v.object({
-				questionId: v.pipe(
-					v.string(),
-					v.digits(),
-					v.transform(Number),
-					v.number(),
-				),
+			z.object({
+				questionId: z.coerce.number().int().positive(),
 			}),
 		),
 		async (c) => {
@@ -37,13 +32,8 @@ const favoritesAPI = new Hono<{ Bindings: Bindings }>()
 		'/:questionId',
 		sValidator(
 			'param',
-			v.object({
-				questionId: v.pipe(
-					v.string(),
-					v.digits(),
-					v.transform(Number),
-					v.number(),
-				),
+			z.object({
+				questionId: z.coerce.number().int().positive(),
 			}),
 		),
 		async (c) => {
@@ -51,7 +41,7 @@ const favoritesAPI = new Hono<{ Bindings: Bindings }>()
 
 			const { questionId } = c.req.valid('param')
 
-			await await c.env.db
+			await c.env.db
 				.delete(userFavorites)
 				.where(
 					and(

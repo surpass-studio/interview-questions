@@ -2,7 +2,6 @@ import { useChat } from '@ai-sdk/react'
 import { Container, Flex, Group, Textarea } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { type FormEventHandler, use, useEffect } from 'react'
-import * as v from 'valibot'
 import ChatContext from './ChatContext'
 import chatSchema from './chatSchema'
 import classes from './ConversationForm.module.css'
@@ -17,7 +16,7 @@ const ConversationForm = () => {
 
 	const [input, handleInputChange] = useInputState('')
 
-	const isInputValid = v.is(chatSchema.input, input)
+	const isInputValid = chatSchema.input.safeParse(input).success
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault()

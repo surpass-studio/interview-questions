@@ -1,36 +1,41 @@
+import { useChat } from '@ai-sdk/react'
 import { Container, Flex, Group, Textarea } from '@mantine/core'
-import { useEffect } from 'react'
+import { useInputState } from '@mantine/hooks'
+import { type FormEventHandler, use, useEffect } from 'react'
 import * as v from 'valibot'
+import ChatContext from './ChatContext'
 import classes from './ConversationForm.module.css'
 import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
-import useSharedChat from './useSharedChat'
 
 const ConversationForm = () => {
-	const {
-		input,
-		status,
-		messages,
-		stop,
-		reload,
-		handleInputChange,
-		handleSubmit,
-	} = useSharedChat()
+	const chat = use(ChatContext)
+
+	const { status, sendMessage, stop } = useChat({
+		chat,
+	})
+
+	const [input, handleInputChange] = useInputState('')
 
 	const isInputValid = v.is(inputValidationSchema, input)
 
-	useEffect(() => {
-		const lastMessage = messages[messages.length - 1]
+	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+		event.preventDefault()
 
+		handleInputChange('')
+
+		await sendMessage({ text: input })
+	}
+
+	useEffect(() => {
 		if (
-			status === 'ready' &&
-			messages.length > 0 &&
-			lastMessage &&
-			lastMessage.role === 'user'
+			chat.status === 'ready' &&
+			chat.lastMessage &&
+			chat.lastMessage.role === 'user'
 		) {
-			void reload()
+			void chat.reload()
 		}
-	}, [messages, status, reload])
+	}, [chat])
 
 	return (
 		<Container className="w-full">
@@ -54,7 +59,9 @@ const ConversationForm = () => {
 							isInputValid
 
 						if (canSendMessage) {
-							handleSubmit(event)
+							const form = event.currentTarget.form as HTMLFormElement
+
+							form.requestSubmit()
 						}
 					}}
 					inputContainer={(children) => (

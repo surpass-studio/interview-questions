@@ -14,7 +14,7 @@ const AssistantMessage = ({ message }: AssistantMessageProps) => {
 		<Stack className="wrap-break-word">
 			{message.parts.map((part) => {
 				if (part.type === 'reasoning') {
-					return <MessageReasoning key={part.type} reasoning={part.reasoning} />
+					return <MessageReasoning key={part.type} reasoning={part.text} />
 				}
 
 				if (part.type === 'text') {

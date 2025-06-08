@@ -1,3 +1,4 @@
+import { useChat } from '@ai-sdk/react'
 import {
 	ActionIcon,
 	Box,
@@ -9,10 +10,10 @@ import {
 import { useInputState } from '@mantine/hooks'
 import { IconArrowBackUp, IconArrowUp } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
-import { useActionState } from 'react'
+import { use, type FormEventHandler } from 'react'
 import * as v from 'valibot'
+import ChatContext from '../ChatContext'
 import inputValidationSchema from '../inputValidationSchema'
-import useSharedChat from '../useSharedChat'
 
 interface EditMessageFormProps {
 	text: string
@@ -21,13 +22,17 @@ interface EditMessageFormProps {
 }
 
 const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
-	const { messages, setMessages } = useSharedChat()
+	const { messages, reload, setMessages } = useChat({ chat: use(ChatContext) })
 
 	const [input, handleInputChange] = useInputState(text)
 
 	const isInputValid = v.is(inputValidationSchema, input)
 
-	const [, formAction] = useActionState<null, FormData>((_state, formData) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+		event.preventDefault()
+
+		const formData = new FormData(event.currentTarget)
+
 		const content = formData.get('content') as string
 
 		const messageIndex = messages.findIndex(
@@ -42,7 +47,6 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 			messages.slice(0, messageIndex).concat([
 				{
 					...message,
-					content,
 					parts: [
 						{
 							type: 'text',
@@ -55,11 +59,11 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 
 		onCancel()
 
-		return null
-	}, null)
+		void reload()
+	}
 
 	return (
-		<Box component="form" pt="1px" action={formAction}>
+		<Box component="form" pt="1px" onSubmit={handleSubmit}>
 			<FocusTrap>
 				<Textarea
 					name="content"

@@ -1,8 +1,8 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
 import { sValidator } from '@hono/standard-validator'
 import {
-	type Message,
-	appendResponseMessages,
+	type UIMessage,
+	convertToModelMessages,
 	generateId,
 	smoothStream,
 	streamText,
@@ -17,7 +17,7 @@ import * as schema from '@/db/schema'
 
 interface ChatAPIRequestBody {
 	id: string
-	messages: Message[]
+	messages: UIMessage[]
 }
 
 const chatAPI = new Hono<{ Bindings: Bindings }>()
@@ -32,20 +32,20 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 
 		const result = streamText({
 			model,
-			messages,
+			messages: convertToModelMessages(messages),
 			experimental_transform: smoothStream({
 				chunking: /[\u4E00-\u9FFF]|\S+\s+/,
 			}),
-			onFinish: async ({ response }) => {
-				const finalMessages = appendResponseMessages({
-					messages,
-					responseMessages: response.messages,
-				})
+		})
 
+		return result.toUIMessageStreamResponse({
+			sendReasoning: true,
+			originalMessages: messages,
+			onFinish: async ({ messages }) => {
 				await c.env.db
 					.update(schema.chatConversations)
 					.set({
-						messages: finalMessages,
+						messages,
 					})
 					.where(
 						and(
@@ -54,11 +54,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 						),
 					)
 			},
-		})
-
-		return result.toDataStreamResponse({
-			sendReasoning: true,
-			getErrorMessage: (error) => {
+			onError: (error) => {
 				if (error == null) {
 					return 'unknown error'
 				}
@@ -92,8 +88,12 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 						{
 							id: generateId(),
 							role: 'user',
-							content,
-							createdAt: new Date(),
+							parts: [
+								{
+									type: 'text',
+									text: content,
+								},
+							],
 						},
 					],
 				})

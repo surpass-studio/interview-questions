@@ -1,16 +1,18 @@
+import { useChat } from '@ai-sdk/react'
 import { Tooltip, ActionIcon } from '@mantine/core'
 import { IconRefresh } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
-import useSharedChat from '../useSharedChat'
+import { use } from 'react'
+import ChatContext from '../ChatContext'
 
 interface RegenerateMessageButtonProps {
 	message: UIMessage
 }
 
 const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
-	const { messages, setMessages } = useSharedChat()
+	const { messages, setMessages, reload } = useChat({ chat: use(ChatContext) })
 
-	const regenerate = () => {
+	const regenerate = async () => {
 		const messageIndex = messages.findIndex(
 			(_message) => _message.id === message.id,
 		)
@@ -20,6 +22,8 @@ const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
 		}
 
 		setMessages((messages) => messages.slice(0, messageIndex))
+
+		await reload()
 	}
 
 	return (

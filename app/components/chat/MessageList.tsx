@@ -1,9 +1,10 @@
+import { useChat } from '@ai-sdk/react'
 import { Box, Container, ScrollArea, Stack } from '@mantine/core'
-import { useMemo } from 'react'
+import { use, useMemo } from 'react'
 import { useStickToBottom } from 'use-stick-to-bottom'
+import ChatContext from './ChatContext'
 import MessageListItem from './MessageListItem/MessageListItem'
 import ScrollToBottomButton from './ScrollToBottomButton'
-import useSharedChat from './useSharedChat'
 
 const chunk = <T,>(array: T[], size: number): T[][] =>
 	Array.from({ length: Math.ceil(array.length / size) }, (_, index) =>
@@ -11,7 +12,9 @@ const chunk = <T,>(array: T[], size: number): T[][] =>
 	)
 
 const MessageList = () => {
-	const { status, error, messages } = useSharedChat()
+	const { status, error, messages } = useChat({
+		chat: use(ChatContext),
+	})
 
 	const lastMessage = messages[messages.length - 1]
 

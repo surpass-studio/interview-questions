@@ -6,6 +6,7 @@
     ],
     "compatibility_date": "2025-05-25",
     "main": "workers/app.ts",
+    "keep_vars": true,
     "observability": {
         "logs": {
             "enabled": true

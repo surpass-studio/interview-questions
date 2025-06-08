@@ -4,8 +4,8 @@ import { useInputState } from '@mantine/hooks'
 import { type FormEventHandler, use, useEffect } from 'react'
 import * as v from 'valibot'
 import ChatContext from './ChatContext'
+import chatSchema from './chatSchema'
 import classes from './ConversationForm.module.css'
-import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
 
 const ConversationForm = () => {
@@ -17,7 +17,7 @@ const ConversationForm = () => {
 
 	const [input, handleInputChange] = useInputState('')
 
-	const isInputValid = v.is(inputValidationSchema, input)
+	const isInputValid = v.is(chatSchema.input, input)
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault()

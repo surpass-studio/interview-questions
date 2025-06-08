@@ -12,7 +12,7 @@ import { Hono } from 'hono'
 import { href } from 'react-router'
 import * as v from 'valibot'
 import { type Bindings } from './route'
-import inputValidationSchema from '@/components/chat/inputValidationSchema'
+import chatSchema from '@/components/chat/chatSchema'
 import * as schema from '@/db/schema'
 
 interface ChatAPIRequestBody {
@@ -73,7 +73,7 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 	})
 	.post(
 		'/create',
-		sValidator('form', v.object({ content: inputValidationSchema })),
+		sValidator('form', v.object({ content: chatSchema.input })),
 		async (c) => {
 			const { content } = c.req.valid('form')
 

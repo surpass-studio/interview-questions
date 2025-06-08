@@ -2,8 +2,8 @@ import { Container, Flex, Group, Textarea } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { useFetcher } from 'react-router'
 import * as v from 'valibot'
+import chatSchema from './chatSchema'
 import classes from './ConversationForm.module.css'
-import inputValidationSchema from './inputValidationSchema'
 import SendMessageButton from './SendMessageButton'
 
 const StartConversationForm = () => {
@@ -11,7 +11,7 @@ const StartConversationForm = () => {
 
 	const [input, handleInputChange] = useInputState('')
 
-	const isInputValid = v.is(inputValidationSchema, input)
+	const isInputValid = v.is(chatSchema.input, input)
 
 	return (
 		<Container className="w-full">

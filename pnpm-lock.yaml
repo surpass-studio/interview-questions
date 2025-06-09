@@ -54,8 +54,8 @@ importers:
         specifier: ^16.5.0
         version: 16.5.0
       drizzle-orm:
-        specifier: ^0.44.1
-        version: 0.44.1(@cloudflare/workers-types@4.20250603.0)(@opentelemetry/api@1.9.0)(gel@2.0.1)
+        specifier: ^0.44.2
+        version: 0.44.2(@cloudflare/workers-types@4.20250603.0)(@opentelemetry/api@1.9.0)(gel@2.0.1)
       github-markdown-css:
         specifier: ^5.8.1
         version: 5.8.1
@@ -2101,8 +2101,8 @@ packages:
     resolution: {integrity: sha512-PUjYKWtzOzPtdtQlTHQG3qfv4Y0XT8+Eas6UbxCmxTj7qgMf+39dDujf1BP1I+qqZtw9uzwTh8jYtkMuCq+B0Q==}
     hasBin: true
 
-  drizzle-orm@0.44.1:
-    resolution: {integrity: sha512-prIWOlwJbiYInvcJxE+IMiJCtMiFVrSUJCwx6AXSJvGOdLu35qZ46QncTZDgloiLNCG0XxTC8agQElSmsl++TA==}
+  drizzle-orm@0.44.2:
+    resolution: {integrity: sha512-zGAqBzWWkVSFjZpwPOrmCrgO++1kZ5H/rZ4qTGeGOe18iXGVJWf3WPfHOVwFIbmi8kHjfJstC6rJomzGx8g/dQ==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=4'
@@ -4174,6 +4174,7 @@ packages:
   wrangler@4.19.0:
     resolution: {integrity: sha512-rqrqgZKBLff868vQHbIp3qxPNzsGzBx5hx5D6IaNTEQFbchYYSp2j4jT0ZmkGeBlJiJvnbS3N0FU4XmIbaUeog==}
     engines: {node: '>=18.0.0'}
+    deprecated: Errors with version upload. Please downgrade to 4.18.0
     hasBin: true
     peerDependencies:
       '@cloudflare/workers-types': ^4.20250525.0
@@ -6036,7 +6037,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.44.1(@cloudflare/workers-types@4.20250603.0)(@opentelemetry/api@1.9.0)(gel@2.0.1):
+  drizzle-orm@0.44.2(@cloudflare/workers-types@4.20250603.0)(@opentelemetry/api@1.9.0)(gel@2.0.1):
     optionalDependencies:
       '@cloudflare/workers-types': 4.20250603.0
       '@opentelemetry/api': 1.9.0

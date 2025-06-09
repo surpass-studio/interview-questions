@@ -71,7 +71,7 @@
     "tailwindcss": "4.1.8",
     "typescript": "^5.8.3",
     "vite": "^6.3.5",
-    "vite-plugin-devtools-json": "^0.1.0",
+    "vite-plugin-devtools-json": "^0.1.1",
     "vite-tsconfig-paths": "^5.1.4",
     "wrangler": "^4.19.0"
   },

@@ -6,7 +6,7 @@ interface MessageTextProps {
 
 const MessageText = ({ text }: MessageTextProps) => {
 	return (
-		<article className="prose dark:prose-invert max-w-none">
+		<article className="prose prose-mantine dark:prose-invert max-w-none">
 			<MemoizedMarkdown content={text} />
 		</article>
 	)

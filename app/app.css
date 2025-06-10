@@ -2,6 +2,8 @@
 
 @import 'tailwindcss';
 
+@config '../tailwind.config.js';
+
 @custom-variant dark (&:where([data-mantine-color-scheme=dark], [data-mantine-color-scheme=dark] *));
 
 @plugin '@tailwindcss/typography';

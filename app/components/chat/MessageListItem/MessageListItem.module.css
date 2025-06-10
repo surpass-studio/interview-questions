@@ -4,7 +4,3 @@
 		var(--mantine-color-dark-8)
 	);
 }
-
-.typography :where(ol, ul, menu) {
-	list-style: revert;
-}

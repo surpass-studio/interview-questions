@@ -1,6 +1,4 @@
-import { TypographyStylesProvider } from '@mantine/core'
 import MemoizedMarkdown from './MemoizedMarkdown'
-import classes from './MessageListItem.module.css'
 
 interface MessageTextProps {
 	text: string
@@ -8,9 +6,9 @@ interface MessageTextProps {
 
 const MessageText = ({ text }: MessageTextProps) => {
 	return (
-		<TypographyStylesProvider className={classes.typography}>
+		<article className="prose dark:prose-invert max-w-none">
 			<MemoizedMarkdown content={text} />
-		</TypographyStylesProvider>
+		</article>
 	)
 }
 

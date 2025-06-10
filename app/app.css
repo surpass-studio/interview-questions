@@ -2,6 +2,10 @@
 
 @import 'tailwindcss';
 
+@custom-variant dark (&:where([data-mantine-color-scheme=dark], [data-mantine-color-scheme=dark] *));
+
+@plugin '@tailwindcss/typography';
+
 @import '@mantine/core/styles.layer.css';
 
 @import '@mantine/notifications/styles.layer.css';

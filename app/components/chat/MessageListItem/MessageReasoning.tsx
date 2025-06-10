@@ -1,16 +1,7 @@
-import {
-	Button,
-	Collapse,
-	Divider,
-	Group,
-	Stack,
-	TypographyStylesProvider,
-} from '@mantine/core'
+import { Button, Collapse, Divider, Group, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
-import clsx from 'clsx'
 import MemoizedMarkdown from './MemoizedMarkdown'
-import classes from './MessageListItem.module.css'
 
 interface MessageReasoningProps {
 	reasoning: string
@@ -39,12 +30,9 @@ const MessageReasoning = ({ reasoning }: MessageReasoningProps) => {
 			<Collapse className="max-w-full" in={isOpened}>
 				<Group>
 					<Divider orientation="vertical" />
-					<TypographyStylesProvider
-						className={clsx('min-w-0 flex-1', classes.typography)}
-						c="gray"
-					>
+					<Stack className="min-w-0 flex-1" c="gray">
 						<MemoizedMarkdown content={reasoning} />
-					</TypographyStylesProvider>
+					</Stack>
 				</Group>
 			</Collapse>
 		</Stack>

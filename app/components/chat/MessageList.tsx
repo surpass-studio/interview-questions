@@ -1,8 +1,9 @@
 import { useChat } from '@ai-sdk/react'
-import { Box, Container, ScrollArea, Stack } from '@mantine/core'
+import { Box, Container, Loader, ScrollArea, Stack } from '@mantine/core'
 import { use, useMemo } from 'react'
 import { useStickToBottom } from 'use-stick-to-bottom'
 import ChatContext from './ChatContext'
+import ErrorMessage from './MessageListItem/ErrorMessage'
 import MessageListItem from './MessageListItem/MessageListItem'
 import ScrollToBottomButton from './ScrollToBottomButton'
 
@@ -43,8 +44,8 @@ const MessageList = () => {
 								))}
 								{index === chunkedMessages.length - 1 && (
 									<>
-										{isPending && <MessageListItem.Pending />}
-										{error && <MessageListItem.Error error={error} />}
+										{isPending && <Loader type="dots" />}
+										{error && <ErrorMessage error={error} />}
 									</>
 								)}
 							</Stack>

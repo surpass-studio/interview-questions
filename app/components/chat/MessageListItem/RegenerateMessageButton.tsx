@@ -6,22 +6,24 @@ import { use } from 'react'
 import ChatContext from '../ChatContext'
 
 interface RegenerateMessageButtonProps {
-	message: UIMessage
+	message?: UIMessage
 }
 
 const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
 	const { messages, setMessages, reload } = useChat({ chat: use(ChatContext) })
 
 	const regenerate = async () => {
-		const messageIndex = messages.findIndex(
-			(_message) => _message.id === message.id,
-		)
+		if (message) {
+			const messageIndex = messages.findIndex(
+				(_message) => _message.id === message.id,
+			)
 
-		if (messageIndex <= 0 || message.role !== 'assistant') {
-			return
+			if (messageIndex <= 0 || message.role !== 'assistant') {
+				return
+			}
+
+			setMessages((messages) => messages.slice(0, messageIndex))
 		}
-
-		setMessages((messages) => messages.slice(0, messageIndex))
 
 		await reload()
 	}

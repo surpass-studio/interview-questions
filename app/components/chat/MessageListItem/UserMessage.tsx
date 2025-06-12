@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks'
 import { type UIMessage } from 'ai'
 import EditMessageButton from './EditMessageButton'
 import EditMessageForm from './EditMessageForm'
-import MessageListItem from './MessageListItem'
 import classes from './MessageListItem.module.css'
 
 interface UserMessageProps {
@@ -16,9 +15,7 @@ const UserMessage = ({ message }: UserMessageProps) => {
 	const textPart = message.parts.find((part) => part.type === 'text')
 
 	if (!textPart) {
-		const error = new Error('No text part found in message')
-
-		return <MessageListItem.Error error={error} />
+		throw new Error('No text part found in message')
 	}
 
 	if (isEditing) {

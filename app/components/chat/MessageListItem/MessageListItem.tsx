@@ -1,5 +1,3 @@
-import { Group, Loader, Alert, Text } from '@mantine/core'
-import { IconAlertTriangle } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
 import AssistantMessage from './AssistantMessage'
 import UserMessage from './UserMessage'
@@ -17,21 +15,5 @@ const MessageListItem = ({ message }: MessageListItemProps) => {
 
 	return null
 }
-
-MessageListItem.Pending = () => (
-	<Group component="li">
-		<Loader type="dots" />
-	</Group>
-)
-
-interface MessageListItemErrorProps {
-	error: Error
-}
-
-MessageListItem.Error = ({ error }: MessageListItemErrorProps) => (
-	<Alert color="red" icon={<IconAlertTriangle />}>
-		<Text c="red">{error.message}</Text>
-	</Alert>
-)
 
 export default MessageListItem

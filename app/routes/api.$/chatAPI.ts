@@ -54,21 +54,8 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 						),
 					)
 			},
-			onError: (error) => {
-				if (error == null) {
-					return 'unknown error'
-				}
-
-				if (typeof error === 'string') {
-					return error
-				}
-
-				if (error instanceof Error) {
-					return error.message
-				}
-
-				return JSON.stringify(error)
-			},
+			onError: (error) =>
+				error instanceof Error ? error.message : String(error),
 		})
 	})
 	.post(

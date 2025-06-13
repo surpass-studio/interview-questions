@@ -37,7 +37,9 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 				justify="space-between"
 				mb="xs"
 			>
-				<Text c="gray">{language}</Text>
+				<Text className="select-none" c="gray">
+					{language}
+				</Text>
 				<CopyButton value={code}>
 					{({ copied, copy }) => (
 						<Tooltip label={copied ? 'Copied' : 'Copy code'}>

@@ -5,12 +5,16 @@ module.exports = {
 			typography: () => ({
 				DEFAULT: {
 					css: {
+						pre: {
+							border:
+								'calc(.0625rem * var(--mantine-scale)) solid var(--paper-border-color)',
+							borderRadius: 'var(--mantine-radius-lg)',
+						},
 						code: {
-							backgroundColor: 'var(--mantine-color-blue-light)',
+							backgroundColor: 'var(--mantine-color-gray-light)',
 							borderRadius: 'var(--mantine-radius-sm)',
 							color: 'var(--tw-prose-code)',
 							fontWeight: '400',
-							lineHeight: 'var(--mantine-line-height)',
 							padding: '2px calc(var(--mantine-spacing-xs) / 2)',
 						},
 						'code::before': {

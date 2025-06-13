@@ -2,7 +2,8 @@ import { marked } from 'marked'
 import { memo, useMemo } from 'react'
 import Markdown, { type Options } from 'react-markdown'
 import rehypeExternalLinks from 'rehype-external-links'
-import CodeHighlight from './CodeHighlight '
+import remarkGfm from 'remark-gfm'
+import CodeHighlight from './CodeHighlight'
 
 interface MemoizedMarkdownProps {
 	content: string
@@ -10,9 +11,11 @@ interface MemoizedMarkdownProps {
 
 const rehypePlugins: Options['rehypePlugins'] = [
 	[rehypeExternalLinks, { target: '_blank', rel: 'noopener noreferrer' }],
+	remarkGfm,
 ]
 
 const components: Options['components'] = {
+	pre: ({ children }) => children,
 	code: ({ children = '', className = '' }) => {
 		const match = className.match(/language-(\w+)/)
 

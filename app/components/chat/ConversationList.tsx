@@ -68,7 +68,7 @@ const ConversationList = () => {
 						title={conversation.title}
 						label={conversation.title}
 					/>
-					<Menu>
+					<Menu radius="lg">
 						<Menu.Target>
 							<ActionIcon
 								className="invisible absolute right-3 group-hover:visible"

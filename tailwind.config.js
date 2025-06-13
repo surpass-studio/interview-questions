@@ -6,8 +6,7 @@ module.exports = {
 				DEFAULT: {
 					css: {
 						pre: {
-							border:
-								'calc(.0625rem * var(--mantine-scale)) solid var(--paper-border-color)',
+							border: '1px solid var(--paper-border-color)',
 							borderRadius: 'var(--mantine-radius-lg)',
 						},
 						'pre code': {

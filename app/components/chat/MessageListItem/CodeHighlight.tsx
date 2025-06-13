@@ -1,10 +1,7 @@
 import {
 	ActionIcon,
-	Badge,
 	CopyButton,
 	Group,
-	Space,
-	Stack,
 	Text,
 	Tooltip,
 	useComputedColorScheme,

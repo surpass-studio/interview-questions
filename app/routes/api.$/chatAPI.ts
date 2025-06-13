@@ -39,7 +39,6 @@ const chatAPI = new Hono<{ Bindings: Bindings }>()
 		})
 
 		return result.toUIMessageStreamResponse({
-			sendReasoning: true,
 			originalMessages: messages,
 			onFinish: async ({ messages }) => {
 				await c.env.db

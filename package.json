@@ -16,8 +16,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "alpha",
-    "@ai-sdk/react": "alpha",
+    "@ai-sdk/openai-compatible": "1.0.0-alpha.13",
+    "@ai-sdk/react": "2.0.0-alpha.13",
     "@clerk/react-router": "^1.4.8",
     "@clerk/themes": "^2.2.48",
     "@hono/standard-validator": "^0.1.2",
@@ -28,7 +28,7 @@
     "@octokit/rest": "^22.0.0",
     "@react-router/fs-routes": "7.6.1",
     "@tabler/icons-react": "^3.34.0",
-    "ai": "alpha",
+    "ai": "5.0.0-alpha.13",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.1",

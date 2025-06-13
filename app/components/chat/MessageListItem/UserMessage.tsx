@@ -42,7 +42,13 @@ const UserMessage = ({ message }: UserMessageProps) => {
 			>
 				<EditMessageButton onEdit={toggle} />
 			</Group>
-			<Paper key={message.id} className={classes.userListItemContent} p="sm">
+			<Paper
+				key={message.id}
+				className={classes.userListItemContent}
+				px="md"
+				py="sm"
+				radius="lg"
+			>
 				<Text className="whitespace-pre-wrap">{textPart.text}</Text>
 			</Paper>
 		</Group>

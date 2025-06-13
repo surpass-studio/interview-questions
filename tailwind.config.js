@@ -3,6 +3,24 @@ module.exports = {
 	theme: {
 		extend: {
 			typography: () => ({
+				DEFAULT: {
+					css: {
+						code: {
+							backgroundColor: 'var(--mantine-color-blue-light)',
+							borderRadius: 'var(--mantine-radius-sm)',
+							color: 'var(--tw-prose-code)',
+							fontWeight: '400',
+							lineHeight: 'var(--mantine-line-height)',
+							padding: '2px calc(var(--mantine-spacing-xs) / 2)',
+						},
+						'code::before': {
+							content: '',
+						},
+						'code::after': {
+							content: '',
+						},
+					},
+				},
 				mantine: {
 					css: {
 						'--tw-prose-body': 'var(--mantine-color-text)',

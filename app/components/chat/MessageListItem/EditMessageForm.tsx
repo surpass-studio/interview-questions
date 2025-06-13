@@ -21,7 +21,9 @@ interface EditMessageFormProps {
 }
 
 const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
-	const { messages, reload, setMessages } = useChat({ chat: use(ChatContext) })
+	const { messages, reload, setMessages } = useChat({
+		chat: use(ChatContext),
+	})
 
 	const [input, handleInputChange] = useInputState(text)
 
@@ -73,11 +75,12 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 					value={input}
 					onChange={handleInputChange}
 					onKeyDown={(event) => {
-						const canSendMessage =
+						const isEnterKeyPressed =
 							event.key === 'Enter' &&
 							!event.shiftKey &&
-							!event.nativeEvent.isComposing &&
-							isInputValid
+							!event.nativeEvent.isComposing
+
+						const canSendMessage = isEnterKeyPressed && isInputValid
 
 						if (canSendMessage) {
 							const form = event.currentTarget.form as HTMLFormElement

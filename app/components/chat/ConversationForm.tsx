@@ -6,13 +6,16 @@ import ChatContext from './ChatContext'
 import chatSchema from './chatSchema'
 import classes from './ConversationForm.module.css'
 import SendMessageButton from './SendMessageButton'
+import StopMessageButton from './StopMessageButton'
 
 const ConversationForm = () => {
 	const chat = use(ChatContext)
 
-	const { status, sendMessage, stop } = useChat({
+	const { status, sendMessage } = useChat({
 		chat,
 	})
+
+	const isLoading = status === 'submitted' || status === 'streaming'
 
 	const [input, handleInputChange] = useInputState('')
 
@@ -50,11 +53,14 @@ const ConversationForm = () => {
 					value={input}
 					onChange={handleInputChange}
 					onKeyDown={(event) => {
-						const canSendMessage =
-							(status === 'ready' || status === 'error') &&
+						const isEnterKeyPressed =
 							event.key === 'Enter' &&
 							!event.shiftKey &&
-							!event.nativeEvent.isComposing &&
+							!event.nativeEvent.isComposing
+
+						const canSendMessage =
+							(status === 'ready' || status === 'error') &&
+							isEnterKeyPressed &&
 							isInputValid
 
 						if (canSendMessage) {
@@ -69,11 +75,11 @@ const ConversationForm = () => {
 						<Flex className={classes.textareaContainer}>
 							{children}
 							<Group className={classes.submitButtonContainer}>
-								<SendMessageButton
-									isLoading={status === 'submitted' || status === 'streaming'}
-									isInputValid={isInputValid}
-									stop={stop}
-								/>
+								{isLoading ? (
+									<StopMessageButton />
+								) : (
+									<SendMessageButton isInputValid={isInputValid} />
+								)}
 							</Group>
 						</Flex>
 					)}

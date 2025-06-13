@@ -75,7 +75,7 @@
     "vite": "^6.3.5",
     "vite-plugin-devtools-json": "^0.1.0",
     "vite-tsconfig-paths": "^5.1.4",
-    "wrangler": "^4.19.0"
+    "wrangler": "^4.20.0"
   },
   "prettier": "@epic-web/config/prettier",
   "lint-staged": {

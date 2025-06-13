@@ -25,6 +25,12 @@ module.exports = {
 						'code::after': {
 							content: '',
 						},
+						'thead th': {
+							padding: 'var(--mantine-spacing-sm)',
+						},
+						'tbody td, tfoot td': {
+							padding: 'var(--mantine-spacing-sm)',
+						},
 					},
 				},
 				mantine: {

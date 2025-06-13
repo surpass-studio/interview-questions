@@ -58,6 +58,8 @@ const ConversationForm = () => {
 							isInputValid
 
 						if (canSendMessage) {
+							event.preventDefault()
+
 							const form = event.currentTarget.form as HTMLFormElement
 
 							form.requestSubmit()

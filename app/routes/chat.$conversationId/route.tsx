@@ -1,4 +1,4 @@
-import { Chat } from '@ai-sdk/react'
+import { Chat, type UIMessage } from '@ai-sdk/react'
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { Stack } from '@mantine/core'
 import { and, eq } from 'drizzle-orm'
@@ -37,7 +37,7 @@ export const loader = async (args: Route.LoaderArgs) => {
 const ChatPage = ({ params, loaderData }: Route.ComponentProps) => {
 	const chat = useMemo(
 		() =>
-			new Chat<unknown>({
+			new Chat<UIMessage>({
 				id: params.conversationId,
 				messages: loaderData.conversation.messages,
 			}),

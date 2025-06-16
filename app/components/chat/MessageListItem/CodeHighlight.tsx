@@ -1,6 +1,5 @@
 import {
 	Stack,
-	Divider,
 	ActionIcon,
 	CopyButton,
 	Group,
@@ -35,7 +34,7 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 	return (
 		<Stack component="pre" gap="xs">
 			<Group className="not-prose" justify="space-between">
-				<Text className="select-none" c="gray">
+				<Text className="select-none" c="gray" size="sm">
 					{language}
 				</Text>
 				<CopyButton value={code}>
@@ -48,7 +47,6 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 					)}
 				</CopyButton>
 			</Group>
-			<Divider />
 			<code>{highlightedCode}</code>
 		</Stack>
 	)

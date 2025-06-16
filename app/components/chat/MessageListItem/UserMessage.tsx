@@ -43,7 +43,7 @@ const UserMessage = ({ message }: UserMessageProps) => {
 			</Group>
 			<Paper
 				key={message.id}
-				className="min-w-0 bg-(--mantine-color-gray-0) dark:bg-(--mantine-color-dark-8)"
+				className="min-w-0 flex-1 bg-(--mantine-color-gray-0) dark:bg-(--mantine-color-dark-8)"
 				px="md"
 				py="sm"
 				radius="lg"

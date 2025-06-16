@@ -6,10 +6,12 @@ module.exports = {
 				DEFAULT: {
 					css: {
 						pre: {
-							border: '1px solid var(--paper-border-color)',
 							borderRadius: 'var(--mantine-radius-lg)',
+							padding: '0',
 						},
 						'pre code': {
+							display: ' block',
+							padding: 'var(--mantine-spacing-sm)',
 							overflowX: 'auto',
 						},
 						code: {

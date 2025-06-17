@@ -31,7 +31,7 @@
     "ai": "5.0.0-alpha.13",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.44.1",
+    "drizzle-orm": "^0.44.2",
     "github-markdown-css": "^5.8.1",
     "hono": "^4.7.11",
     "html-to-text": "^9.0.5",

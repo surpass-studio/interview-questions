@@ -3,7 +3,6 @@ import { useDisclosure } from '@mantine/hooks'
 import { type UIMessage } from 'ai'
 import EditMessageButton from './EditMessageButton'
 import EditMessageForm from './EditMessageForm'
-import classes from './MessageListItem.module.css'
 
 interface UserMessageProps {
 	message: UIMessage
@@ -30,7 +29,7 @@ const UserMessage = ({ message }: UserMessageProps) => {
 
 	return (
 		<Group
-			className="group max-w-5/6 self-end wrap-break-word"
+			className="group max-w-5/6 self-end"
 			gap="xs"
 			justify="end"
 			align="start"
@@ -44,12 +43,12 @@ const UserMessage = ({ message }: UserMessageProps) => {
 			</Group>
 			<Paper
 				key={message.id}
-				className={classes.userListItemContent}
+				className="min-w-0 flex-1 bg-(--mantine-color-gray-0) dark:bg-(--mantine-color-dark-8)"
 				px="md"
 				py="sm"
 				radius="lg"
 			>
-				<Text className="whitespace-pre-wrap">{textPart.text}</Text>
+				<Text className="break-words whitespace-pre-wrap">{textPart.text}</Text>
 			</Paper>
 		</Group>
 	)

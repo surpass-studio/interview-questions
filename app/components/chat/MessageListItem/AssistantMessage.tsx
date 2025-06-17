@@ -11,7 +11,7 @@ interface AssistantMessageProps {
 
 const AssistantMessage = ({ message }: AssistantMessageProps) => {
 	return (
-		<Stack className="wrap-break-word">
+		<Stack>
 			{message.parts.map((part) => {
 				if (part.type === 'reasoning') {
 					return <MessageReasoning key={part.type} reasoning={part.text} />

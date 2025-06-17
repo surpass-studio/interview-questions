@@ -30,7 +30,7 @@ const MessageReasoning = ({ reasoning }: MessageReasoningProps) => {
 			<Collapse className="max-w-full" in={isOpened}>
 				<Group>
 					<Divider orientation="vertical" />
-					<Stack className="min-w-0 flex-1" c="gray">
+					<Stack className="min-w-0 flex-1 break-words" c="gray">
 						<MemoizedMarkdown content={reasoning} />
 					</Stack>
 				</Group>

@@ -1,4 +1,4 @@
-import { Container, Flex, Group, Textarea } from '@mantine/core'
+import { Container, Flex, Group, Loader, Textarea } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { useFetcher } from 'react-router'
 import chatSchema from './chatSchema'
@@ -7,6 +7,9 @@ import SendMessageButton from './SendMessageButton'
 
 const StartConversationForm = () => {
 	const fetcher = useFetcher()
+
+	const isPending =
+		fetcher.state === 'loading' || fetcher.state === 'submitting'
 
 	const [input, handleInputChange] = useInputState('')
 
@@ -27,12 +30,13 @@ const StartConversationForm = () => {
 					value={input}
 					onChange={handleInputChange}
 					onKeyDown={async (event) => {
-						const canSendMessage =
-							fetcher.state === 'idle' &&
+						const isEnterKeyPressed =
 							event.key === 'Enter' &&
 							!event.shiftKey &&
-							!event.nativeEvent.isComposing &&
-							isInputValid
+							!event.nativeEvent.isComposing
+
+						const canSendMessage =
+							fetcher.state === 'idle' && isEnterKeyPressed && isInputValid
 
 						if (canSendMessage) {
 							event.preventDefault()
@@ -46,13 +50,11 @@ const StartConversationForm = () => {
 						<Flex className={classes.textareaContainer}>
 							{children}
 							<Group className={classes.submitButtonContainer}>
-								<SendMessageButton
-									isLoading={
-										fetcher.state === 'loading' ||
-										fetcher.state === 'submitting'
-									}
-									isInputValid={isInputValid}
-								/>
+								{isPending ? (
+									<Loader size="28" />
+								) : (
+									<SendMessageButton isInputValid={isInputValid} />
+								)}
 							</Group>
 						</Flex>
 					)}

@@ -1,16 +1,9 @@
 import { useChat } from '@ai-sdk/react'
-import {
-	ActionIcon,
-	Box,
-	FocusTrap,
-	Stack,
-	Textarea,
-	Tooltip,
-} from '@mantine/core'
+import { ActionIcon, Box, Stack, Textarea, Tooltip } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
 import { IconArrowBackUp, IconArrowUp } from '@tabler/icons-react'
 import { type UIMessage } from 'ai'
-import { use, type FormEventHandler } from 'react'
+import { type RefCallback, use, type FormEventHandler } from 'react'
 import ChatContext from '../ChatContext'
 import chatSchema from '../chatSchema'
 
@@ -20,8 +13,20 @@ interface EditMessageFormProps {
 	onCancel: () => void
 }
 
+const setCursorToEndRef: RefCallback<HTMLTextAreaElement> = (instance) => {
+	if (instance) {
+		const length = instance.value.length
+
+		instance.setSelectionRange(length, length)
+
+		instance.focus()
+	}
+}
+
 const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
-	const { messages, reload, setMessages } = useChat({ chat: use(ChatContext) })
+	const { messages, reload, setMessages } = useChat({
+		chat: use(ChatContext),
+	})
 
 	const [input, handleInputChange] = useInputState(text)
 
@@ -63,44 +68,44 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 
 	return (
 		<Box component="form" pt="1px" onSubmit={handleSubmit}>
-			<FocusTrap>
-				<Textarea
-					name="content"
-					autosize
-					size="md"
-					minRows={3}
-					rows={3}
-					value={input}
-					onChange={handleInputChange}
-					onKeyDown={(event) => {
-						const canSendMessage =
-							event.key === 'Enter' &&
-							!event.shiftKey &&
-							!event.nativeEvent.isComposing &&
-							isInputValid
+			<Textarea
+				ref={setCursorToEndRef}
+				name="content"
+				autosize
+				size="md"
+				minRows={3}
+				rows={3}
+				value={input}
+				onChange={handleInputChange}
+				onKeyDown={(event) => {
+					const isEnterKeyPressed =
+						event.key === 'Enter' &&
+						!event.shiftKey &&
+						!event.nativeEvent.isComposing
 
-						if (canSendMessage) {
-							const form = event.currentTarget.form as HTMLFormElement
+					const canSendMessage = isEnterKeyPressed && isInputValid
 
-							form.requestSubmit()
-						}
-					}}
-					rightSection={
-						<Stack className="h-full" justify="end" py="xs" gap="xs">
-							<Tooltip label="Cancel">
-								<ActionIcon color="gray" variant="subtle" onClick={onCancel}>
-									<IconArrowBackUp className="size-5" />
-								</ActionIcon>
-							</Tooltip>
-							<Tooltip label="Send">
-								<ActionIcon type="submit" disabled={!isInputValid}>
-									<IconArrowUp className="size-5" />
-								</ActionIcon>
-							</Tooltip>
-						</Stack>
+					if (canSendMessage) {
+						const form = event.currentTarget.form as HTMLFormElement
+
+						form.requestSubmit()
 					}
-				/>
-			</FocusTrap>
+				}}
+				rightSection={
+					<Stack className="h-full" justify="end" py="xs" gap="xs">
+						<Tooltip label="Cancel">
+							<ActionIcon color="gray" variant="subtle" onClick={onCancel}>
+								<IconArrowBackUp className="size-5" />
+							</ActionIcon>
+						</Tooltip>
+						<Tooltip label="Send">
+							<ActionIcon type="submit" disabled={!isInputValid}>
+								<IconArrowUp className="size-5" />
+							</ActionIcon>
+						</Tooltip>
+					</Stack>
+				}
+			/>
 		</Box>
 	)
 }

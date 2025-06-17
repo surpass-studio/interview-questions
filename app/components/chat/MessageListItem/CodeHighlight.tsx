@@ -1,6 +1,4 @@
 import {
-	Stack,
-	Divider,
 	ActionIcon,
 	CopyButton,
 	Group,
@@ -33,24 +31,28 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 	)
 
 	return (
-		<Stack component="pre" gap="xs">
-			<Group className="not-prose" justify="space-between">
-				<Text className="select-none" c="gray">
+		<pre>
+			<Group className="not-prose" justify="space-between" px="sm" py="xs">
+				<Text className="select-none" c="gray" size="sm">
 					{language}
 				</Text>
 				<CopyButton value={code}>
 					{({ copied, copy }) => (
 						<Tooltip label={copied ? 'Copied' : 'Copy code'}>
-							<ActionIcon color="gray" variant="subtle" onClick={copy}>
-								<IconCopy className="size-5" />
+							<ActionIcon
+								size="sm"
+								color="gray"
+								variant="subtle"
+								onClick={copy}
+							>
+								<IconCopy className="size-4" />
 							</ActionIcon>
 						</Tooltip>
 					)}
 				</CopyButton>
 			</Group>
-			<Divider />
 			<code>{highlightedCode}</code>
-		</Stack>
+		</pre>
 	)
 }
 

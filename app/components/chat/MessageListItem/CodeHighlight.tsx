@@ -1,9 +1,8 @@
 import {
-	ActionIcon,
+	Button,
 	CopyButton,
 	Group,
 	Text,
-	Tooltip,
 	useComputedColorScheme,
 } from '@mantine/core'
 import { IconCopy } from '@tabler/icons-react'
@@ -32,22 +31,26 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 
 	return (
 		<pre>
-			<Group className="not-prose" justify="space-between" px="sm" py="xs">
-				<Text className="select-none" c="gray" size="sm">
+			<Group
+				className="not-prose bg-(--mantine-color-gray-light)"
+				justify="space-between"
+				px="sm"
+				py="xxs"
+			>
+				<Text className="select-none" size="sm">
 					{language}
 				</Text>
 				<CopyButton value={code}>
 					{({ copied, copy }) => (
-						<Tooltip label={copied ? 'Copied' : 'Copy code'}>
-							<ActionIcon
-								size="sm"
-								color="gray"
-								variant="subtle"
-								onClick={copy}
-							>
-								<IconCopy className="size-4" />
-							</ActionIcon>
-						</Tooltip>
+						<Button
+							size="xs"
+							color="gray"
+							variant="subtle"
+							leftSection={<IconCopy className="size-4" />}
+							onClick={copy}
+						>
+							{copied ? 'Copied' : 'Copy'}
+						</Button>
 					)}
 				</CopyButton>
 			</Group>

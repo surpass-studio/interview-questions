@@ -1,5 +1,29 @@
-import { createTheme, Input, ActionIcon } from '@mantine/core'
+import {
+	type DefaultMantineColor,
+	type MantineColorsTuple,
+	type DefaultMantineSize,
+	createTheme,
+	Input,
+	ActionIcon,
+} from '@mantine/core'
 import classes from './components.module.css'
+
+type ExtendedCustomColors = 'brand' | DefaultMantineColor
+
+type ExtendedCustomSpacing = 'xxs' | DefaultMantineSize
+
+type ExtendedCustomRadius = 'full' | DefaultMantineSize
+
+declare module '@mantine/core' {
+	export interface MantineThemeColorsOverride {
+		colors: Record<ExtendedCustomColors, MantineColorsTuple>
+	}
+
+	export interface MantineThemeSizesOverride {
+		spacing: Record<ExtendedCustomSpacing, string>
+		radius: Record<ExtendedCustomRadius, string>
+	}
+}
 
 const mantineTheme = createTheme({
 	components: {
@@ -10,7 +34,7 @@ const mantineTheme = createTheme({
 		}),
 		ActionIcon: ActionIcon.extend({
 			defaultProps: {
-				radius: 'xl',
+				radius: 'full',
 			},
 		}),
 	},
@@ -30,6 +54,12 @@ const mantineTheme = createTheme({
 			'#004ECD',
 			'#0043B5',
 		],
+	},
+	spacing: {
+		xxs: 'calc(0.25rem * var(--mantine-scale))',
+	},
+	radius: {
+		full: 'calc(infinity * 1px)',
 	},
 })
 

@@ -24,7 +24,7 @@ const setCursorToEndRef: RefCallback<HTMLTextAreaElement> = (instance) => {
 }
 
 const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
-	const { messages, reload, setMessages } = useChat({
+	const { sendMessage } = useChat({
 		chat: use(ChatContext),
 	})
 
@@ -32,38 +32,19 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 
 	const isInputValid = chatSchema.input.safeParse(input).success
 
-	const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+	const handleSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault()
 
 		const formData = new FormData(event.currentTarget)
 
 		const content = formData.get('content') as string
 
-		const messageIndex = messages.findIndex(
-			(_message) => _message.id === message.id,
-		)
-
-		if (messageIndex === -1) {
-			throw new Error('Message not found')
-		}
-
-		setMessages((messages) =>
-			messages.slice(0, messageIndex).concat([
-				{
-					...message,
-					parts: [
-						{
-							type: 'text',
-							text: content,
-						},
-					],
-				},
-			]),
-		)
-
 		onCancel()
 
-		void reload()
+		await sendMessage({
+			messageId: message.id,
+			text: content,
+		})
 	}
 
 	return (

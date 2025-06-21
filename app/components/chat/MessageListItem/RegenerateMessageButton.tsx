@@ -10,27 +10,21 @@ interface RegenerateMessageButtonProps {
 }
 
 const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
-	const { messages, setMessages, reload } = useChat({ chat: use(ChatContext) })
-
-	const regenerate = async () => {
-		if (message) {
-			const messageIndex = messages.findIndex(
-				(_message) => _message.id === message.id,
-			)
-
-			if (messageIndex <= 0 || message.role !== 'assistant') {
-				return
-			}
-
-			setMessages((messages) => messages.slice(0, messageIndex))
-		}
-
-		await reload()
-	}
+	const { regenerate } = useChat({
+		chat: use(ChatContext),
+	})
 
 	return (
 		<Tooltip label="Regenerate">
-			<ActionIcon color="gray" variant="subtle" onClick={regenerate}>
+			<ActionIcon
+				color="gray"
+				variant="subtle"
+				onClick={() => {
+					if (message) {
+						void regenerate({ messageId: message.id })
+					}
+				}}
+			>
 				<IconRefresh className="size-5" />
 			</ActionIcon>
 		</Tooltip>

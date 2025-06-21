@@ -35,7 +35,7 @@ const ConversationForm = () => {
 			chat.lastMessage &&
 			chat.lastMessage.role === 'user'
 		) {
-			void chat.reload()
+			void chat.regenerate()
 		}
 	}, [chat])
 

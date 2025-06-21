@@ -29,7 +29,7 @@ const mantineTheme = createTheme({
 	components: {
 		Input: Input.extend({
 			classNames: {
-				input: classes.input,
+				input: classes.inputInput,
 			},
 		}),
 		ActionIcon: ActionIcon.extend({

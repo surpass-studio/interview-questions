@@ -1,6 +1,7 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { IconCheck, IconMoodSad, IconCopy } from '@tabler/icons-react'
+import { marked } from 'marked'
 
 interface CopyMessageButtonProps {
 	text: string
@@ -9,8 +10,6 @@ interface CopyMessageButtonProps {
 const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 	const copy = async () => {
 		try {
-			const { marked } = await import('marked')
-
 			const { htmlToText } = await import('html-to-text')
 
 			const html = await marked(text)

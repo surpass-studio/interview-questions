@@ -1,6 +1,6 @@
 import { Transition, Tooltip, ActionIcon } from '@mantine/core'
 import { useWindowScroll } from '@mantine/hooks'
-import { IconArrowUp } from '@tabler/icons-react'
+import { ArrowUpIcon } from '@phosphor-icons/react'
 
 const ScrollToTopButton = () => {
 	const [scroll, scrollTo] = useWindowScroll()
@@ -15,7 +15,7 @@ const ScrollToTopButton = () => {
 						variant="light"
 						onClick={() => scrollTo({ y: 0 })}
 					>
-						<IconArrowUp />
+						<ArrowUpIcon className="size-6" />
 					</ActionIcon>
 				</Tooltip>
 			)}

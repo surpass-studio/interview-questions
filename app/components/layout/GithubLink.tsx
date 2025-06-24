@@ -1,5 +1,5 @@
 import { ActionIcon, Anchor, Tooltip } from '@mantine/core'
-import { IconBrandGithub } from '@tabler/icons-react'
+import { GithubLogoIcon } from '@phosphor-icons/react'
 
 const GithubLink = () => {
 	return (
@@ -9,7 +9,7 @@ const GithubLink = () => {
 				target="_blank"
 			>
 				<ActionIcon color="gray" variant="subtle" size="lg">
-					<IconBrandGithub />
+					<GithubLogoIcon className="size-6" />
 				</ActionIcon>
 			</Anchor>
 		</Tooltip>

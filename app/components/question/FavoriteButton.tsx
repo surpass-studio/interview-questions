@@ -1,8 +1,8 @@
 import { SignInButton, useAuth } from '@clerk/react-router'
 import { Tooltip, ActionIcon } from '@mantine/core'
-import { IconHeart, IconHeartFilled } from '@tabler/icons-react'
+import { HeartIcon } from '@phosphor-icons/react'
 import { useLoaderData, useFetcher, useParams } from 'react-router'
-import { type Route } from '../../routes/question.$questionId/+types/route'
+import { type Route } from '../../routes/questions.$questionId/+types/route'
 
 const FavoriteButton = () => {
 	const { questionId } = useParams<Route.ComponentProps['params']>()
@@ -20,7 +20,7 @@ const FavoriteButton = () => {
 			<Tooltip label="登录后即可收藏">
 				<SignInButton>
 					<ActionIcon color="red" size="lg" variant="light">
-						<IconHeart />
+						<HeartIcon className="size-6" />
 					</ActionIcon>
 				</SignInButton>
 			</Tooltip>
@@ -33,7 +33,7 @@ const FavoriteButton = () => {
 				<fetcher.Form method="delete" action={`/api/favorites/${questionId}`}>
 					<input type="hidden" name="questionId" value={questionId} />
 					<ActionIcon type="submit" color="red" size="lg" loading={loading}>
-						<IconHeartFilled />
+						<HeartIcon className="size-6" weight="fill" />
 					</ActionIcon>
 				</fetcher.Form>
 			</Tooltip>
@@ -51,7 +51,7 @@ const FavoriteButton = () => {
 					variant="light"
 					loading={loading}
 				>
-					<IconHeart />
+					<HeartIcon className="size-6" />
 				</ActionIcon>
 			</fetcher.Form>
 		</Tooltip>

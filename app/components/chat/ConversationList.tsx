@@ -8,7 +8,7 @@ import {
 	Stack,
 	Title,
 } from '@mantine/core'
-import { IconDots, IconTrash } from '@tabler/icons-react'
+import { DotsThreeIcon, TrashIcon } from '@phosphor-icons/react'
 import clsx from 'clsx'
 import {
 	href,
@@ -74,14 +74,14 @@ const ConversationList = () => {
 								className="invisible absolute right-3 group-hover:visible"
 								variant="subtle"
 							>
-								<IconDots />
+								<DotsThreeIcon className="size-6" />
 							</ActionIcon>
 						</Menu.Target>
 						<Menu.Dropdown>
 							<Menu.Item
 								type="submit"
 								color="red"
-								leftSection={<IconTrash className="size-4" />}
+								leftSection={<TrashIcon className="size-4" />}
 								renderRoot={(props) => (
 									<fetcher.Form
 										method="delete"

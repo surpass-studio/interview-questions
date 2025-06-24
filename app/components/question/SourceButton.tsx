@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
-import { IconLink } from '@tabler/icons-react'
+import { LinkSimpleIcon } from '@phosphor-icons/react'
 import { useParams } from 'react-router'
-import { type Route } from '../../routes/question.$questionId/+types/route'
+import { type Route } from '../../routes/questions.$questionId/+types/route'
 
 const SourceButton = () => {
 	const { questionId } = useParams<Route.ComponentProps['params']>()
@@ -15,7 +15,7 @@ const SourceButton = () => {
 				size="lg"
 				variant="light"
 			>
-				<IconLink />
+				<LinkSimpleIcon className="size-6" />
 			</ActionIcon>
 		</Tooltip>
 	)

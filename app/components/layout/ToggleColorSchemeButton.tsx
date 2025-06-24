@@ -4,8 +4,7 @@ import {
 	useComputedColorScheme,
 	useMantineColorScheme,
 } from '@mantine/core'
-import { IconSun, IconMoon } from '@tabler/icons-react'
-import classes from './ToggleColorSchemeButton.module.css'
+import { SunIcon, MoonIcon } from '@phosphor-icons/react'
 
 const ToggleColorSchemeButton = () => {
 	const { setColorScheme } = useMantineColorScheme()
@@ -24,8 +23,8 @@ const ToggleColorSchemeButton = () => {
 					setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
 				}
 			>
-				<IconSun className={classes.light} />
-				<IconMoon className={classes.dark} />
+				<SunIcon className="hidden size-6 dark:block" />
+				<MoonIcon className="block size-6 dark:hidden" />
 			</ActionIcon>
 		</Tooltip>
 	)

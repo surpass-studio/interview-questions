@@ -40,7 +40,7 @@ const QuestionList = () => {
 						<Link
 							viewTransition
 							prefetch="intent"
-							to={href('/question/:questionId', {
+							to={href('/questions/:questionId', {
 								questionId: String(question.number),
 							})}
 							className="stretched-link align-middle"

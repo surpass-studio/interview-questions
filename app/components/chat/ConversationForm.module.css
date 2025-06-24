@@ -19,6 +19,7 @@
 .textareaContainer:focus-within {
 	--input-bd: transparent;
 	outline: rem(2px) solid var(--mantine-primary-color-filled);
+	outline-offset: rem(-1px);
 }
 
 .textarea {

@@ -17,9 +17,4 @@ export default defineConfig({
 	server: {
 		open: true,
 	},
-	ssr: {
-		resolve: {
-			conditions: ['workerd', 'worker', 'browser'],
-		},
-	},
 })

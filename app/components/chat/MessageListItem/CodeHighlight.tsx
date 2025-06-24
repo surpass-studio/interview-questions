@@ -6,7 +6,7 @@ import {
 	useComputedColorScheme,
 } from '@mantine/core'
 import { CopySimpleIcon } from '@phosphor-icons/react'
-import { useShikiHighlighter } from 'react-shiki'
+import { useShikiHighlighter } from 'react-shiki/web'
 
 interface CodeHighlightProps {
 	code: string

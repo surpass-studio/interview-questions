@@ -1,6 +1,6 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
-import { IconCheck, IconMoodSad, IconCopy } from '@tabler/icons-react'
+import { CheckIcon, SmileySadIcon, CopySimpleIcon } from '@phosphor-icons/react'
 import { marked } from 'marked'
 
 interface CopyMessageButtonProps {
@@ -28,7 +28,7 @@ const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 			])
 
 			notifications.show({
-				icon: <IconCheck className="size-5" />,
+				icon: <CheckIcon className="size-5" />,
 				color: 'green',
 				title: 'Copied',
 				message: 'Copied to clipboard',
@@ -40,7 +40,7 @@ const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 					: 'Failed to copy text to clipboard'
 
 			notifications.show({
-				icon: <IconMoodSad className="size-5" />,
+				icon: <SmileySadIcon className="size-5" />,
 				color: 'red',
 				title: 'An error occurred',
 				message,
@@ -51,7 +51,7 @@ const CopyMessageButton = ({ text }: CopyMessageButtonProps) => {
 	return (
 		<Tooltip label="Copy message">
 			<ActionIcon color="gray" variant="subtle" onClick={copy}>
-				<IconCopy className="size-5" />
+				<CopySimpleIcon className="size-5" />
 			</ActionIcon>
 		</Tooltip>
 	)

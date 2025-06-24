@@ -1,6 +1,6 @@
 import { Button, Collapse, Divider, Group, Stack } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconChevronDown, IconChevronRight } from '@tabler/icons-react'
+import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react'
 import MemoizedMarkdown from './MemoizedMarkdown'
 
 interface MessageReasoningProps {
@@ -18,9 +18,9 @@ const MessageReasoning = ({ reasoning }: MessageReasoningProps) => {
 				variant="subtle"
 				rightSection={
 					isOpened ? (
-						<IconChevronDown className="size-5" />
+						<CaretDownIcon className="size-5" />
 					) : (
-						<IconChevronRight className="size-5" />
+						<CaretRightIcon className="size-5" />
 					)
 				}
 				onClick={() => toggle()}

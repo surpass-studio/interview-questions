@@ -1,10 +1,10 @@
 import { type MantineColor, Button, Group, ThemeIcon } from '@mantine/core'
 import {
 	type Icon,
-	IconCloud,
-	IconDeviceMobile,
-	IconFileTypeCss,
-} from '@tabler/icons-react'
+	CloudSunIcon,
+	DeviceMobileIcon,
+	FileCssIcon,
+} from '@phosphor-icons/react'
 import { useFetcher } from 'react-router'
 
 interface QuickPrompt {
@@ -18,17 +18,17 @@ const QuickPromptList = () => {
 
 	const quickPrompts: QuickPrompt[] = [
 		{
-			icon: IconCloud,
+			icon: CloudSunIcon,
 			color: 'blue',
 			content: 'Why is the sky blue?',
 		},
 		{
-			icon: IconDeviceMobile,
+			icon: DeviceMobileIcon,
 			color: 'pink',
 			content: 'Mobile-first design principles?',
 		},
 		{
-			icon: IconFileTypeCss,
+			icon: FileCssIcon,
 			color: 'violet',
 			content: 'How do I center a div in CSS?',
 		},

@@ -5,7 +5,7 @@ import {
 	Text,
 	useComputedColorScheme,
 } from '@mantine/core'
-import { IconCopy } from '@tabler/icons-react'
+import { CopySimpleIcon } from '@phosphor-icons/react'
 import { useShikiHighlighter } from 'react-shiki'
 
 interface CodeHighlightProps {
@@ -46,7 +46,7 @@ const CodeHighlight = ({ code, language }: CodeHighlightProps) => {
 							size="xs"
 							color="gray"
 							variant="subtle"
-							leftSection={<IconCopy className="size-4" />}
+							leftSection={<CopySimpleIcon className="size-4" />}
 							onClick={copy}
 						>
 							{copied ? 'Copied' : 'Copy'}

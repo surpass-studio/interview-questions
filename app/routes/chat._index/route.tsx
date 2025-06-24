@@ -1,6 +1,6 @@
 import { useAuth, SignInButton } from '@clerk/react-router'
 import { Stack, Group, ThemeIcon, Title, Button, Text } from '@mantine/core'
-import { IconSparkles } from '@tabler/icons-react'
+import { SparkleIcon } from '@phosphor-icons/react'
 import QuickPromptList from '@/components/chat/QuickPromptList'
 import StartConversationForm from '@/components/chat/StartConversationForm'
 
@@ -13,7 +13,7 @@ const ChatPage = () => {
 				<Stack className="flex-1" justify="center" align="center" gap="xl">
 					<Group gap="xs">
 						<ThemeIcon size="lg" variant="transparent">
-							<IconSparkles className="size-full" />
+							<SparkleIcon className="size-full" weight="fill" />
 						</ThemeIcon>
 						<Title order={2}>
 							开始与
@@ -37,7 +37,7 @@ const ChatPage = () => {
 		<Stack className="h-full" justify="center" align="center">
 			<Group gap="xs">
 				<ThemeIcon variant="transparent">
-					<IconSparkles />
+					<SparkleIcon className="size-6" weight="fill" />
 				</ThemeIcon>
 				<Text>Please sign in to start the conversation.</Text>
 			</Group>

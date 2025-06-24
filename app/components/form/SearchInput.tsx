@@ -1,5 +1,5 @@
 import { Pill, PillsInput } from '@mantine/core'
-import { IconSearch } from '@tabler/icons-react'
+import { MagnifyingGlassIcon } from '@phosphor-icons/react'
 import { useQueryState } from 'nuqs'
 import { Form } from 'react-router'
 import SEARCH_PARAMS from '@/helpers/SEARCH_PARAMS'
@@ -11,7 +11,7 @@ const SearchInput = () => {
 
 	return (
 		<Form action="/" method="get">
-			<PillsInput leftSection={<IconSearch className="size-4" />}>
+			<PillsInput leftSection={<MagnifyingGlassIcon className="size-4" />}>
 				<Pill.Group>
 					{label && (
 						<Pill withRemoveButton onRemove={() => setLabel(null, {})}>

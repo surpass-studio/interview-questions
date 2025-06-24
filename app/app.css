@@ -12,12 +12,6 @@
 
 @import '@mantine/notifications/styles.layer.css';
 
-@layer base {
-	.tabler-icon {
-		stroke-width: 1.5;
-	}
-}
-
 @utility stretched-link {
 	&::after {
 		position: absolute;

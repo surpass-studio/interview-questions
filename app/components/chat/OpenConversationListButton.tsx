@@ -1,6 +1,6 @@
 import { ActionIcon, Drawer, Tooltip } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { IconList } from '@tabler/icons-react'
+import { ListIcon } from '@phosphor-icons/react'
 import { useEffect } from 'react'
 import { href, useNavigation } from 'react-router'
 import ConversationList from './ConversationList'
@@ -29,7 +29,7 @@ const OpenConversationListButton = () => {
 			</Drawer>
 			<Tooltip label="Open conversations">
 				<ActionIcon size="lg" variant="subtle" onClick={open}>
-					<IconList />
+					<ListIcon className="size-6" />
 				</ActionIcon>
 			</Tooltip>
 		</>

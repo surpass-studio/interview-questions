@@ -1,5 +1,5 @@
 import { Stack, Alert, Text, Group } from '@mantine/core'
-import { IconAlertTriangle } from '@tabler/icons-react'
+import { WarningIcon } from '@phosphor-icons/react'
 import RegenerateMessageButton from './RegenerateMessageButton'
 
 interface ErrorMessageProps {
@@ -9,7 +9,7 @@ interface ErrorMessageProps {
 const ErrorMessage = ({ error }: ErrorMessageProps) => {
 	return (
 		<Stack gap="xs">
-			<Alert color="red" icon={<IconAlertTriangle />}>
+			<Alert color="red" icon={<WarningIcon className="size-6" />}>
 				<Text c="red">{error.message}</Text>
 			</Alert>
 			<Group gap="xs">

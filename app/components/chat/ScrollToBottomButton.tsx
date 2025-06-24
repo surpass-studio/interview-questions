@@ -1,5 +1,5 @@
 import { ActionIcon, Tooltip, Transition } from '@mantine/core'
-import { IconArrowDown } from '@tabler/icons-react'
+import { ArrowDownIcon } from '@phosphor-icons/react'
 import { type StickToBottomInstance } from 'use-stick-to-bottom'
 
 type ScrollToBottomButtonProps = Pick<
@@ -22,7 +22,7 @@ const ScrollToBottomButton = ({
 							void scrollToBottom()
 						}}
 					>
-						<IconArrowDown />
+						<ArrowDownIcon className="size-6" />
 					</ActionIcon>
 				</Tooltip>
 			)}

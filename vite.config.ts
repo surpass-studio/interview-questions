@@ -14,11 +14,6 @@ export default defineConfig({
 		reactRouter(),
 		tailwindcss(),
 	],
-	resolve: {
-		alias: {
-			'@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs',
-		},
-	},
 	server: {
 		open: true,
 	},

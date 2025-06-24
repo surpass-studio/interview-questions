@@ -16,14 +16,11 @@ import {
 } from '@mantine/core'
 import {
 	type Icon,
-	IconBoltFilled,
-	IconHome,
-	IconHomeFilled,
-	IconHeart,
-	IconHeartFilled,
-	IconMessageChatbot,
-	IconMessageChatbotFilled,
-} from '@tabler/icons-react'
+	LightningIcon,
+	HouseIcon,
+	HeartIcon,
+	ChatsCircleIcon,
+} from '@phosphor-icons/react'
 import { Link, NavLink, Outlet, href } from 'react-router'
 import SearchInput from '../form/SearchInput'
 import classes from './AppLayout.module.css'
@@ -35,7 +32,6 @@ interface NavLinkItem {
 	to: string
 	label: string
 	icon: Icon
-	iconFilled: Icon
 }
 
 const AppLayout = () => {
@@ -43,20 +39,17 @@ const AppLayout = () => {
 		{
 			to: href('/'),
 			label: '主页',
-			icon: IconHome,
-			iconFilled: IconHomeFilled,
+			icon: HouseIcon,
 		},
 		{
 			to: href('/favorites'),
 			label: '收藏',
-			icon: IconHeart,
-			iconFilled: IconHeartFilled,
+			icon: HeartIcon,
 		},
 		{
 			to: href('/chat'),
 			label: '对话',
-			icon: IconMessageChatbot,
-			iconFilled: IconMessageChatbotFilled,
+			icon: ChatsCircleIcon,
 		},
 	]
 
@@ -77,7 +70,7 @@ const AppLayout = () => {
 							)}
 						>
 							<ThemeIcon variant="transparent">
-								<IconBoltFilled />
+								<LightningIcon className="size-6" weight="fill" />
 							</ThemeIcon>
 							<Title order={4}>Interview Questions</Title>
 						</Group>
@@ -103,7 +96,10 @@ const AppLayout = () => {
 											classNames={{ inner: 'justify-start' }}
 											color={isActive ? undefined : 'gray'}
 											leftSection={
-												isActive ? <link.iconFilled /> : <link.icon />
+												<link.icon
+													className="size-6"
+													weight={isActive ? 'fill' : 'regular'}
+												/>
 											}
 										>
 											{link.label}

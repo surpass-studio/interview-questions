@@ -1,5 +1,5 @@
 import { Tooltip, ActionIcon, CopyButton } from '@mantine/core'
-import { IconCopy, IconCopyCheck } from '@tabler/icons-react'
+import { CopySimpleIcon } from '@phosphor-icons/react'
 
 interface FullTextCopyButtonProps {
 	text: string
@@ -16,7 +16,7 @@ const FullTextCopyButton = ({ text }: FullTextCopyButtonProps) => {
 						variant="light"
 						onClick={copy}
 					>
-						{copied ? <IconCopyCheck /> : <IconCopy />}
+						<CopySimpleIcon className="size-6" />
 					</ActionIcon>
 				</Tooltip>
 			)}

@@ -1,5 +1,5 @@
 import { Tooltip, ActionIcon } from '@mantine/core'
-import { IconMessagePlus } from '@tabler/icons-react'
+import { PlusIcon } from '@phosphor-icons/react'
 import clsx from 'clsx'
 import { href, Link } from 'react-router'
 
@@ -17,7 +17,7 @@ const NewConversationButton = ({ visible }: NewConversationButtonProps) => {
 				size="lg"
 				variant="subtle"
 			>
-				<IconMessagePlus />
+				<PlusIcon className="size-6" />
 			</ActionIcon>
 		</Tooltip>
 	)

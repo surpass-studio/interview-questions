@@ -1,7 +1,7 @@
 import { useChat } from '@ai-sdk/react'
 import { ActionIcon, Box, Stack, Textarea, Tooltip } from '@mantine/core'
 import { useInputState } from '@mantine/hooks'
-import { IconArrowBackUp, IconArrowUp } from '@tabler/icons-react'
+import { ArrowUUpLeftIcon, ArrowUpIcon } from '@phosphor-icons/react'
 import { type UIMessage } from 'ai'
 import { type RefCallback, use, type FormEventHandler } from 'react'
 import ChatContext from '../ChatContext'
@@ -76,12 +76,12 @@ const EditMessageForm = ({ text, message, onCancel }: EditMessageFormProps) => {
 					<Stack className="h-full" justify="end" py="xs" gap="xs">
 						<Tooltip label="Cancel">
 							<ActionIcon color="gray" variant="subtle" onClick={onCancel}>
-								<IconArrowBackUp className="size-5" />
+								<ArrowUUpLeftIcon className="size-5" />
 							</ActionIcon>
 						</Tooltip>
 						<Tooltip label="Send">
 							<ActionIcon type="submit" disabled={!isInputValid}>
-								<IconArrowUp className="size-5" />
+								<ArrowUpIcon className="size-5" />
 							</ActionIcon>
 						</Tooltip>
 					</Stack>

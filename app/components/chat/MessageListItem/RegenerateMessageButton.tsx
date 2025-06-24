@@ -1,6 +1,6 @@
 import { useChat } from '@ai-sdk/react'
 import { Tooltip, ActionIcon } from '@mantine/core'
-import { IconRefresh } from '@tabler/icons-react'
+import { ArrowClockwiseIcon } from '@phosphor-icons/react'
 import { type UIMessage } from 'ai'
 import { use } from 'react'
 import ChatContext from '../ChatContext'
@@ -25,7 +25,7 @@ const RegenerateMessageButton = ({ message }: RegenerateMessageButtonProps) => {
 					}
 				}}
 			>
-				<IconRefresh className="size-5" />
+				<ArrowClockwiseIcon className="size-5" />
 			</ActionIcon>
 		</Tooltip>
 	)

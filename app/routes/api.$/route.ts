@@ -1,4 +1,4 @@
-import { type AuthObject } from '@clerk/react-router/api.server'
+import { type SessionAuthObject } from '@clerk/react-router/api.server'
 import { getAuth } from '@clerk/react-router/ssr.server'
 import { Hono } from 'hono'
 import { HTTPException } from 'hono/http-exception'
@@ -8,7 +8,7 @@ import chatAPI from './chatAPI'
 import favoritesAPI from './favoritesAPI'
 
 export type Bindings = AppLoadContext & {
-	auth: AuthObject
+	auth: SessionAuthObject
 }
 
 const app = new Hono<{ Bindings: AppLoadContext }>()

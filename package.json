@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "1.0.0-beta.1",
-    "@ai-sdk/react": "2.0.0-beta.1",
+    "@ai-sdk/react": "2.0.0-canary.23",
     "@clerk/react-router": "^1.6.1",
     "@clerk/themes": "^2.2.51",
     "@hono/standard-validator": "^0.1.2",

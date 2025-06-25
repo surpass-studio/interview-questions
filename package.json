@@ -28,7 +28,7 @@
     "@octokit/rest": "^22.0.0",
     "@phosphor-icons/react": "^2.1.10",
     "@react-router/fs-routes": "7.6.2",
-    "ai": "5.0.0-beta.1",
+    "ai": "5.0.0-canary.24",
     "clsx": "^2.1.1",
     "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2",
